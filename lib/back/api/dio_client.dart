@@ -10,7 +10,7 @@ static DioClient? _instance;
 static DioClient get instance => _instance ??= DioClient._();
 late final Dio dio;
 late final PersistCookieJar _cookieJar;
-static const String baseUrl = 'https://zqwis-apis-production.up.railway.app';
+static const String baseUrl = 'zqwis-backend.up.railway.app';
 //===============
 DioClient._() {
 dio = Dio(
