@@ -5,6 +5,7 @@ import 'package:zqwis/back/api/dio_client.dart';
 import 'package:zqwis/main/helper/auth_provider.dart';
 import 'package:zqwis/main/helper/app_theme.dart';
 import 'package:zqwis/main/helper/shared_widgets.dart';
+import 'package:zqwis/main/helper/notification_helper.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -39,8 +40,18 @@ class _MissionsPageState extends State<MissionsPage> {
     setState(() => _loading = true);
     try {
       final res = await DioClient.instance.claimMission(missionId);
-      if (res.statusCode == 200 && res.data['status'] == true && mounted) { AppSnackbar.show(context, res.data['message'] ?? "Mission Completed!"); context.read<AuthProvider>().refreshProfile(); _updateMissionLocally(missionId); } else { if (mounted) AppSnackbar.show(context, res.data['message'] ?? "Claim Failed", isError: true); }
-    } catch (_) { if (mounted) AppSnackbar.show(context, "Connection Error", isError: true); } finally { if (mounted) setState(() => _loading = false); }
+      if (res.statusCode == 200 && res.data['status'] == true && mounted) {
+        Notif.success(context, res.data['message'] ?? "Mission Completed!");
+        context.read<AuthProvider>().refreshProfile();
+        _updateMissionLocally(missionId);
+      } else {
+        if (mounted) Notif.error(context, res.data['message'] ?? "Claim Failed");
+      }
+    } catch (_) {
+      if (mounted) Notif.error(context, "Connection Error");
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
   }
 
   void _updateMissionLocally(String missionId) {

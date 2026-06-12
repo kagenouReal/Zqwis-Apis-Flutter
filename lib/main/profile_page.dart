@@ -37,15 +37,15 @@ class _ProfilePageState extends State<ProfilePage> {
 
       if (res.statusCode == 200 && res.data['status'] == true) {
         if (mounted) {
-          AppSnackbar.show(context, res.data['message'] ?? 'Action Success!');
+          Notif.success(context, res.data['message'] ?? 'Action Success!');
           if (action == 'change_password') _passController.clear();
           context.read<AuthProvider>().refreshProfile();
         }
       } else {
-        if (mounted) AppSnackbar.show(context, res.data['message'] ?? 'Action Failed', isError: true);
+        if (mounted) Notif.error(context, res.data['message'] ?? 'Action Failed');
       }
     } catch (_) {
-      if (mounted) AppSnackbar.show(context, 'Connection Error', isError: true);
+      if (mounted) Notif.error(context, 'Connection Error');
     } finally {
       if (mounted) setState(() => _loading = false);
     }
@@ -54,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
   //==================
   void _copyToClipboard(String text, String label) {
     Clipboard.setData(ClipboardData(text: text));
-    AppSnackbar.show(context, '$label copied to clipboard!');
+    Notif.success(context, '$label COPIED TO CLIPBOARD!');
   }
 
   //==================
@@ -536,6 +536,15 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 Text(label, style: GoogleFonts.inter(fontSize: 8, fontWeight: FontWeight.w900, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary, letterSpacing: 1.0)),
                 Text(value, style: GoogleFonts.jetBrainsMono(fontSize: 14, fontWeight: FontWeight.w900, color: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary), overflow: TextOverflow.ellipsis),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+low: TextOverflow.ellipsis),
               ],
             ),
           ),

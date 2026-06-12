@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:zqwis/back/api/dio_client.dart';
 import 'package:zqwis/main/helper/app_theme.dart';
 import 'package:zqwis/main/helper/shared_widgets.dart';
+import 'package:zqwis/main/helper/notification_helper.dart';
 import 'package:zqwis/main/helper/auth_provider.dart';
 import 'package:zqwis/back/myfunc/user_model.dart';
 
@@ -33,24 +34,24 @@ class _AdminPageState extends State<AdminPage> {
     final username = _createUsernameController.text.trim();
     final password = _createPasswordController.text.trim();
     if (username.isEmpty || password.isEmpty) {
-      AppSnackbar.show(context, 'Username and Password required', isError: true);
+      Notif.error(context, 'Username and Password required');
       return;
     }
     setState(() => _creating = true);
     try {
       final res = await DioClient.instance.createUser(username, password, _createRole);
       if (res.statusCode == 200 && mounted) {
-        AppSnackbar.show(context, 'User created successfully!');
+        Notif.success(context, 'User created successfully!');
         _createUsernameController.clear();
         _createPasswordController.clear();
         setState(() { _isCreateExpanded = false; _creating = false; });
         _fetchUsers();
         context.read<AuthProvider>().refreshProfile();
       } else {
-        if (mounted) { AppSnackbar.show(context, res.data['message'] ?? 'Failed to create user', isError: true); setState(() => _creating = false); }
+        if (mounted) { Notif.error(context, res.data['message'] ?? 'Failed to create user'); setState(() => _creating = false); }
       }
     } catch (_) {
-      if (mounted) { AppSnackbar.show(context, 'Connection Error', isError: true); setState(() => _creating = false); }
+      if (mounted) { Notif.error(context, 'Connection Error'); setState(() => _creating = false); }
     }
   }
 
@@ -62,36 +63,36 @@ class _AdminPageState extends State<AdminPage> {
         setState(() { _users = (res.data as List).map((e) => UserModel.fromJson(e)).toList(); _loading = false; });
       }
     } catch (_) {
-      if (mounted) { setState(() => _loading = false); AppSnackbar.show(context, 'Failed to fetch users', isError: true); }
+      if (mounted) { setState(() => _loading = false); Notif.error(context, 'Failed to fetch users'); }
     }
   }
 
   Future<void> _updateLimit(String username, int amount) async {
     try {
       final res = await DioClient.instance.setLimit(username, amount);
-      if (res.statusCode == 200 && mounted) { AppSnackbar.show(context, 'Limit updated for $username'); _fetchUsers(); context.read<AuthProvider>().refreshProfile(); }
-    } catch (_) { if (mounted) AppSnackbar.show(context, 'Failed to update limit', isError: true); }
+      if (res.statusCode == 200 && mounted) { Notif.success(context, 'Limit updated for $username'); _fetchUsers(); context.read<AuthProvider>().refreshProfile(); }
+    } catch (_) { if (mounted) Notif.error(context, 'Failed to update limit'); }
   }
 
   Future<void> _updateIpQuota(String username, int quota) async {
     try {
       final res = await DioClient.instance.setIpQuota(username, quota);
-      if (res.statusCode == 200 && mounted) { AppSnackbar.show(context, 'IP Quota updated for $username'); _fetchUsers(); context.read<AuthProvider>().refreshProfile(); }
-    } catch (_) { if (mounted) AppSnackbar.show(context, 'Failed to update IP quota', isError: true); }
+      if (res.statusCode == 200 && mounted) { Notif.success(context, 'IP Quota updated for $username'); _fetchUsers(); context.read<AuthProvider>().refreshProfile(); }
+    } catch (_) { if (mounted) Notif.error(context, 'Failed to update IP quota'); }
   }
 
   Future<void> _deleteUser(String username) async {
     try {
       final res = await DioClient.instance.deleteUser(username);
-      if (res.statusCode == 200 && mounted) { AppSnackbar.show(context, 'User $username deleted'); _fetchUsers(); context.read<AuthProvider>().refreshProfile(); }
-    } catch (_) { if (mounted) AppSnackbar.show(context, 'Failed to delete user', isError: true); }
+      if (res.statusCode == 200 && mounted) { Notif.success(context, 'User $username deleted'); _fetchUsers(); context.read<AuthProvider>().refreshProfile(); }
+    } catch (_) { if (mounted) Notif.error(context, 'Failed to delete user'); }
   }
 
   Future<void> _adminSetCoins(String username, int amount, String action, String reason) async {
     try {
       final res = await DioClient.instance.adminSetCoins(username, amount, action, reason);
-      if (res.statusCode == 200 && mounted) { final actionText = action == 'add' ? 'Added' : 'Set'; AppSnackbar.show(context, '$actionText coins for $username success'); _fetchUsers(); } else { if (mounted) AppSnackbar.show(context, res.data['message'] ?? 'Action failed', isError: true); }
-    } catch (_) { if (mounted) AppSnackbar.show(context, 'Connection error', isError: true); }
+      if (res.statusCode == 200 && mounted) { final actionText = action == 'add' ? 'Added' : 'Set'; Notif.success(context, '$actionText coins for $username success'); _fetchUsers(); } else { if (mounted) Notif.error(context, res.data['message'] ?? 'Action failed'); }
+    } catch (_) { if (mounted) Notif.error(context, 'Connection error'); }
   }
 
   @override

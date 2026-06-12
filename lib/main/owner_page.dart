@@ -5,6 +5,7 @@ import 'package:zqwis/back/api/dio_client.dart';
 import 'package:zqwis/main/helper/auth_provider.dart';
 import 'package:zqwis/main/helper/app_theme.dart';
 import 'package:zqwis/main/helper/shared_widgets.dart';
+import 'package:zqwis/main/helper/notification_helper.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:dio/dio.dart';
@@ -39,7 +40,7 @@ class _OwnerPageState extends State<OwnerPage> {
         });
       }
     } catch (_) {
-      if (mounted) AppSnackbar.show(context, "Failed to load owner data", isError: true);
+      if (mounted) Notif.error(context, "Failed to load owner data");
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -49,11 +50,11 @@ class _OwnerPageState extends State<OwnerPage> {
     try {
       final res = await DioClient.instance.updateOwnerSetting(key, value);
       if (res.statusCode == 200 && res.data['status'] == true) {
-        if (mounted) AppSnackbar.show(context, "Setting updated");
+        if (mounted) Notif.success(context, "Setting updated");
         _fetchData();
       }
     } catch (_) {
-      if (mounted) AppSnackbar.show(context, "Update failed", isError: true);
+      if (mounted) Notif.error(context, "Update failed");
     }
   }
 
@@ -61,10 +62,10 @@ class _OwnerPageState extends State<OwnerPage> {
     try {
       final res = await DioClient.instance.backupDatabase();
       if (res.statusCode == 200 && res.data['status'] == true) {
-        if (mounted) AppSnackbar.show(context, res.data['message']);
+        if (mounted) Notif.success(context, res.data['message']);
       }
     } catch (_) {
-      if (mounted) AppSnackbar.show(context, "Backup failed", isError: true);
+      if (mounted) Notif.error(context, "Backup failed");
     }
   }
 
@@ -76,11 +77,15 @@ class _OwnerPageState extends State<OwnerPage> {
         final formData = FormData.fromMap({'file': MultipartFile.fromBytes(result.files.single.bytes!, filename: result.files.single.name)});
         final res = await DioClient.instance.dio.post('/api/owner/manage', data: formData);
         if (mounted) {
-          if (res.statusCode == 200 && res.data['status'] == true) { AppSnackbar.show(context, res.data['message']); } else { AppSnackbar.show(context, res.data['message'] ?? "Import failed", isError: true); }
+          if (res.statusCode == 200 && res.data['status'] == true) {
+            Notif.success(context, res.data['message']);
+          } else {
+            Notif.error(context, res.data['message'] ?? "Import failed");
+          }
         }
       }
     } catch (e) {
-      if (mounted) AppSnackbar.show(context, "Error: $e", isError: true);
+      if (mounted) Notif.error(context, "Error: $e");
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }

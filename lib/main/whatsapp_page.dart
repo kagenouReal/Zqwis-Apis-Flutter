@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:zqwis/back/api/dio_client.dart';
 import 'package:zqwis/main/helper/app_theme.dart';
 import 'package:zqwis/main/helper/shared_widgets.dart';
+import 'package:zqwis/main/helper/notification_helper.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 //==================
@@ -37,7 +38,7 @@ class _WhatsAppPairingPageState extends State<WhatsAppPairingPage> {
         setState(() => _status = res.data);
       }
     } catch (_) {
-      if (mounted) AppSnackbar.show(context, 'Gagal mengambil status WA', isError: true);
+      if (mounted) Notif.error(context, 'Gagal mengambil status WA');
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -47,7 +48,7 @@ class _WhatsAppPairingPageState extends State<WhatsAppPairingPage> {
   Future<void> _connect() async {
     final phone = _phoneController.text.trim();
     if (phone.isEmpty) {
-      AppSnackbar.show(context, 'Nomor HP jangan kosong, bang!', isError: true);
+      Notif.error(context, 'Nomor HP jangan kosong, bang!');
       return;
     }
     setState(() {
@@ -62,14 +63,14 @@ class _WhatsAppPairingPageState extends State<WhatsAppPairingPage> {
           setState(() {
             _pairingCode = data != null ? data['pairingCode'] : null;
           });
-          AppSnackbar.show(context, res.data['message'] ?? 'Berhasil terkirim!');
+          Notif.success(context, res.data['message'] ?? 'Berhasil terkirim!');
           _fetchStatus();
         }
       } else {
-        if (mounted) AppSnackbar.show(context, res.data['message'] ?? 'Gagal menghubungkan', isError: true);
+        if (mounted) Notif.error(context, res.data['message'] ?? 'Gagal menghubungkan');
       }
     } catch (_) {
-      if (mounted) AppSnackbar.show(context, 'Error saat menghubungkan', isError: true);
+      if (mounted) Notif.error(context, 'Error saat menghubungkan');
     } finally {
       if (mounted) setState(() => _isConnecting = false);
     }
@@ -80,11 +81,11 @@ class _WhatsAppPairingPageState extends State<WhatsAppPairingPage> {
     try {
       final res = await DioClient.instance.disconnectWa(phoneNumber);
       if (res.statusCode == 200 && mounted) {
-        AppSnackbar.show(context, 'Berhasil diputus!');
+        Notif.success(context, 'Berhasil diputus!');
         _fetchStatus();
       }
     } catch (_) {
-      if (mounted) AppSnackbar.show(context, 'Gagal memutus koneksi', isError: true);
+      if (mounted) Notif.error(context, 'Gagal memutus koneksi');
     }
   }
 
@@ -469,6 +470,10 @@ class _WhatsAppPairingPageState extends State<WhatsAppPairingPage> {
           ),
         ],
       ),
+    );
+  }
+}
+    ),
     );
   }
 }

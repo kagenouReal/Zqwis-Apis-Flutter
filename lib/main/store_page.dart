@@ -5,6 +5,7 @@ import 'package:zqwis/back/api/dio_client.dart';
 import 'package:zqwis/main/helper/auth_provider.dart';
 import 'package:zqwis/main/helper/app_theme.dart';
 import 'package:zqwis/main/helper/shared_widgets.dart';
+import 'package:zqwis/main/helper/notification_helper.dart';
 
 class StorePage extends StatefulWidget {
   const StorePage({super.key});
@@ -19,16 +20,34 @@ class _StorePageState extends State<StorePage> {
     setState(() => _loading = true);
     try {
       final res = await DioClient.instance.buyPremium(packageType);
-      if (res.statusCode == 200 && res.data['status'] == true && mounted) { AppSnackbar.show(context, "Premium Activated Successfully!"); context.read<AuthProvider>().refreshProfile(); } else { if (mounted) AppSnackbar.show(context, res.data['message'] ?? "Purchase Failed", isError: true); }
-    } catch (_) { if (mounted) AppSnackbar.show(context, "Connection Error", isError: true); } finally { if (mounted) setState(() => _loading = false); }
+      if (res.statusCode == 200 && res.data['status'] == true && mounted) {
+        Notif.success(context, "Premium Activated Successfully!");
+        context.read<AuthProvider>().refreshProfile();
+      } else {
+        if (mounted) Notif.error(context, res.data['message'] ?? "Purchase Failed");
+      }
+    } catch (_) {
+      if (mounted) Notif.error(context, "Connection Error");
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
   }
 
   Future<void> _buyLimit(String packageType) async {
     setState(() => _loading = true);
     try {
       final res = await DioClient.instance.buyLimit(packageType);
-      if (res.statusCode == 200 && res.data['status'] == true && mounted) { AppSnackbar.show(context, "API Limits Added Successfully!"); context.read<AuthProvider>().refreshProfile(); } else { if (mounted) AppSnackbar.show(context, res.data['message'] ?? "Purchase Failed", isError: true); }
-    } catch (_) { if (mounted) AppSnackbar.show(context, "Connection Error", isError: true); } finally { if (mounted) setState(() => _loading = false); }
+      if (res.statusCode == 200 && res.data['status'] == true && mounted) {
+        Notif.success(context, "API Limits Added Successfully!");
+        context.read<AuthProvider>().refreshProfile();
+      } else {
+        if (mounted) Notif.error(context, res.data['message'] ?? "Purchase Failed");
+      }
+    } catch (_) {
+      if (mounted) Notif.error(context, "Connection Error");
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
   }
 
   @override

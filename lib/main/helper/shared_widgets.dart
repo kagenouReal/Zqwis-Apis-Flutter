@@ -371,34 +371,4 @@ class _VisibilityAnimatorState extends State<VisibilityAnimator> {
   }
 }
 // Tambahin di shared_widgets.dart
-class AppSnackbar {
-  static void show(
-    BuildContext context,
-    String message, {
-    bool isError = false,
-  }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bgColor = isError
-        ? (isDark ? const Color(0xFFF43F5E) : const Color(0xFFDC2626))
-        : (isDark ? const Color(0xFF10B981) : const Color(0xFF059669));
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          message,
-          style: GoogleFonts.inter(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: bgColor,
-        duration: const Duration(milliseconds: 1500),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-    );
-  }
-}
+// Note: Notification logic moved to notification_helper.dart for better accessibility.

@@ -11,6 +11,7 @@ import 'package:zqwis/back/myfunc/api_item_model.dart';
 import 'package:zqwis/main/helper/auth_provider.dart';
 import 'package:zqwis/main/helper/app_theme.dart';
 import 'package:zqwis/main/helper/shared_widgets.dart';
+import 'package:zqwis/main/helper/notification_helper.dart';
 
 //==================
 class ApiListPage extends StatefulWidget {
@@ -64,7 +65,7 @@ _loading = false;
 } catch (_) {
 if (mounted) {
 setState(() => _loading = false);
-AppSnackbar.show(context, 'Gagal mengambil daftar API', isError: true);
+Notif.error(context, 'Gagal mengambil daftar API');
 }
 }
 }
@@ -374,7 +375,7 @@ if (mounted) setState(() => _loading = false);
 //==================
 void _handleCopy(String text, String label) {
 Clipboard.setData(ClipboardData(text: text));
-AppSnackbar.show(context, '$label berhasil disalin ke clipboard!');
+Notif.success(context, '$label berhasil disalin ke clipboard!');
 }
 
 //==================

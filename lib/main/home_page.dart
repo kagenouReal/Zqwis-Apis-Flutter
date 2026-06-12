@@ -29,10 +29,10 @@ class _HomePageState extends State<HomePage> {
     try {
       final uri = Uri.parse(url);
       if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-        if (mounted) AppSnackbar.show(context, 'Gagal membuka link', isError: true);
+        if (mounted) Notif.error(context, 'Gagal membuka link');
       }
     } catch (_) {
-      if (mounted) AppSnackbar.show(context, 'Error link', isError: true);
+      if (mounted) Notif.error(context, 'Error link');
     }
   }
 
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
     } catch (_) {
       if (mounted) {
         setState(() => _loadingStats = false);
-        AppSnackbar.show(context, 'Gagal mengambil metrics', isError: true);
+        Notif.error(context, 'Gagal mengambil metrics');
       }
     }
   }
@@ -388,6 +388,12 @@ class _PingingDotState extends State<_PingingDot> with SingleTickerProviderState
             ),
           ),
           Container(width: 6, height: 6, decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.accentBlue)),
+        ],
+      ),
+    );
+  }
+}
+BoxShape.circle, color: AppColors.accentBlue)),
         ],
       ),
     );
