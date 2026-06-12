@@ -1,0 +1,56 @@
+:root {
+  /* =====================
+     APP COLORS (DARK MODE DEFAULT)
+  ====================== */
+  --app-accent: #00ff88;
+  --app-accent-blue: #4daaff;
+  --app-error: #ff4d6d;
+
+  --bg-dark: #0b0b0b;
+  --card-dark: #111111;
+  --text-dark: #ffffff;
+  --text-secondary-dark: #8a8a9a;
+
+  /* =====================
+     LIGHT MODE
+  ====================== */
+  --bg-light: #ffffff;
+  --card-light: #fcfcfc;
+  --text-light: #0a0a0a;
+  --text-secondary-light: #52525b;
+}
+
+/* =====================
+   GLOBAL RESET
+====================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* =====================
+   BODY (DEFAULT DARK)
+====================== */
+body {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+  transition: 0.3s ease;
+}
+
+/* =====================
+   LIGHT MODE SWITCH
+====================== */
+body.light {
+  background: var(--bg-light);
+  color: var(--text-light);
+}
+
+/* =====================
+   CARD STYLE
+====================== */
+.card {
+  background: var(--card-dark);
+  padding: 16px;
+  border
