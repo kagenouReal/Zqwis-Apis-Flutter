@@ -31,7 +31,7 @@ class _MissionsPageState extends State<MissionsPage> {
 
   Future<void> _fetchMissionsList() async {
     try {
-      final res = await DioClient.instance.getMissions(action: 'list');
+      final res = await DioClient.instance.getMissionsList();
       if (res.statusCode == 200 && res.data['status'] == true && mounted) { 
         setState(() { 
           _availableMissions = res.data['data'] ?? {}; 
@@ -43,10 +43,10 @@ class _MissionsPageState extends State<MissionsPage> {
     }
   }
 
-  Future<void> _claimMission(String missionId) async {
+  Future<void> _claimMission(String missionId, String rewardType) async {
     setState(() => _loading = true);
     try {
-      final res = await DioClient.instance.claimMission(missionId);
+      final res = await DioClient.instance.claimMission(missionId, rewardType);
       if (res.statusCode == 200 && res.data['status'] == true && mounted) {
         Notif.success(context, res.data['message'] ?? "Mission Completed!");
         context.read<AuthProvider>().refreshProfile();
@@ -84,7 +84,7 @@ class _MissionsPageState extends State<MissionsPage> {
         final ok = await launchUrl(uri, mode: LaunchMode.externalApplication); 
         if (ok) { 
           await Future.delayed(const Duration(seconds: 1)); 
-          await _claimMission(missionId); 
+          await _claimMission(missionId, 'coins'); 
         } 
       } catch (_) {}
     }

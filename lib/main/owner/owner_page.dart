@@ -31,18 +31,21 @@ class _OwnerPageState extends State<OwnerPage> {
   Future<void> _fetchData() async {
     setState(() => _isLoading = true);
     try {
-      final res = await DioClient.instance.getOwnerManageData();
-      if (res.statusCode == 200 && res.data['status'] == true) {
+      final resSet = await DioClient.instance.getSettings();
+      final resSys = await DioClient.instance.getSystemInfo();
+      if (mounted) {
         setState(() {
-          _system = res.data['data']['system'] ?? {};
-          _settings = res.data['data']['settings'] ?? {};
+          _settings = resSet.data['data'] ?? {};
+          _system = resSys.data['data'] ?? {};
           _broadcastController.text = _settings['broadcast'] ?? "";
+          _isLoading = false;
         });
       }
     } catch (_) {
-      if (mounted) Notif.error(context, "Failed to load owner data");
-    } finally {
-      if (mounted) setState(() => _isLoading = false);
+      if (mounted) {
+        setState(() => _isLoading = false);
+        Notif.error(context, "Failed to load owner data");
+      }
     }
   }
 
@@ -99,6 +102,7 @@ class _OwnerPageState extends State<OwnerPage> {
       backgroundColor: Colors.transparent,
       body: RefreshIndicator(
         onRefresh: _fetchData,
+        color: AppColors.accentBlue,
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
@@ -175,10 +179,8 @@ class _OwnerPageState extends State<OwnerPage> {
         const SectionHeader("DATABASE UTILITIES"),
         const SizedBox(height: 12),
         Row(children: [
-          // TOMBOL BACKUP
           Expanded(child: _buildFlatActionButton("BACKUP", Icons.backup_rounded, _backupDb, isDark, borderColor, primaryTextColor)),
           const SizedBox(width: 8),
-          // TOMBOL IMPORT
           Expanded(child: _buildFlatActionButton("IMPORT", Icons.upload_file_rounded, _importDb, isDark, borderColor, primaryTextColor)),
         ]),
       ]),
@@ -206,15 +208,13 @@ class _OwnerPageState extends State<OwnerPage> {
           )
         ),
         const SizedBox(height: 12),
-        // TOMBOL UPDATE BROADCAST
         _buildFlatActionButton("UPDATE BROADCAST", Icons.send_rounded, 
           () => _updateSetting('broadcast', _broadcastController.text), isDark, borderColor, primaryTextColor),
       ]),
     );
   }
+
   Widget _buildFlatActionButton(String label, IconData icon, VoidCallback onTap, bool isDark, Color borderColor, Color primaryTextColor) {
-    final labelColor = isDark ? const Color(0xFF71717A) : const Color(0xFFA1A1AA);
-    
     return InkWell(
       onTap: _isLoading ? null : onTap,
       child: AnimatedContainer(
@@ -250,5 +250,4 @@ class _OwnerPageState extends State<OwnerPage> {
       ),
     );
   }
-
 }

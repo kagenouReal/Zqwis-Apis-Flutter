@@ -1,0 +1,401 @@
+﻿2026-06-14T11:45:34.6599871Z Current runner version: '2.335.1'
+2026-06-14T11:45:34.6636563Z ##[group]Runner Image Provisioner
+2026-06-14T11:45:34.6637855Z Hosted Compute Agent
+2026-06-14T11:45:34.6638817Z Version: 20260527.539
+2026-06-14T11:45:34.6639792Z Commit: a891dd388383b896fa6ac04a82c0b75cec981078
+2026-06-14T11:45:34.6641050Z Build Date: 2026-05-27T21:39:57Z
+2026-06-14T11:45:34.6642412Z Worker ID: {3f69827b-2789-4b5f-8340-578961f896ed}
+2026-06-14T11:45:34.6643610Z Azure Region: eastus
+2026-06-14T11:45:34.6644587Z ##[endgroup]
+2026-06-14T11:45:34.6646482Z ##[group]Operating System
+2026-06-14T11:45:34.6647541Z Ubuntu
+2026-06-14T11:45:34.6648341Z 24.04.4
+2026-06-14T11:45:34.6649095Z LTS
+2026-06-14T11:45:34.6650098Z ##[endgroup]
+2026-06-14T11:45:34.6650935Z ##[group]Runner Image
+2026-06-14T11:45:34.6652012Z Image: ubuntu-24.04
+2026-06-14T11:45:34.6653131Z Version: 20260607.184.1
+2026-06-14T11:45:34.6655210Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260607.184/images/ubuntu/Ubuntu2404-Readme.md
+2026-06-14T11:45:34.6657717Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260607.184
+2026-06-14T11:45:34.6659449Z ##[endgroup]
+2026-06-14T11:45:34.6661366Z ##[group]GITHUB_TOKEN Permissions
+2026-06-14T11:45:34.6665173Z Contents: read
+2026-06-14T11:45:34.6666074Z Metadata: read
+2026-06-14T11:45:34.6666898Z Packages: read
+2026-06-14T11:45:34.6667881Z ##[endgroup]
+2026-06-14T11:45:34.6670664Z Secret source: Actions
+2026-06-14T11:45:34.6672377Z Prepare workflow directory
+2026-06-14T11:45:34.7127570Z Prepare all required actions
+2026-06-14T11:45:34.7181105Z Getting action download info
+2026-06-14T11:45:35.0391729Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-06-14T11:45:35.1092997Z Download action repository 'actions/setup-java@v4' (SHA:c1e323688fd81a25caa38c78aa6df2d33d3e20d9)
+2026-06-14T11:45:35.3480014Z Download action repository 'subosito/flutter-action@v2' (SHA:1a449444c387b1966244ae4d4f8c696479add0b2)
+2026-06-14T11:45:35.4290921Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-06-14T11:45:35.6794465Z Getting action download info
+2026-06-14T11:45:35.7441636Z Download action repository 'actions/cache@v5' (SHA:27d5ce7f107fe9357f9df03efb73ab90386fccae)
+2026-06-14T11:45:35.9184139Z Complete job name: build
+2026-06-14T11:45:36.0026593Z ##[group]Run actions/checkout@v4
+2026-06-14T11:45:36.0027952Z with:
+2026-06-14T11:45:36.0028890Z   repository: kagenouReal/Zqwis-Apis-Flutter
+2026-06-14T11:45:36.0038358Z   token: ***
+2026-06-14T11:45:36.0039219Z   ssh-strict: true
+2026-06-14T11:45:36.0040084Z   ssh-user: git
+2026-06-14T11:45:36.0040959Z   persist-credentials: true
+2026-06-14T11:45:36.0041909Z   clean: true
+2026-06-14T11:45:36.0042920Z   sparse-checkout-cone-mode: true
+2026-06-14T11:45:36.0043968Z   fetch-depth: 1
+2026-06-14T11:45:36.0044826Z   fetch-tags: false
+2026-06-14T11:45:36.0045703Z   show-progress: true
+2026-06-14T11:45:36.0046593Z   lfs: false
+2026-06-14T11:45:36.0047450Z   submodules: false
+2026-06-14T11:45:36.0048353Z   set-safe-directory: true
+2026-06-14T11:45:36.0049529Z ##[endgroup]
+2026-06-14T11:45:36.1298932Z Syncing repository: kagenouReal/Zqwis-Apis-Flutter
+2026-06-14T11:45:36.1301697Z ##[group]Getting Git version info
+2026-06-14T11:45:36.1304237Z Working directory is '/home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter'
+2026-06-14T11:45:36.1306569Z [command]/usr/bin/git version
+2026-06-14T11:45:36.1363610Z git version 2.54.0
+2026-06-14T11:45:36.1390126Z ##[endgroup]
+2026-06-14T11:45:36.1405156Z Temporarily overriding HOME='/home/runner/work/_temp/ed4d5dfa-bc64-4b0c-bd49-081703a587c7' before making global git config changes
+2026-06-14T11:45:36.1407816Z Adding repository directory to the temporary git global config as a safe directory
+2026-06-14T11:45:36.1419030Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter
+2026-06-14T11:45:36.1468722Z Deleting the contents of '/home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter'
+2026-06-14T11:45:36.1473055Z ##[group]Initializing the repository
+2026-06-14T11:45:36.1478191Z [command]/usr/bin/git init /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter
+2026-06-14T11:45:36.1572071Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-06-14T11:45:36.1575200Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-06-14T11:45:36.1577858Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-06-14T11:45:36.1579998Z hint: call:
+2026-06-14T11:45:36.1581015Z hint:
+2026-06-14T11:45:36.1582009Z hint: 	git config --global init.defaultBranch <name>
+2026-06-14T11:45:36.1583439Z hint:
+2026-06-14T11:45:36.1584558Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-06-14T11:45:36.1586512Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-06-14T11:45:36.1588160Z hint:
+2026-06-14T11:45:36.1588977Z hint: 	git branch -m <name>
+2026-06-14T11:45:36.1589915Z hint:
+2026-06-14T11:45:36.1591127Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-06-14T11:45:36.1593774Z Initialized empty Git repository in /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter/.git/
+2026-06-14T11:45:36.1597356Z [command]/usr/bin/git remote add origin https://github.com/kagenouReal/Zqwis-Apis-Flutter
+2026-06-14T11:45:36.1637106Z ##[endgroup]
+2026-06-14T11:45:36.1638729Z ##[group]Disabling automatic garbage collection
+2026-06-14T11:45:36.1640625Z [command]/usr/bin/git config --local gc.auto 0
+2026-06-14T11:45:36.1673438Z ##[endgroup]
+2026-06-14T11:45:36.1674828Z ##[group]Setting up auth
+2026-06-14T11:45:36.1680126Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-06-14T11:45:36.1715070Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-06-14T11:45:36.2055979Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-06-14T11:45:36.2087883Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-06-14T11:45:36.2318435Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-06-14T11:45:36.2350008Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-06-14T11:45:36.2590347Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-06-14T11:45:36.2625283Z ##[endgroup]
+2026-06-14T11:45:36.2626751Z ##[group]Fetching the repository
+2026-06-14T11:45:36.2634187Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +587ceb32251eeff31e2dce8e11110d394dc9a437:refs/remotes/origin/main
+2026-06-14T11:45:36.4798982Z From https://github.com/kagenouReal/Zqwis-Apis-Flutter
+2026-06-14T11:45:36.4801652Z  * [new ref]         587ceb32251eeff31e2dce8e11110d394dc9a437 -> origin/main
+2026-06-14T11:45:36.4834971Z ##[endgroup]
+2026-06-14T11:45:36.4836749Z ##[group]Determining the checkout info
+2026-06-14T11:45:36.4838389Z ##[endgroup]
+2026-06-14T11:45:36.4841640Z [command]/usr/bin/git sparse-checkout disable
+2026-06-14T11:45:36.4884309Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-06-14T11:45:36.4914869Z ##[group]Checking out the ref
+2026-06-14T11:45:36.4916554Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-06-14T11:45:36.5011316Z Switched to a new branch 'main'
+2026-06-14T11:45:36.5014805Z branch 'main' set up to track 'origin/main'.
+2026-06-14T11:45:36.5022537Z ##[endgroup]
+2026-06-14T11:45:36.5059788Z [command]/usr/bin/git log -1 --format=%H
+2026-06-14T11:45:36.5083189Z 587ceb32251eeff31e2dce8e11110d394dc9a437
+2026-06-14T11:45:36.5441670Z ##[group]Run actions/setup-java@v4
+2026-06-14T11:45:36.5442916Z with:
+2026-06-14T11:45:36.5443718Z   distribution: temurin
+2026-06-14T11:45:36.5444609Z   java-version: 17
+2026-06-14T11:45:36.5445456Z   java-package: jdk
+2026-06-14T11:45:36.5446307Z   check-latest: false
+2026-06-14T11:45:36.5447179Z   server-id: github
+2026-06-14T11:45:36.5448083Z   server-username: GITHUB_ACTOR
+2026-06-14T11:45:36.5449109Z   server-password: GITHUB_TOKEN
+2026-06-14T11:45:36.5450120Z   overwrite-settings: true
+2026-06-14T11:45:36.5451060Z   job-status: success
+2026-06-14T11:45:36.5460090Z   token: ***
+2026-06-14T11:45:36.5460922Z ##[endgroup]
+2026-06-14T11:45:36.7645001Z ##[group]Installed distributions
+2026-06-14T11:45:36.7703518Z Resolved Java 17.0.19+10 from tool-cache
+2026-06-14T11:45:36.7705212Z Setting Java 17.0.19+10 as the default
+2026-06-14T11:45:36.7717580Z Creating toolchains.xml for JDK version 17 from temurin
+2026-06-14T11:45:36.7790014Z Writing to /home/runner/.m2/toolchains.xml
+2026-06-14T11:45:36.7791352Z 
+2026-06-14T11:45:36.7791882Z Java configuration:
+2026-06-14T11:45:36.7793408Z   Distribution: temurin
+2026-06-14T11:45:36.7794683Z   Version: 17.0.19+10
+2026-06-14T11:45:36.7796380Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:45:36.7797867Z 
+2026-06-14T11:45:36.7799248Z ##[endgroup]
+2026-06-14T11:45:36.7817198Z Creating settings.xml with server-id: github
+2026-06-14T11:45:36.7818895Z Writing to /home/runner/.m2/settings.xml
+2026-06-14T11:45:36.8286292Z ##[group]Run subosito/flutter-action@v2
+2026-06-14T11:45:36.8287366Z with:
+2026-06-14T11:45:36.8288137Z   channel: stable
+2026-06-14T11:45:36.8288976Z   architecture: X64
+2026-06-14T11:45:36.8289805Z   cache: false
+2026-06-14T11:45:36.8290643Z   pub-cache-path: default
+2026-06-14T11:45:36.8291543Z   dry-run: false
+2026-06-14T11:45:36.8292724Z   git-source: https://github.com/flutter/flutter.git
+2026-06-14T11:45:36.8293870Z env:
+2026-06-14T11:45:36.8294964Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:45:36.8296776Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:45:36.8298174Z ##[endgroup]
+2026-06-14T11:45:36.8434836Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+2026-06-14T11:45:36.8436198Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+2026-06-14T11:45:36.8600991Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-06-14T11:45:36.8602564Z env:
+2026-06-14T11:45:36.8603790Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:45:36.8605572Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:45:36.8606981Z ##[endgroup]
+2026-06-14T11:45:36.8792689Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+2026-06-14T11:45:36.8793992Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+2026-06-14T11:45:36.8795060Z [36;1m  -n '' \[0m
+2026-06-14T11:45:36.8795867Z [36;1m  -f '' \[0m
+2026-06-14T11:45:36.8796716Z [36;1m  -a 'X64' \[0m
+2026-06-14T11:45:36.8797556Z [36;1m  -k '' \[0m
+2026-06-14T11:45:36.8798360Z [36;1m  -c '' \[0m
+2026-06-14T11:45:36.8799167Z [36;1m  -l '' \[0m
+2026-06-14T11:45:36.8799997Z [36;1m  -d 'default' \[0m
+2026-06-14T11:45:36.8801089Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+2026-06-14T11:45:36.8802392Z [36;1m  stable[0m
+2026-06-14T11:45:36.8843365Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-06-14T11:45:36.8844567Z env:
+2026-06-14T11:45:36.8845684Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:45:36.8847437Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:45:36.8848861Z ##[endgroup]
+2026-06-14T11:45:37.0988227Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+2026-06-14T11:45:37.0989406Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+2026-06-14T11:45:37.0990447Z [36;1m  -n '3.44.2' \[0m
+2026-06-14T11:45:37.0991336Z [36;1m  -a 'x64' \[0m
+2026-06-14T11:45:37.0993519Z [36;1m  -c '/opt/hostedtoolcache/flutter/stable-3.44.2-x64' \[0m
+2026-06-14T11:45:37.0995178Z [36;1m  -d '/home/runner/.pub-cache' \[0m
+2026-06-14T11:45:37.0996519Z [36;1m  stable[0m
+2026-06-14T11:45:37.1038170Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-06-14T11:45:37.1039390Z env:
+2026-06-14T11:45:37.1040485Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:45:37.1042451Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:45:37.1043868Z ##[endgroup]
+2026-06-14T11:45:37.2852484Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2026-06-14T11:45:37.9639342Z                                  Dload  Upload   Total   Spent    Left  Speed
+2026-06-14T11:45:37.9639953Z 
+2026-06-14T11:45:37.9641741Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-06-14T11:45:38.9663014Z  13 1471M   13  193M    0     0   284M      0  0:00:05 --:--:--  0:00:05  284M
+2026-06-14T11:45:39.9646167Z  31 1471M   31  466M    0     0   277M      0  0:00:05  0:00:01  0:00:04  277M
+2026-06-14T11:45:40.9636262Z  50 1471M   50  740M    0     0   276M      0  0:00:05  0:00:02  0:00:03  276M
+2026-06-14T11:45:41.9659639Z  70 1471M   70 1034M    0     0   281M      0  0:00:05  0:00:03  0:00:02  281M
+2026-06-14T11:45:42.5367900Z  90 1471M   90 1331M    0     0   284M      0  0:00:05  0:00:04  0:00:01  284M
+2026-06-14T11:45:42.5369613Z 100 1471M  100 1471M    0     0   280M      0  0:00:05  0:00:05 --:--:--  279M
+2026-06-14T11:46:35.7872741Z ##[group]Run flutter pub get
+2026-06-14T11:46:35.7873066Z [36;1mflutter pub get[0m
+2026-06-14T11:46:35.7907422Z shell: /usr/bin/bash -e {0}
+2026-06-14T11:46:35.7907701Z env:
+2026-06-14T11:46:35.7908040Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:46:35.7908551Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:46:35.7909041Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.44.2-x64/flutter
+2026-06-14T11:46:35.7909456Z   PUB_CACHE: /home/runner/.pub-cache
+2026-06-14T11:46:35.7909746Z ##[endgroup]
+2026-06-14T11:46:39.2301433Z Resolving dependencies...
+2026-06-14T11:46:39.5737853Z Downloading packages...
+2026-06-14T11:46:43.4391217Z + archive 4.0.9
+2026-06-14T11:46:43.4391669Z + args 2.7.0
+2026-06-14T11:46:43.4391981Z + async 2.13.1
+2026-06-14T11:46:43.4392718Z + boolean_selector 2.1.2
+2026-06-14T11:46:43.4393290Z + characters 1.4.1
+2026-06-14T11:46:43.4393707Z + checked_yaml 2.0.4
+2026-06-14T11:46:43.4394241Z + cli_util 0.4.2 (0.5.1 available)
+2026-06-14T11:46:43.4394725Z + clock 1.1.2
+2026-06-14T11:46:43.4395128Z + code_assets 1.2.1
+2026-06-14T11:46:43.4395529Z + collection 1.19.1
+2026-06-14T11:46:43.4395861Z + cookie_jar 4.0.9
+2026-06-14T11:46:43.4396253Z + cross_file 0.3.5+2
+2026-06-14T11:46:43.4396979Z + crypto 3.0.7
+2026-06-14T11:46:43.4397349Z + dio 5.9.2
+2026-06-14T11:46:43.4397650Z + dio_cookie_manager 3.4.0
+2026-06-14T11:46:43.4398030Z + dio_web_adapter 2.1.2
+2026-06-14T11:46:43.4398398Z + fake_async 1.3.3
+2026-06-14T11:46:43.4398956Z + ffi 2.2.0
+2026-06-14T11:46:43.4399307Z + file 7.0.1
+2026-06-14T11:46:43.4399696Z + file_picker 8.3.7 (11.0.2 available)
+2026-06-14T11:46:43.4400229Z + flutter 0.0.0 from sdk flutter
+2026-06-14T11:46:43.4400722Z + flutter_animate 4.5.2
+2026-06-14T11:46:43.4401178Z + flutter_launcher_icons 0.14.4
+2026-06-14T11:46:43.4401674Z + flutter_lints 3.0.2 (6.0.0 available)
+2026-06-14T11:46:43.4402407Z + flutter_plugin_android_lifecycle 2.0.35
+2026-06-14T11:46:43.4402973Z + flutter_shaders 0.1.3
+2026-06-14T11:46:43.4403423Z + flutter_test 0.0.0 from sdk flutter
+2026-06-14T11:46:43.4404022Z + flutter_web_plugins 0.0.0 from sdk flutter
+2026-06-14T11:46:43.4404607Z + fluttertoast 8.2.14 (9.1.0 available)
+2026-06-14T11:46:43.4405135Z + go_router 13.2.5 (17.3.0 available)
+2026-06-14T11:46:43.4405628Z + google_fonts 6.3.3 (8.1.0 available)
+2026-06-14T11:46:43.4406135Z + hooks 2.0.2
+2026-06-14T11:46:43.4406468Z + http 1.6.0
+2026-06-14T11:46:43.4407125Z + http_parser 4.1.2
+2026-06-14T11:46:43.4407560Z + image 4.9.1
+2026-06-14T11:46:43.4407859Z + jni 1.0.0
+2026-06-14T11:46:43.4408242Z + jni_flutter 1.0.1
+2026-06-14T11:46:43.4408607Z + json_annotation 4.12.0
+2026-06-14T11:46:43.4410860Z + leak_tracker 11.0.2
+2026-06-14T11:46:43.4411547Z + leak_tracker_flutter_testing 3.0.10
+2026-06-14T11:46:43.4412563Z + leak_tracker_testing 3.0.2
+2026-06-14T11:46:43.4413210Z + lints 3.0.0 (6.1.0 available)
+2026-06-14T11:46:43.4413760Z + logging 1.3.0
+2026-06-14T11:46:43.4414272Z + matcher 0.12.19 (0.12.20 available)
+2026-06-14T11:46:43.4414870Z + material_color_utilities 0.13.0
+2026-06-14T11:46:43.4415433Z + meta 1.18.0 (1.18.3 available)
+2026-06-14T11:46:43.4415952Z + mime 2.0.0
+2026-06-14T11:46:43.4416400Z + nested 1.0.0
+2026-06-14T11:46:43.4416866Z + objective_c 9.4.1
+2026-06-14T11:46:43.4417239Z + package_config 2.2.0 (3.0.0 available)
+2026-06-14T11:46:43.4417640Z + path 1.9.1
+2026-06-14T11:46:43.4417981Z + path_provider 2.1.5
+2026-06-14T11:46:43.4418440Z + path_provider_android 2.3.1
+2026-06-14T11:46:43.4418837Z + path_provider_foundation 2.6.0
+2026-06-14T11:46:43.4419225Z + path_provider_linux 2.2.1
+2026-06-14T11:46:43.4419626Z + path_provider_platform_interface 2.1.2
+2026-06-14T11:46:43.4420195Z + path_provider_windows 2.3.0
+2026-06-14T11:46:43.4420679Z + petitparser 7.0.2
+2026-06-14T11:46:43.4421077Z + platform 3.1.6
+2026-06-14T11:46:43.4425040Z + plugin_platform_interface 2.1.8
+2026-06-14T11:46:43.4425548Z + posix 6.5.0
+2026-06-14T11:46:43.4425896Z + provider 6.1.5+1
+2026-06-14T11:46:43.4426593Z + pub_semver 2.2.0
+2026-06-14T11:46:43.4426939Z + record_use 0.6.0
+2026-06-14T11:46:43.4427330Z + shared_preferences 2.2.0 (2.5.5 available)
+2026-06-14T11:46:43.4427903Z + shared_preferences_android 2.4.26
+2026-06-14T11:46:43.4428393Z + shared_preferences_foundation 2.5.6
+2026-06-14T11:46:43.4428852Z + shared_preferences_linux 2.4.1
+2026-06-14T11:46:43.4429320Z + shared_preferences_platform_interface 2.4.2
+2026-06-14T11:46:43.4429823Z + shared_preferences_web 2.4.3
+2026-06-14T11:46:43.4430267Z + shared_preferences_windows 2.4.1
+2026-06-14T11:46:43.4430691Z + shimmer 3.0.0
+2026-06-14T11:46:43.4431039Z + sky_engine 0.0.0 from sdk flutter
+2026-06-14T11:46:43.4431457Z + source_span 1.10.2
+2026-06-14T11:46:43.4431804Z + stack_trace 1.12.1
+2026-06-14T11:46:43.4432363Z + stream_channel 2.1.4
+2026-06-14T11:46:43.4432727Z + string_scanner 1.4.1
+2026-06-14T11:46:43.4433083Z + term_glyph 1.2.2
+2026-06-14T11:46:43.4433426Z + test_api 0.7.11 (0.7.12 available)
+2026-06-14T11:46:43.4433828Z + typed_data 1.4.0
+2026-06-14T11:46:43.4434178Z + universal_io 2.3.1
+2026-06-14T11:46:43.4434534Z + url_launcher 6.1.14 (6.3.2 available)
+2026-06-14T11:46:43.4434982Z + url_launcher_android 6.3.32
+2026-06-14T11:46:43.4435386Z + url_launcher_ios 6.4.1
+2026-06-14T11:46:43.4435756Z + url_launcher_linux 3.2.2
+2026-06-14T11:46:43.4436144Z + url_launcher_macos 3.2.5
+2026-06-14T11:46:43.4436546Z + url_launcher_platform_interface 2.3.2
+2026-06-14T11:46:43.4436994Z + url_launcher_web 2.4.3
+2026-06-14T11:46:43.4437381Z + url_launcher_windows 3.1.5
+2026-06-14T11:46:43.4437796Z + vector_math 2.2.0 (2.4.0 available)
+2026-06-14T11:46:43.4438231Z + visibility_detector 0.4.0+2
+2026-06-14T11:46:43.4438616Z + vm_service 15.2.0
+2026-06-14T11:46:43.4438948Z + web 1.1.1
+2026-06-14T11:46:43.4439267Z + win32 5.15.0 (6.3.0 available)
+2026-06-14T11:46:43.4439692Z + xdg_directories 1.1.0
+2026-06-14T11:46:43.4440039Z + xml 7.0.1
+2026-06-14T11:46:43.4440332Z + yaml 3.1.3
+2026-06-14T11:46:43.4440681Z Changed 97 dependencies!
+2026-06-14T11:46:43.4441280Z 15 packages have newer versions incompatible with dependency constraints.
+2026-06-14T11:46:43.4441971Z Try `flutter pub outdated` for more information.
+2026-06-14T11:46:43.7887428Z ##[group]Run flutter build apk --release --target-platform android-arm64
+2026-06-14T11:46:43.7888002Z [36;1mflutter build apk --release --target-platform android-arm64[0m
+2026-06-14T11:46:43.7921968Z shell: /usr/bin/bash -e {0}
+2026-06-14T11:46:43.7922482Z env:
+2026-06-14T11:46:43.7922829Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:46:43.7923532Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-06-14T11:46:43.7924015Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.44.2-x64/flutter
+2026-06-14T11:46:43.7924392Z   PUB_CACHE: /home/runner/.pub-cache
+2026-06-14T11:46:43.7924661Z ##[endgroup]
+2026-06-14T11:48:47.3618137Z Running Gradle task 'assembleRelease'...                        
+2026-06-14T11:48:47.3666513Z WARNING: Your Android app project: app located at: /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter/android/app/build.gradle.kts
+2026-06-14T11:48:47.3673297Z applies the Kotlin Gradle Plugin, which will cause build failures in future versions of Flutter. 
+2026-06-14T11:48:47.3674809Z Please migrate your app to Built-in Kotlin using this guide: https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-app-developers
+2026-06-14T11:48:47.3675815Z 
+2026-06-14T11:48:47.3676272Z WARNING: Your app uses the following plugins that apply Kotlin Gradle Plugin (KGP): fluttertoast
+2026-06-14T11:48:47.3677310Z Future versions of Flutter will fail to build if your app uses plugins that apply KGP.
+2026-06-14T11:48:47.3677878Z 
+2026-06-14T11:48:47.3678358Z Please check the changelogs of these plugins and upgrade to a version that supports Built-in Kotlin.
+2026-06-14T11:48:47.3679430Z If no such version exists, report the issue to the plugin. If necessary, here is a guide on filing 
+2026-06-14T11:48:47.3681120Z an issue against a plugin: https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-app-developers#report-incompatible-kotlin-gradle-plugin-usage-to-plugin-authors
+2026-06-14T11:48:47.3682499Z 
+2026-06-14T11:48:47.3683413Z If you are a plugin author, please migrate your plugin to Built-in Kotlin using this guide: https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-plugin-authors
+2026-06-14T11:48:49.8545996Z Checking the license for package Android SDK Platform 33 in /usr/local/lib/android/sdk/licenses
+2026-06-14T11:48:49.8550250Z License for package Android SDK Platform 33 accepted.
+2026-06-14T11:48:49.8551176Z Preparing "Install Android SDK Platform 33 (revision 3)".
+2026-06-14T11:48:52.4520853Z "Install Android SDK Platform 33 (revision 3)" ready.
+2026-06-14T11:48:52.4521829Z Installing Android SDK Platform 33 in /usr/local/lib/android/sdk/platforms/android-33
+2026-06-14T11:48:52.4522735Z "Install Android SDK Platform 33 (revision 3)" complete.
+2026-06-14T11:48:52.7525763Z "Install Android SDK Platform 33 (revision 3)" finished.
+2026-06-14T11:48:52.8547328Z [=========                              ] 25%                                   
+2026-06-14T11:48:52.8583401Z [=========                              ] 25% Fetch remote repository...        
+2026-06-14T11:48:52.8584542Z [=======================================] 100% Fetch remote repository...       
+2026-06-14T11:48:53.3527343Z Checking the license for package CMake 3.22.1 in /usr/local/lib/android/sdk/licenses
+2026-06-14T11:48:53.3548142Z License for package CMake 3.22.1 accepted.
+2026-06-14T11:48:53.3553965Z Preparing "Install CMake 3.22.1 v.3.22.1".
+2026-06-14T11:48:54.2521673Z "Install CMake 3.22.1 v.3.22.1" ready.
+2026-06-14T11:48:54.2522873Z Installing CMake 3.22.1 in /usr/local/lib/android/sdk/cmake/3.22.1
+2026-06-14T11:48:54.2524120Z "Install CMake 3.22.1 v.3.22.1" complete.
+2026-06-14T11:48:54.2525545Z "Install CMake 3.22.1 v.3.22.1" finished.
+2026-06-14T11:49:04.4538854Z lib/main/profile/profile_page.dart:34:7: Error: 'Response' isn't a type.
+2026-06-14T11:49:04.4540802Z       Response res;
+2026-06-14T11:49:04.4541403Z       ^^^^^^^^
+2026-06-14T11:49:04.4543066Z lib/main/owner/owner_page.dart:34:44: Error: The method 'getOwnerManageData' isn't defined for the type 'DioClient'.
+2026-06-14T11:49:04.4544417Z  - 'DioClient' is from 'package:zqwis/back/api/dio_client.dart' ('lib/back/api/dio_client.dart').
+2026-06-14T11:49:04.4545641Z Try correcting the name to the name of an existing method, or defining a method named 'getOwnerManageData'.
+2026-06-14T11:49:04.4546918Z       final res = await DioClient.instance.getOwnerManageData();
+2026-06-14T11:49:04.4547657Z                                            ^^^^^^^^^^^^^^^^^^
+2026-06-14T11:49:04.4548690Z lib/main/missions/missions_page.dart:34:44: Error: The method 'getMissions' isn't defined for the type 'DioClient'.
+2026-06-14T11:49:04.4549938Z  - 'DioClient' is from 'package:zqwis/back/api/dio_client.dart' ('lib/back/api/dio_client.dart').
+2026-06-14T11:49:04.4551093Z Try correcting the name to the name of an existing method, or defining a method named 'getMissions'.
+2026-06-14T11:49:04.4552278Z       final res = await DioClient.instance.getMissions(action: 'list');
+2026-06-14T11:49:04.4553060Z                                            ^^^^^^^^^^^
+2026-06-14T11:49:04.4553981Z lib/main/missions/missions_page.dart:49:56: Error: Too few positional arguments: 2 required, 1 given.
+2026-06-14T11:49:04.4555003Z       final res = await DioClient.instance.claimMission(missionId);
+2026-06-14T11:49:04.4555741Z                                                        ^
+2026-06-14T11:49:04.4556678Z lib/main/missions/missions_page.dart:188:98: Error: Too many positional arguments: 1 allowed, but 2 found.
+2026-06-14T11:49:04.4557674Z Try removing the extra positional arguments.
+2026-06-14T11:49:04.4558638Z                   : (hasUrl ? () => _handleSocialMission(m['id'], m['url']) : () => _claimMission(m['id'], rewardType)),
+2026-06-14T11:49:04.4559657Z                                                                                           ^
+2026-06-14T11:49:12.6521714Z Target kernel_snapshot_program failed: Exception
+2026-06-14T11:49:12.6550945Z 
+2026-06-14T11:49:12.6564998Z 
+2026-06-14T11:49:12.6565642Z FAILURE: Build failed with an exception.
+2026-06-14T11:49:12.6566196Z 
+2026-06-14T11:49:12.6566522Z * What went wrong:
+2026-06-14T11:49:12.6589924Z Execution failed for task ':app:compileFlutterBuildRelease'.
+2026-06-14T11:49:12.6591526Z > Process 'command '/opt/hostedtoolcache/flutter/stable-3.44.2-x64/flutter/bin/flutter'' finished with non-zero exit value 1
+2026-06-14T11:49:12.6592792Z 
+2026-06-14T11:49:12.6593096Z * Try:
+2026-06-14T11:49:12.6593693Z > Run with --stacktrace option to get the stack trace.
+2026-06-14T11:49:12.6594499Z > Run with --info or --debug option to get more log output.
+2026-06-14T11:49:12.6595233Z > Run with --scan to get full insights.
+2026-06-14T11:49:12.6595915Z > Get more help at https://help.gradle.org.
+2026-06-14T11:49:12.6596434Z 
+2026-06-14T11:49:12.6596750Z BUILD FAILED in 2m 27s
+2026-06-14T11:49:13.1250239Z Running Gradle task 'assembleRelease'...                          148.8s
+2026-06-14T11:49:13.1339860Z Gradle task assembleRelease failed with exit code 1
+2026-06-14T11:49:13.1407683Z ##[error]Process completed with exit code 1.
+2026-06-14T11:49:13.1615925Z Post job cleanup.
+2026-06-14T11:49:13.1723856Z Post job cleanup.
+2026-06-14T11:49:13.3541905Z Post job cleanup.
+2026-06-14T11:49:13.4574485Z [command]/usr/bin/git version
+2026-06-14T11:49:13.4627595Z git version 2.54.0
+2026-06-14T11:49:13.4689733Z Temporarily overriding HOME='/home/runner/work/_temp/1f1c927e-b904-4419-8300-b509e9f71edf' before making global git config changes
+2026-06-14T11:49:13.4690821Z Adding repository directory to the temporary git global config as a safe directory
+2026-06-14T11:49:13.4707431Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter
+2026-06-14T11:49:13.4751776Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-06-14T11:49:13.4791086Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-06-14T11:49:13.5039847Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-06-14T11:49:13.5065902Z http.https://github.com/.extraheader
+2026-06-14T11:49:13.5077937Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-06-14T11:49:13.5108760Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-06-14T11:49:13.5345470Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-06-14T11:49:13.5378313Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-06-14T11:49:13.5725419Z Cleaning up orphan processes
+2026-06-14T11:49:13.6077706Z Terminate orphan process: pid (2725) (java)
+2026-06-14T11:49:13.6111055Z Terminate orphan process: pid (2843) (java)
+2026-06-14T11:49:13.6128082Z ##[warning]Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/setup-java@v4. Actions will be forced to run with Node.js 24 by default starting June 16th, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

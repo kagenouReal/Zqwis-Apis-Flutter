@@ -174,7 +174,7 @@ class _StorePageState extends State<StorePage> {
   }
 
   Widget _buildPremiumSection(dynamic user, bool isDark) {
-    final packages = [ {'id': '7day', 'name': '7 Days Premium', 'price': 200, 'icon': Icons.flash_on_rounded, 'color': AppColors.brandBlue}, {'id': '30day', 'name': '30 Days Premium', 'price': 600, 'icon': Icons.star_rounded, 'color': AppColors.accentPurple}, {'id': 'permanent', 'name': 'Permanent Access', 'price': 3000, 'icon': Icons.diamond_rounded, 'color': AppColors.warning} ];
+    final packages = [ {'id': '7day', 'name': '7 Days Premium', 'price': 500, 'icon': Icons.flash_on_rounded, 'color': AppColors.brandBlue}, {'id': '30day', 'name': '30 Days Premium', 'price': 1500, 'icon': Icons.star_rounded, 'color': AppColors.accentPurple}, {'id': 'permanent', 'name': 'Permanent Access', 'price': 5000, 'icon': Icons.diamond_rounded, 'color': AppColors.warning} ];
     final bool canBuy = user.role == 'user';
 
     // Setup warna untuk tombol flat
