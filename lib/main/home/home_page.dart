@@ -184,7 +184,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             _buildQuickStat(Icons.bolt_rounded, "Fast", AppColors.accentBlue),
             _buildQuickStat(Icons.security_rounded, "Secure", const Color(0xFF10B981)),
-            _buildQuickStat(Icons.Auto_awesome_rounded, "Modern", AppColors.accentPurple),
+            _buildQuickStat(Icons.auto_awesome_rounded, "Modern", AppColors.accentPurple),
           ].animate(interval: 100.ms).fade().scale(),
         ),
       ],
