@@ -91,16 +91,22 @@ class _HomePageState extends State<HomePage> {
                         child: VisibilityAnimator(idKey: 'banner_card', child: _buildBannerCard(isDark)),
                       );
                     case 1:
+                      if (_stats?.broadcast == null || _stats!.broadcast!.isEmpty) return const SizedBox.shrink();
                       return Padding(
                         padding: const EdgeInsets.only(top: 20),
-                        child: VisibilityAnimator(idKey: 'metrics_card', child: _buildMetricsCard(isDark, ratio)),
+                        child: VisibilityAnimator(idKey: 'broadcast_card', child: _buildBroadcastCard(isDark)),
                       );
                     case 2:
                       return Padding(
                         padding: const EdgeInsets.only(top: 20),
-                        child: VisibilityAnimator(idKey: 'project_card', child: _buildProjectInfoCard(isDark)),
+                        child: VisibilityAnimator(idKey: 'metrics_card', child: _buildMetricsCard(isDark, ratio)),
                       );
                     case 3:
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: VisibilityAnimator(idKey: 'project_card', child: _buildProjectInfoCard(isDark)),
+                      );
+                    case 4:
                       return const Padding(
                         padding: EdgeInsets.only(top: 40),
                         child: CopyrightFooter(),
@@ -109,8 +115,37 @@ class _HomePageState extends State<HomePage> {
                       return const SizedBox.shrink();
                   }
                 },
-                childCount: 4,
+                childCount: 5,
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBroadcastCard(bool isDark) {
+    return GlassCard(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(color: AppColors.accentBlue.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+            child: const Icon(Icons.campaign_rounded, color: AppColors.accentBlue, size: 20),
+          ).animate(onPlay: (c) => c.repeat()).shimmer(duration: 2.seconds),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("ANNOUNCEMENT", style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.accentBlue, letterSpacing: 1.5)),
+                const SizedBox(height: 4),
+                Text(
+                  _stats?.broadcast ?? "",
+                  style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, color: isDark ? Colors.white : Colors.black87),
+                ),
+              ],
             ),
           ),
         ],

@@ -31,10 +31,12 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> _handleAction(String action, {Map<String, dynamic>? payload}) async {
     setState(() => _loading = true);
     try {
-      final res = await DioClient.instance.updateProfile({
-        'action': action,
-        if (payload != null) 'payload': payload,
-      });
+      Response res;
+      if (action == 'reset_apikey') res = await DioClient.instance.resetApikey();
+      else if (action == 'change_password') res = await DioClient.instance.changePassword(payload?['newPassword']);
+      else if (action == 'add_ip') res = await DioClient.instance.addIp(payload?['ip']);
+      else if (action == 'delete_ip') res = await DioClient.instance.deleteIp(payload?['ip']);
+      else throw 'Action not supported';
 
       if (res.statusCode == 200 && res.data['status'] == true) {
         if (mounted) {

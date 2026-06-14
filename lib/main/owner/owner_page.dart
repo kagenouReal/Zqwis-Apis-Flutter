@@ -75,7 +75,7 @@ class _OwnerPageState extends State<OwnerPage> {
       if (result != null && result.files.single.bytes != null) {
         setState(() => _isLoading = true);
         final formData = FormData.fromMap({'file': MultipartFile.fromBytes(result.files.single.bytes!, filename: result.files.single.name)});
-        final res = await DioClient.instance.dio.post('/api/owner/manage', data: formData);
+        final res = await DioClient.instance.dio.post('/api/owner/manage/db/import', data: formData);
         if (mounted) {
           if (res.statusCode == 200 && res.data['status'] == true) {
             Notif.success(context, res.data['message']);

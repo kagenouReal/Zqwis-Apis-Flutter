@@ -6,17 +6,17 @@ import 'package:zqwis/back/api/dio_client.dart';
 import 'package:zqwis/main/helper/app_theme.dart';
 import 'package:zqwis/main/helper/switchmode_provider.dart';
 import 'package:zqwis/main/helper/auth_provider.dart';
-import 'main/login_page.dart';
-import 'main/home_page.dart';
-import 'main/docs_page.dart';
-import 'main/profile_page.dart';
-import 'main/admin_page.dart';
-import 'main/owner_page.dart';
-import 'main/missions_page.dart';
+import 'main/login/login_page.dart';
+import 'main/home/home_page.dart';
+import 'main/docs/docs_page.dart';
+import 'main/profile/profile_page.dart';
+import 'main/admin/admin_page.dart';
+import 'main/owner/owner_page.dart';
+import 'main/missions/missions_page.dart';
 import 'main/helper/sidemenu_wrapper.dart'; 
-import 'main/splash_screen.dart';
-import 'main/whatsapp_page.dart';
-import 'main/store_page.dart';
+import 'main/splash/splash_screen.dart';
+import 'main/whatsapp/whatsapp_page.dart';
+import 'main/store/store_page.dart';
 
 //==================
 Future<void> main() async {

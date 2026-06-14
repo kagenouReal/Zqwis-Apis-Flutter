@@ -185,7 +185,7 @@ class _MissionsPageState extends State<MissionsPage> {
             InkWell(
               onTap: (isBtnLoading || !isActive) 
                   ? null 
-                  : (hasUrl ? () => _handleSocialMission(m['id'], m['url']) : () => _claimMission(m['id'])),
+                  : (hasUrl ? () => _handleSocialMission(m['id'], m['url']) : () => _claimMission(m['id'], rewardType)),
               borderRadius: BorderRadius.circular(8),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),

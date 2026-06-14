@@ -209,7 +209,7 @@ class _AdminPageState extends State<AdminPage> {
 
   void _showManageCoinsDialog(UserModel user) {
     final amountController = TextEditingController(text: user.totalCoins.toString());
-    final reasonController = TextEditingController(text: "Admin adjustment");
+    final reasonController = TextEditingController();
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -219,12 +219,10 @@ class _AdminPageState extends State<AdminPage> {
         title: Text("SET COINS: ${user.username.toUpperCase()}", style: GoogleFonts.inter(fontWeight: FontWeight.w900, fontSize: 14, letterSpacing: 0.5)),
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           TextFormField(controller: amountController, keyboardType: TextInputType.number, style: GoogleFonts.jetBrainsMono(fontSize: 14), decoration: const InputDecoration(hintText: "New balance", prefixIcon: Icon(Icons.monetization_on_outlined, size: 18)), autofocus: true),
-          const SizedBox(height: 16),
-          TextFormField(controller: reasonController, style: GoogleFonts.inter(fontSize: 14), decoration: const InputDecoration(hintText: "Reason (optional)", prefixIcon: Icon(Icons.note_alt_outlined, size: 18))),
         ]),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: Text("CANCEL", style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.grey))),
-          TextButton(onPressed: () { final amount = int.tryParse(amountController.text); if (amount != null) { Navigator.pop(context); _adminSetCoins(user.username, amount, 'set', reasonController.text); } }, child: Text("SET BALANCE", style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w900, color: AppColors.brandBlue))),
+          TextButton(onPressed: () { final amount = int.tryParse(amountController.text); if (amount != null) { Navigator.pop(context); _adminSetCoins(user.username, amount, 'set', reasonController.text.isEmpty ? "Admin adjustment" : reasonController.text); } }, child: Text("SET BALANCE", style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w900, color: AppColors.brandBlue))),
         ],
       ),
     );
@@ -242,7 +240,7 @@ class _AdminPageState extends State<AdminPage> {
         content: TextFormField(controller: controller, keyboardType: TextInputType.number, autofocus: true, style: GoogleFonts.jetBrainsMono(fontSize: 14), decoration: const InputDecoration(hintText: "Enter amount...")),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: Text("CANCEL", style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.grey))),
-          TextButton(onPressed: () { final target = int.tryParse(controller.text); if (target != null) { final current = user.limit is int ? user.limit as int : 0; final delta = target - current; Navigator.pop(context); _updateLimit(user.username, delta); } }, child: Text("UPDATE", style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w900, color: AppColors.brandBlue))),
+          TextButton(onPressed: () { final target = int.tryParse(controller.text); if (target != null) { Navigator.pop(context); _updateLimit(user.username, target); } }, child: Text("UPDATE", style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w900, color: AppColors.brandBlue))),
         ],
       ),
     );
@@ -329,7 +327,7 @@ class _UserCardInteractiveState extends State<_UserCardInteractive> {
               SizedBox(width: (MediaQuery.of(context).size.width - 64) / 3, child: ActionButton(icon: Icons.edit_rounded, label: "LIMIT", onTap: widget.onEditLimit, isDark: isDark)),
               SizedBox(width: (MediaQuery.of(context).size.width - 64) / 3, child: ActionButton(icon: Icons.security_rounded, label: "IP", onTap: widget.onEditIpQuota, isDark: isDark)),
               SizedBox(width: (MediaQuery.of(context).size.width - 64) / 3, child: ActionButton(icon: Icons.monetization_on_outlined, label: "COINS", onTap: widget.onManageCoins, isDark: isDark)),
-              ActionButton(icon: Icons.delete_outline_rounded, onTap: widget.onDelete, isDark: isDark),
+              SizedBox(width: (MediaQuery.of(context).size.width - 64) / 3, child: ActionButton(icon: Icons.delete_outline_rounded, label: "DELETE", onTap: widget.onDelete, isDark: isDark, color: Colors.redAccent)),
             ]),
           ])),
           crossFadeState: _isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,

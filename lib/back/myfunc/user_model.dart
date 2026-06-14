@@ -62,10 +62,8 @@ class UserModel {
   //===============
   bool get isOwner => role == 'owner';
   bool get isAdmin => role == 'admin' || role == 'owner';
-  bool get isUnlimited => limit == 'UNLIMITED' || limit == 999999;
-  String get limitDisplay => isUnlimited ? '∞ Unlimited' : limit.toString();
-  String get ipQuotaDisplay =>
-      (maxIpQuota == 'UNLIMITED' || maxIpQuota == null) ? '∞' : maxIpQuota.toString();
+  String get limitDisplay => limit.toString();
+  String get ipQuotaDisplay => (maxIpQuota ?? '0').toString();
   
   // Helper getters for new fields
   bool get isPremium => premium?['isPremium'] ?? false;
