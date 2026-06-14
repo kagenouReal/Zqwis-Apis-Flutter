@@ -7,6 +7,7 @@ import 'package:zqwis/back/api/dio_client.dart';
 import 'package:zqwis/main/helper/auth_provider.dart';
 import 'package:zqwis/main/helper/app_theme.dart';
 import 'package:zqwis/main/helper/shared_widgets.dart';
+import 'package:zqwis/main/helper/notification_helper.dart';
 
 //==================
 class ProfilePage extends StatefulWidget {
@@ -146,6 +147,90 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   //==================
+  Widget _buildBalanceCard(dynamic user, bool isDark) {
+    return GlassCard(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              _buildBalanceItem(
+                icon: Icons.monetization_on_rounded,
+                label: "COINS",
+                value: "${user.totalCoins}",
+                color: AppColors.warning,
+                isDark: isDark,
+              ),
+              Container(width: 1, height: 40, color: isDark ? Colors.white10 : Colors.black12, margin: const EdgeInsets.symmetric(horizontal: 16)),
+              _buildBalanceItem(
+                icon: Icons.bolt_rounded,
+                label: "LIMIT LEFT",
+                value: user.limitDisplay,
+                color: AppColors.accentBlue,
+                isDark: isDark,
+              ),
+            ],
+          ),
+          if (user.isPremium) ...[
+            const SizedBox(height: 20),
+            Divider(color: isDark ? AppColors.darkCardBorder : AppColors.lightCardBorder),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("PREMIUM STATUS", style: GoogleFonts.inter(fontSize: 8, fontWeight: FontWeight.w900, color: AppColors.accentBlue, letterSpacing: 1.0)),
+                    Text(
+                      user.isPermanentPremium 
+                          ? "PERMANENT ACCESS" 
+                          : "${user.premiumDaysLeft} DAYS REMAINING",
+                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.bold, color: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary),
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: AppColors.accentBlue.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: AppColors.accentBlue.withOpacity(0.3)),
+                  ),
+                  child: Text(user.premiumType.toUpperCase(), style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.accentBlue)),
+                ),
+              ],
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBalanceItem({required IconData icon, required String label, required String value, required Color color, required bool isDark}) {
+    return Expanded(
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+            child: Icon(icon, color: color, size: 20),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(label, style: GoogleFonts.inter(fontSize: 8, fontWeight: FontWeight.w900, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary, letterSpacing: 1.0)),
+                Text(value, style: GoogleFonts.jetBrainsMono(fontSize: 14, fontWeight: FontWeight.w900, color: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary), overflow: TextOverflow.ellipsis),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   //==================
   Widget _buildSecurityCard(dynamic user, bool isDark) {
     final labelColor = isDark ? const Color(0xFF71717A) : const Color(0xFFA1A1AA);
@@ -453,100 +538,6 @@ class _ProfilePageState extends State<ProfilePage> {
               }
             },
             child: Text("ADD IP", style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w900, color: AppColors.brandBlue)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  //==================
-  Widget _buildBalanceCard(dynamic user, bool isDark) {
-    return GlassCard(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              _buildBalanceItem(
-                icon: Icons.monetization_on_rounded,
-                label: "COINS",
-                value: "${user.totalCoins}",
-                color: AppColors.warning,
-                isDark: isDark,
-              ),
-              Container(width: 1, height: 40, color: isDark ? Colors.white10 : Colors.black12, margin: const EdgeInsets.symmetric(horizontal: 16)),
-              _buildBalanceItem(
-                icon: Icons.bolt_rounded,
-                label: "LIMIT LEFT",
-                value: user.limitDisplay,
-                color: AppColors.accentBlue,
-                isDark: isDark,
-              ),
-            ],
-          ),
-          if (user.isPremium) ...[
-            const SizedBox(height: 20),
-            Divider(color: isDark ? AppColors.darkCardBorder : AppColors.lightCardBorder),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("PREMIUM STATUS", style: GoogleFonts.inter(fontSize: 8, fontWeight: FontWeight.w900, color: AppColors.accentBlue, letterSpacing: 1.0)),
-                    Text(
-                      user.isPermanentPremium 
-                          ? "PERMANENT ACCESS" 
-                          : "${user.premiumDaysLeft} DAYS REMAINING",
-                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.bold, color: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: AppColors.accentBlue.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: AppColors.accentBlue.withOpacity(0.3)),
-                  ),
-                  child: Text(user.premiumType.toUpperCase(), style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.accentBlue)),
-                ),
-              ],
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBalanceItem({required IconData icon, required String label, required String value, required Color color, required bool isDark}) {
-    return Expanded(
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
-            child: Icon(icon, color: color, size: 20),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(label, style: GoogleFonts.inter(fontSize: 8, fontWeight: FontWeight.w900, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary, letterSpacing: 1.0)),
-                Text(value, style: GoogleFonts.jetBrainsMono(fontSize: 14, fontWeight: FontWeight.w900, color: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary), overflow: TextOverflow.ellipsis),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-low: TextOverflow.ellipsis),
-              ],
-            ),
           ),
         ],
       ),

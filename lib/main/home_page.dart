@@ -6,6 +6,7 @@ import 'package:zqwis/back/myfunc/stats_model.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:zqwis/main/helper/app_theme.dart';
 import 'package:zqwis/main/helper/shared_widgets.dart';
+import 'package:zqwis/main/helper/notification_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -388,12 +389,6 @@ class _PingingDotState extends State<_PingingDot> with SingleTickerProviderState
             ),
           ),
           Container(width: 6, height: 6, decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.accentBlue)),
-        ],
-      ),
-    );
-  }
-}
-BoxShape.circle, color: AppColors.accentBlue)),
         ],
       ),
     );

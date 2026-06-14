@@ -242,7 +242,6 @@ class _WhatsAppPairingPageState extends State<WhatsAppPairingPage> {
   }
 
   //==================
-  //==================
   Widget _buildConnectForm(bool isDark) {
     final labelColor = isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary;
     final borderColor = isDark ? AppColors.darkCardBorder : AppColors.lightCardBorder;
@@ -470,10 +469,6 @@ class _WhatsAppPairingPageState extends State<WhatsAppPairingPage> {
           ),
         ],
       ),
-    );
-  }
-}
-    ),
     );
   }
 }
