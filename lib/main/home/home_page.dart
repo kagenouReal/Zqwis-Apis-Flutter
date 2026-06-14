@@ -86,15 +86,15 @@ class _HomePageState extends State<HomePage> {
                 (context, index) {
                   switch (index) {
                     case 0:
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: VisibilityAnimator(idKey: 'banner_card', child: _buildBannerCard(isDark)),
-                      );
-                    case 1:
                       if (_stats?.broadcast == null || _stats!.broadcast!.isEmpty) return const SizedBox.shrink();
                       return Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: VisibilityAnimator(idKey: 'broadcast_card', child: _buildBroadcastCard(isDark)),
+                      );
+                    case 1:
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: VisibilityAnimator(idKey: 'banner_card', child: _buildBannerCard(isDark)),
                       );
                     case 2:
                       return Padding(
