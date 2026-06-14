@@ -85,7 +85,7 @@ class _MissionsPageState extends State<MissionsPage> {
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
                   const SizedBox(height: 16),
-                  ModuleHeader(title: "DAILY", accentTitle: "MISSIONS", subtitle: "Complete tasks to earn free coins.", isDark: isDark).animate().fade().slideY(begin: 0.1, end: 0),
+                  ModuleHeader(title: "DAILY", accentTitle: "MISSIONS", subtitle: "Complete tasks to earn coins and API limits.", isDark: isDark).animate().fade().slideY(begin: 0.1, end: 0),
                   const SizedBox(height: 24),
                   if (user.role == 'owner') _buildOwnerState(isDark) else if (_fetchingMissions) const Center(child: Padding(padding: EdgeInsets.all(40), child: CircularProgressIndicator())) else if (_availableMissions.isEmpty) _buildEmptyState(isDark) else ... _availableMissions.entries.map((entry) => _buildMissionsSection(entry.key.toUpperCase(), entry.value as List, user.missions?['completed'] as List? ?? [], isDark)).toList(),
                   const SizedBox(height: 40),
@@ -205,6 +205,15 @@ class _MissionsPageState extends State<MissionsPage> {
       padding: const EdgeInsets.all(40),
       child: Column(children: [
         Container(padding: const EdgeInsets.all(20), decoration: BoxDecoration(color: AppColors.accentBlue.withOpacity(0.1), shape: BoxShape.circle), child: const Icon(Icons.auto_awesome_rounded, size: 48, color: AppColors.accentBlue)),
+        const SizedBox(height: 24),
+        Text("OWNER DETECTED", style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w900, letterSpacing: 1.0)),
+        const SizedBox(height: 12),
+        Text("You have unlimited resources and system access. Missions are only for standard users.", textAlign: TextAlign.center, style: GoogleFonts.inter(fontSize: 12, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary)),
+      ]),
+    );
+  }
+}
+AppColors.accentBlue)),
         const SizedBox(height: 24),
         Text("OWNER DETECTED", style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w900, letterSpacing: 1.0)),
         const SizedBox(height: 12),
