@@ -32,8 +32,15 @@ class _MissionsPageState extends State<MissionsPage> {
   Future<void> _fetchMissionsList() async {
     try {
       final res = await DioClient.instance.getMissions(action: 'list');
-      if (res.statusCode == 200 && res.data['status'] == true && mounted) { setState(() { _availableMissions = res.data['data'] ?? {}; _fetchingMissions = false; }); }
-    } catch (_) { if (mounted) setState(() => _fetchingMissions = false); }
+      if (res.statusCode == 200 && res.data['status'] == true && mounted) { 
+        setState(() { 
+          _availableMissions = res.data['data'] ?? {}; 
+          _fetchingMissions = false; 
+        }); 
+      }
+    } catch (_) { 
+      if (mounted) setState(() => _fetchingMissions = false); 
+    }
   }
 
   Future<void> _claimMission(String missionId) async {
@@ -56,13 +63,30 @@ class _MissionsPageState extends State<MissionsPage> {
 
   void _updateMissionLocally(String missionId) {
     if (_availableMissions.isEmpty) return;
-    setState(() { for (var category in _availableMissions.values) { if (category is List) { for (var m in category) { if (m['id'] == missionId) { m['isCompleted'] = true; return; } } } } });
+    setState(() { 
+      for (var category in _availableMissions.values) { 
+        if (category is List) { 
+          for (var m in category) { 
+            if (m['id'] == missionId) { 
+              m['isCompleted'] = true; 
+              return; 
+            } 
+          } 
+        } 
+      } 
+    });
   }
 
   Future<void> _handleSocialMission(String missionId, String? url) async {
     if (url != null && url.isNotEmpty) {
       final uri = Uri.parse(url);
-      try { final ok = await launchUrl(uri, mode: LaunchMode.externalApplication); if (ok) { await Future.delayed(const Duration(seconds: 1)); await _claimMission(missionId); } } catch (_) {}
+      try { 
+        final ok = await launchUrl(uri, mode: LaunchMode.externalApplication); 
+        if (ok) { 
+          await Future.delayed(const Duration(seconds: 1)); 
+          await _claimMission(missionId); 
+        } 
+      } catch (_) {}
     }
   }
 
@@ -85,9 +109,17 @@ class _MissionsPageState extends State<MissionsPage> {
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
                   const SizedBox(height: 16),
-                  ModuleHeader(title: "DAILY", accentTitle: "MISSIONS", subtitle: "Complete tasks to earn coins and API limits.", isDark: isDark).animate().fade().slideY(begin: 0.1, end: 0),
+                  ModuleHeader(
+                    title: "DAILY", 
+                    accentTitle: "MISSIONS", 
+                    subtitle: "Complete tasks to earn coins and API limits.", 
+                    isDark: isDark
+                  ).animate().fade().slideY(begin: 0.1, end: 0),
                   const SizedBox(height: 24),
-                  if (user.role == 'owner') _buildOwnerState(isDark) else if (_fetchingMissions) const Center(child: Padding(padding: EdgeInsets.all(40), child: CircularProgressIndicator())) else if (_availableMissions.isEmpty) _buildEmptyState(isDark) else ... _availableMissions.entries.map((entry) => _buildMissionsSection(entry.key.toUpperCase(), entry.value as List, user.missions?['completed'] as List? ?? [], isDark)).toList(),
+                  if (user.role == 'owner') _buildOwnerState(isDark) 
+                  else if (_fetchingMissions) const Center(child: Padding(padding: EdgeInsets.all(40), child: CircularProgressIndicator())) 
+                  else if (_availableMissions.isEmpty) _buildEmptyState(isDark) 
+                  else ... _availableMissions.entries.map((entry) => _buildMissionsSection(entry.key.toUpperCase(), entry.value as List, user.missions?['completed'] as List? ?? [], isDark)).toList(),
                   const SizedBox(height: 40),
                   const CopyrightFooter(),
                 ]),
@@ -98,32 +130,34 @@ class _MissionsPageState extends State<MissionsPage> {
       ),
     );
   }
+
   Widget _buildMissionsSection(String title, List missions, List completed, bool isDark) {
-    // Siapin variabel warna biar gampang dipanggil di ternary operator ntar
-    final labelColor = isDark ? const Color(0xFF71717A) : const Color(0xFFA1A1AA); // Warna pudar (abu-abu)
-    final textColor = isDark ? Colors.white : Colors.black; // Warna terang (kontras)
-    // Coba sesuaikan AppColors.darkCardBorder lu kalau ada error, gw pake default sini
+    final labelColor = isDark ? const Color(0xFF71717A) : const Color(0xFFA1A1AA);
+    final textColor = isDark ? Colors.white : Colors.black;
     final borderColor = isDark ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.1); 
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       SectionHeader(title),
       const SizedBox(height: 16),
       ...missions.map((m) {
-        final isCompleted = m['isCompleted'] ?? completed.contains(m['id']); // Udah pernah di-claim
-        final canClaim = m['canClaim'] ?? false; // Misi beres, siap di-claim
-        final hasUrl = m['url'] != null && (m['url'] as String).isNotEmpty; // Misi tipe GO (kunjungi link)
+        final isCompleted = m['isCompleted'] ?? completed.contains(m['id']);
+        final canClaim = m['canClaim'] ?? false;
+        final hasUrl = m['url'] != null && (m['url'] as String).isNotEmpty;
 
-        // STATUS AKTIF (Terang): Jika belum claimed DAN (sudah bisa claim ATAU tipe misi GO)
         final bool isActive = !isCompleted && (canClaim || hasUrl);
         final bool isBtnLoading = _loading && isActive;
 
-        // LOGIKA ICON & LABEL
         String btnLabel = isCompleted ? "CLAIMED" : (hasUrl ? "GO" : "CLAIM");
         IconData btnIcon = isCompleted 
-            ? Icons.check_circle_outline_rounded // Kalo udah claimed
+            ? Icons.check_circle_outline_rounded 
             : (!isActive && !hasUrl) 
-                ? Icons.lock_outline_rounded     // Kalo blm kelar misi (gembok)
-                : (hasUrl ? Icons.launch_rounded : Icons.redeem_rounded); // Kalo siap claim / GO
+                ? Icons.lock_outline_rounded     
+                : (hasUrl ? Icons.launch_rounded : Icons.redeem_rounded);
+
+        final rewardType = m['rewardType'] ?? 'coins';
+        final isLimit = rewardType == 'limit';
+        final rewardColor = isLimit ? AppColors.accentBlue : AppColors.warning;
+        final rewardUnit = isLimit ? "LIMIT" : "COINS";
 
         return Container(
           margin: const EdgeInsets.only(bottom: 12),
@@ -138,14 +172,19 @@ class _MissionsPageState extends State<MissionsPage> {
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(m['name'] ?? "Mission", style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.bold)), 
                 const SizedBox(height: 4), 
-                Text("+${m['reward']} COINS", style: GoogleFonts.jetBrainsMono(fontSize: 11, color: AppColors.warning, fontWeight: FontWeight.bold))
+                Row(
+                  children: [
+                    Icon(isLimit ? Icons.bolt_rounded : Icons.monetization_on_rounded, size: 10, color: rewardColor),
+                    const SizedBox(width: 4),
+                    Text("+${m['reward']} $rewardUnit", style: GoogleFonts.jetBrainsMono(fontSize: 11, color: rewardColor, fontWeight: FontWeight.bold)),
+                  ],
+                )
               ])
             ),
             
-            // --- MULAI TOMBOL FLAT ALA SEND REQUEST ---
             InkWell(
               onTap: (isBtnLoading || !isActive) 
-                  ? null // Kalo lagi loading atau gak aktif, fungsi dimatiin (null)
+                  ? null 
                   : (hasUrl ? () => _handleSocialMission(m['id'], m['url']) : () => _claimMission(m['id'])),
               borderRadius: BorderRadius.circular(8),
               child: AnimatedContainer(
@@ -153,8 +192,8 @@ class _MissionsPageState extends State<MissionsPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 decoration: BoxDecoration(
                   color: (isBtnLoading || !isActive)
-                      ? (isDark ? const Color(0x04FFFFFF) : const Color(0x05000000)) // Background Pudar
-                      : (isDark ? const Color(0x0DFFFFFF) : const Color(0x06000000)), // Background Terang
+                      ? (isDark ? const Color(0x04FFFFFF) : const Color(0x05000000))
+                      : (isDark ? const Color(0x0DFFFFFF) : const Color(0x06000000)),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: borderColor),
                 ),
@@ -170,7 +209,7 @@ class _MissionsPageState extends State<MissionsPage> {
                             Icon(
                               btnIcon,
                               size: 12,
-                              color: (!isActive) ? labelColor : textColor, // Warna Icon dinamis
+                              color: (!isActive) ? labelColor : textColor,
                             ),
                             const SizedBox(width: 8),
                             Text(
@@ -178,7 +217,7 @@ class _MissionsPageState extends State<MissionsPage> {
                               style: GoogleFonts.inter(
                                 fontSize: 10, 
                                 fontWeight: FontWeight.w900,
-                                color: (!isActive) ? labelColor : textColor, // Warna Teks dinamis
+                                color: (!isActive) ? labelColor : textColor,
                                 letterSpacing: 1.5,
                               ),
                             ),
@@ -187,8 +226,6 @@ class _MissionsPageState extends State<MissionsPage> {
                 ),
               ),
             ),
-            // --- END TOMBOL FLAT ---
-
           ]),
         );
       }).toList(),
@@ -197,23 +234,27 @@ class _MissionsPageState extends State<MissionsPage> {
   }
 
   Widget _buildEmptyState(bool isDark) {
-    return GlassCard(padding: const EdgeInsets.all(40), child: Column(children: [const Icon(Icons.assignment_turned_in_outlined, size: 48, color: Colors.grey), const SizedBox(height: 16), Text("No missions available at the moment.", style: GoogleFonts.inter(color: Colors.grey))]));
+    return GlassCard(
+      padding: const EdgeInsets.all(40), 
+      child: Column(
+        children: [
+          const Icon(Icons.assignment_turned_in_outlined, size: 48, color: Colors.grey), 
+          const SizedBox(height: 16), 
+          Text("No missions available at the moment.", style: GoogleFonts.inter(color: Colors.grey))
+        ]
+      )
+    );
   }
 
   Widget _buildOwnerState(bool isDark) {
     return GlassCard(
       padding: const EdgeInsets.all(40),
       child: Column(children: [
-        Container(padding: const EdgeInsets.all(20), decoration: BoxDecoration(color: AppColors.accentBlue.withOpacity(0.1), shape: BoxShape.circle), child: const Icon(Icons.auto_awesome_rounded, size: 48, color: AppColors.accentBlue)),
-        const SizedBox(height: 24),
-        Text("OWNER DETECTED", style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w900, letterSpacing: 1.0)),
-        const SizedBox(height: 12),
-        Text("You have unlimited resources and system access. Missions are only for standard users.", textAlign: TextAlign.center, style: GoogleFonts.inter(fontSize: 12, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary)),
-      ]),
-    );
-  }
-}
-AppColors.accentBlue)),
+        Container(
+          padding: const EdgeInsets.all(20), 
+          decoration: BoxDecoration(color: AppColors.accentBlue.withOpacity(0.1), shape: BoxShape.circle), 
+          child: const Icon(Icons.auto_awesome_rounded, size: 48, color: AppColors.accentBlue)
+        ),
         const SizedBox(height: 24),
         Text("OWNER DETECTED", style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w900, letterSpacing: 1.0)),
         const SizedBox(height: 12),
