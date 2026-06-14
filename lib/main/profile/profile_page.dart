@@ -110,11 +110,19 @@ class _ProfilePageState extends State<ProfilePage> {
                       return Padding(
                         padding: const EdgeInsets.only(top: 24),
                         child: VisibilityAnimator(
+                          idKey: 'api_activity_card',
+                          child: _buildActivityCard(user, isDark),
+                        ),
+                      );
+                    case 3:
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 24),
+                        child: VisibilityAnimator(
                           idKey: 'api_security_card',
                           child: _buildSecurityCard(user, isDark),
                         ),
                       );
-                    case 3:
+                    case 4:
                       return Padding(
                         padding: const EdgeInsets.only(top: 24),
                         child: VisibilityAnimator(
@@ -122,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: _buildIpWhitelistCard(user, isDark),
                         ),
                       );
-                    case 4:
+                    case 5:
                       if (user.role == 'owner') return const SizedBox.shrink();
                       return Padding(
                         padding: const EdgeInsets.only(top: 24),
@@ -131,7 +139,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: _buildPasswordCard(isDark),
                         ),
                       );
-                    case 5:
+                    case 6:
                       return const Padding(
                         padding: EdgeInsets.only(top: 40, bottom: 40),
                         child: CopyrightFooter(),
@@ -140,8 +148,75 @@ class _ProfilePageState extends State<ProfilePage> {
                       return const SizedBox.shrink();
                   }
                 },
-                childCount: 6,
+                childCount: 7,
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  //==================
+  Widget _buildActivityCard(dynamic user, bool isDark) {
+    final activity = user.activity ?? {};
+    final totalCalls = activity['apiCalls'] ?? 0;
+    final dailyCalls = activity['dailyApiCalls'] ?? 0;
+    final borderColor = isDark ? AppColors.darkCardBorder : AppColors.lightCardBorder;
+
+    return GlassCard(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SectionHeader("YOUR API ACTIVITY", dotColor: Color(0xFF10B981)),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              _buildActivityItem(
+                icon: Icons.analytics_outlined,
+                label: "TOTAL REQUESTS",
+                value: "$totalCalls",
+                color: AppColors.accentBlue,
+                isDark: isDark,
+              ),
+              Container(width: 1, height: 40, color: isDark ? Colors.white10 : Colors.black12, margin: const EdgeInsets.symmetric(horizontal: 16)),
+              _buildActivityItem(
+                icon: Icons.today_rounded,
+                label: "V1 CALLS TODAY",
+                value: "$dailyCalls",
+                color: const Color(0xFF10B981),
+                isDark: isDark,
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            "V1 calls track your daily usage for specific automated endpoints.",
+            style: GoogleFonts.inter(fontSize: 10, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary, fontStyle: FontStyle.italic),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActivityItem({required IconData icon, required String label, required String value, required Color color, required bool isDark}) {
+    return Expanded(
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+            child: Icon(icon, color: color, size: 20),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(label, style: GoogleFonts.inter(fontSize: 8, fontWeight: FontWeight.w900, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary, letterSpacing: 1.0)),
+                Text(value, style: GoogleFonts.jetBrainsMono(fontSize: 14, fontWeight: FontWeight.w900, color: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary), overflow: TextOverflow.ellipsis),
+              ],
             ),
           ),
         ],
@@ -252,7 +327,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           const SizedBox(height: 20),
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8), // Padding dikecilin biar kotak gak kegedean
             decoration: BoxDecoration(
               color: isDark ? Colors.black26 : AppColors.lightSurface,
               borderRadius: BorderRadius.circular(10),

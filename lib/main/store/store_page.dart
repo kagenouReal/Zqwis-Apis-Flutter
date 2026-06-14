@@ -104,7 +104,11 @@ class _StorePageState extends State<StorePage> {
           return Container(
             margin: const EdgeInsets.only(bottom: 12),
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(gradient: LinearGradient(colors: [(pkg['color'] as Color).withOpacity(0.1), (pkg['color'] as Color).withOpacity(0.05)]), borderRadius: BorderRadius.circular(12), border: Border.all(color: (pkg['color'] as Color).withOpacity(0.3))),
+            decoration: BoxDecoration(
+              color: isDark ? Colors.white.withOpacity(0.03) : Colors.black.withOpacity(0.02),
+              borderRadius: BorderRadius.circular(12), 
+              border: Border.all(color: borderColor)
+            ),
             child: Row(children: [
               Icon(pkg['icon'] as IconData, color: pkg['color'] as Color, size: 28),
               const SizedBox(width: 16),
@@ -196,7 +200,11 @@ class _StorePageState extends State<StorePage> {
           return Container(
             margin: const EdgeInsets.only(bottom: 12),
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(gradient: LinearGradient(colors: [(pkg['color'] as Color).withOpacity(0.1), (pkg['color'] as Color).withOpacity(0.05)]), borderRadius: BorderRadius.circular(12), border: Border.all(color: (pkg['color'] as Color).withOpacity(0.3))),
+            decoration: BoxDecoration(
+              color: isDark ? Colors.white.withOpacity(0.03) : Colors.black.withOpacity(0.02),
+              borderRadius: BorderRadius.circular(12), 
+              border: Border.all(color: borderColor)
+            ),
             child: Row(children: [
               Icon(pkg['icon'] as IconData, color: pkg['color'] as Color, size: 28),
               const SizedBox(width: 16),

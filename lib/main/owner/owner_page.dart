@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:zqwis/back/api/dio_client.dart';
+import 'package:zqwis/back/myfunc/stats_model.dart';
 import 'package:zqwis/main/helper/auth_provider.dart';
 import 'package:zqwis/main/helper/app_theme.dart';
 import 'package:zqwis/main/helper/shared_widgets.dart';
@@ -20,6 +21,7 @@ class _OwnerPageState extends State<OwnerPage> {
   bool _isLoading = true;
   Map<String, dynamic> _system = {};
   Map<String, dynamic> _settings = {};
+  StatsModel? _stats;
   final _broadcastController = TextEditingController();
 
   @override
@@ -33,21 +35,35 @@ class _OwnerPageState extends State<OwnerPage> {
     try {
       final resSet = await DioClient.instance.getSettings();
       final resSys = await DioClient.instance.getSystemInfo();
+      final resStats = await DioClient.instance.getStats();
+      
       if (mounted) {
         setState(() {
           _settings = resSet.data['data'] ?? {};
           _system = resSys.data['data'] ?? {};
+          _stats = resStats.data['status'] == true ? StatsModel.fromJson(resStats.data['data']) : null;
           _broadcastController.text = _settings['broadcast'] ?? "";
           _isLoading = false;
         });
       }
-    } catch (_) {
+    } catch (e) {
       if (mounted) {
         setState(() => _isLoading = false);
         Notif.error(context, "Failed to load owner data");
       }
     }
   }
+
+  String _formatTime(String? iso) {
+    if (iso == null || iso.isEmpty) return "STABLE";
+    try {
+      final d = DateTime.parse(iso).toLocal();
+      return "${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')}:${d.second.toString().padLeft(2, '0')}";
+    } catch (_) {
+      return "STABLE";
+    }
+  }
+// ... rest of methods unchanged ...
 
   Future<void> _updateSetting(String key, dynamic value) async {
     try {
@@ -112,6 +128,8 @@ class _OwnerPageState extends State<OwnerPage> {
                 delegate: SliverChildListDelegate([
                   ModuleHeader(title: "OWNER", accentTitle: "COMMAND", subtitle: "Full control over system and resources.", isDark: isDark).animate().fade().slideY(begin: 0.1, end: 0),
                   const SizedBox(height: 24),
+                  _buildGlobalMetrics(isDark),
+                  const SizedBox(height: 24),
                   _buildSystemHealth(isDark),
                   const SizedBox(height: 24),
                   _buildGlobalControls(isDark),
@@ -124,6 +142,86 @@ class _OwnerPageState extends State<OwnerPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildGlobalMetrics(bool isDark) {
+    final total = _stats?.total ?? 0;
+    final success = _stats?.success ?? 0;
+    final ratio = total == 0 ? 100.0 : (success / total * 100);
+    final borderColor = isDark ? AppColors.darkCardBorder : AppColors.lightCardBorder;
+    final valueColor = isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary;
+
+    return GlassCard(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SectionHeader("GLOBAL LIVE METRICS"),
+          const SizedBox(height: 16),
+          GridView.count(
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 2.5,
+            children: [
+              _buildMetricBox(icon: "⊞", title: "Total", value: "$total", iconColor: AppColors.accentBlue, bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: valueColor, borderColor: borderColor),
+              _buildMetricBox(icon: "✓", title: "Success", value: "$success", iconColor: const Color(0xFF10B981), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFF10B981), borderColor: borderColor),
+              _buildMetricBox(icon: "✕", title: "Failed", value: "${_stats?.failed ?? 0}", iconColor: const Color(0xFFF43F5E), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFFF43F5E), borderColor: borderColor),
+              _buildMetricBox(icon: "◷", title: "Crash", value: _formatTime(_stats?.lastCrash), iconColor: const Color(0xFF06B6D4), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFF06B6D4), borderColor: borderColor),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("API SUCCESS RATE", style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w900, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary, letterSpacing: 1.5)),
+              Text("${ratio.toStringAsFixed(1)}%", style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: AppColors.accentBlue)),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Container(
+            height: 6, width: double.infinity,
+            decoration: BoxDecoration(color: isDark ? AppColors.darkSurface : AppColors.lightSurface, borderRadius: BorderRadius.circular(999)),
+            child: FractionallySizedBox(
+              alignment: Alignment.centerLeft,
+              widthFactor: (ratio / 100).clamp(0.0, 1.0),
+              child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(999), gradient: const LinearGradient(colors: [Color(0xFF3B82F6), Color(0xFF22D3EE)]))),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMetricBox({required String icon, required String title, required String value, required Color iconColor, required Color bgColor, required Color valueColor, required Color borderColor}) {
+    final isNumber = int.tryParse(value) != null;
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(12), border: Border.all(color: borderColor)),
+      child: Row(
+        children: [
+          Container(
+            width: 32, height: 32,
+            decoration: BoxDecoration(color: iconColor.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+            child: Center(child: Text(icon, style: TextStyle(color: iconColor, fontSize: 16, fontWeight: FontWeight.bold))),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(title.toUpperCase(), style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.darkTextSecondary, letterSpacing: 1.5), overflow: TextOverflow.ellipsis),
+                const SizedBox(height: 2),
+                Text(value, style: GoogleFonts.jetBrainsMono(fontSize: 11, fontWeight: FontWeight.bold, color: valueColor), overflow: TextOverflow.ellipsis),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

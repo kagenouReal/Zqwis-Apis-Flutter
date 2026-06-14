@@ -17,106 +17,62 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  StatsModel? _stats;
-  bool _loadingStats = true;
+  String? _broadcast;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _fetchStats();
+    _fetchBroadcast();
   }
 
-  Future<void> _openUrl(String url) async {
+  Future<void> _fetchBroadcast() async {
     try {
-      final uri = Uri.parse(url);
-      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-        if (mounted) Notif.error(context, 'Gagal membuka link');
-      }
-    } catch (_) {
-      if (mounted) Notif.error(context, 'Error link');
-    }
-  }
-
-  Future<void> _fetchStats() async {
-    try {
-      final res = await DioClient.instance.getStats();
+      final res = await DioClient.instance.getSettings();
       if (res.statusCode == 200 && mounted) {
         setState(() {
-          _stats = StatsModel.fromJson(res.data);
-          _loadingStats = false;
+          _broadcast = res.data['data']['broadcast'];
+          _isLoading = false;
         });
       }
     } catch (_) {
-      if (mounted) {
-        setState(() => _loadingStats = false);
-        Notif.error(context, 'Gagal mengambil metrics');
-      }
-    }
-  }
-
-  String _formatTime(String? iso) {
-    if (iso == null || iso.isEmpty) return "STABLE";
-    try {
-      final d = DateTime.parse(iso).toLocal();
-      return "${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')}:${d.second.toString().padLeft(2, '0')}";
-    } catch (_) {
-      return "STABLE";
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final total = _stats?.total ?? 0;
-    final success = _stats?.success ?? 0;
-    final ratio = total == 0 ? 100.0 : (success / total * 100);
 
     return RefreshIndicator(
       color: AppColors.accentBlue,
       backgroundColor: Theme.of(context).colorScheme.surface,
-      onRefresh: _fetchStats,
+      onRefresh: _fetchBroadcast,
       child: CustomScrollView(
-        cacheExtent: 500,
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  switch (index) {
-                    case 0:
-                      if (_stats?.broadcast == null || _stats!.broadcast!.isEmpty) return const SizedBox.shrink();
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: VisibilityAnimator(idKey: 'broadcast_card', child: _buildBroadcastCard(isDark)),
-                      );
-                    case 1:
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: VisibilityAnimator(idKey: 'banner_card', child: _buildBannerCard(isDark)),
-                      );
-                    case 2:
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: VisibilityAnimator(idKey: 'metrics_card', child: _buildMetricsCard(isDark, ratio)),
-                      );
-                    case 3:
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: VisibilityAnimator(idKey: 'project_card', child: _buildProjectInfoCard(isDark)),
-                      );
-                    case 4:
-                      return const Padding(
-                        padding: EdgeInsets.only(top: 40),
-                        child: CopyrightFooter(),
-                      );
-                    default:
-                      return const SizedBox.shrink();
-                  }
-                },
-                childCount: 5,
-              ),
+              delegate: SliverChildListDelegate([
+                if (_broadcast != null && _broadcast!.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: VisibilityAnimator(idKey: 'broadcast_card', child: _buildBroadcastCard(isDark)),
+                  ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: VisibilityAnimator(idKey: 'banner_card', child: _buildBannerCard(isDark)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 24),
+                  child: _buildWelcomeSection(isDark),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 60),
+                  child: CopyrightFooter(),
+                ),
+              ]),
             ),
           ),
         ],
@@ -142,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                 Text("ANNOUNCEMENT", style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w900, color: AppColors.accentBlue, letterSpacing: 1.5)),
                 const SizedBox(height: 4),
                 Text(
-                  _stats?.broadcast ?? "",
+                  _broadcast ?? "",
                   style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, color: isDark ? Colors.white : Colors.black87),
                 ),
               ],
@@ -202,181 +158,54 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ).animate(delay: 450.ms).fade(duration: 500.ms).slideY(begin: 0.3, end: 0, curve: Curves.easeOutCubic),
-          const SizedBox(height: 8),
-          Text(
-            "kage nyscrep web ampe keluat mani.",
-            style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary),
-            textAlign: TextAlign.center,
-          ).animate(delay: 600.ms).fade(duration: 500.ms),
         ],
       ),
     );
   }
 
-  Widget _buildMetricsCard(bool isDark, double ratio) {
-    final borderColor = isDark ? AppColors.darkCardBorder : AppColors.lightCardBorder;
-    final valueColor = isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary;
-
-    return GlassCard(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SectionHeader("LIVE METRICS", dotColor: AppColors.accentBlue),
-          if (_loadingStats)
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 24.0),
-              child: Center(child: CircularProgressIndicator()),
-            ).animate().fade()
-          else
-            GridView.count(
-              crossAxisCount: MediaQuery.of(context).size.width < 600 ? 2 : 4,
-              shrinkWrap: true,
-              padding: EdgeInsets.zero,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 2.5,
-              children: [
-                _buildMetricBox(icon: "⊞", title: "Total", value: "${_stats?.total ?? 0}", iconColor: AppColors.accentBlue, bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: valueColor, borderColor: borderColor),
-                _buildMetricBox(icon: "✓", title: "Success", value: "${_stats?.success ?? 0}", iconColor: const Color(0xFF10B981), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFF10B981), borderColor: borderColor),
-                _buildMetricBox(icon: "✕", title: "Failed", value: "${_stats?.failed ?? 0}", iconColor: const Color(0xFFF43F5E), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFFF43F5E), borderColor: borderColor),
-                _buildMetricBox(icon: "◷", title: "Crash", value: _formatTime(_stats?.lastCrash), iconColor: const Color(0xFF06B6D4), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFF06B6D4), borderColor: borderColor),
-              ].animate(interval: 100.ms).fade(duration: 400.ms).scaleXY(begin: 0.9, end: 1.0, curve: Curves.easeOutBack),
-            ),
-          const SizedBox(height: 20),
-          Divider(color: borderColor, height: 1),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("SYSTEM HEALTH", style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w900, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary, letterSpacing: 1.5)),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(color: isDark ? AppColors.accentGlow : const Color(0xCCEFF6FF), borderRadius: BorderRadius.circular(6), border: Border.all(color: isDark ? const Color(0x333B82F6) : const Color(0x80BFDBFE))),
-                child: TweenAnimationBuilder<double>(
-                  tween: Tween<double>(begin: 0, end: ratio),
-                  duration: 1.seconds,
-                  curve: Curves.easeOutQuart,
-                  builder: (context, value, child) => Text("${value.toStringAsFixed(1)}%", style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.bold, color: isDark ? const Color(0xFF60A5FA) : const Color(0xFF2563EB))),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Container(
-            height: 4, width: double.infinity,
-            decoration: BoxDecoration(color: isDark ? AppColors.darkSurface : AppColors.lightSurface, borderRadius: BorderRadius.circular(999), border: Border.all(color: borderColor)),
-            child: FractionallySizedBox(
-              alignment: Alignment.centerLeft,
-              widthFactor: (ratio / 100).clamp(0.0, 1.0),
-              child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(999), gradient: const LinearGradient(colors: [Color(0xFF3B82F6), Color(0xFF22D3EE)]), boxShadow: const [BoxShadow(color: Color(0x803B82F6), blurRadius: 8)])),
-            ).animate().scaleX(begin: 0, end: 1, duration: 1200.ms, curve: Curves.easeOutCirc, alignment: Alignment.centerLeft),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMetricBox({required String icon, required String title, required String value, required Color iconColor, required Color bgColor, required Color valueColor, required Color borderColor}) {
-    final isNumber = int.tryParse(value) != null;
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(12), border: Border.all(color: borderColor)),
-      child: Row(
-        children: [
-          Container(
-            width: 32, height: 32,
-            decoration: BoxDecoration(color: iconColor.withOpacity(0.1), borderRadius: BorderRadius.circular(8), border: Border.all(color: iconColor.withOpacity(0.2))),
-            child: Center(child: Text(icon, style: TextStyle(color: iconColor, fontSize: 16, fontWeight: FontWeight.bold))),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(title.toUpperCase(), style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.darkTextSecondary, letterSpacing: 1.5), overflow: TextOverflow.ellipsis),
-                const SizedBox(height: 2),
-                if (isNumber)
-                  TweenAnimationBuilder<int>(
-                    tween: IntTween(begin: 0, end: int.parse(value)),
-                    duration: 1200.ms, curve: Curves.easeOutQuart,
-                    builder: (context, val, child) => Text('$val', style: GoogleFonts.jetBrainsMono(fontSize: 11, fontWeight: FontWeight.bold, color: valueColor), overflow: TextOverflow.ellipsis),
-                  )
-                else
-                  Text(value, style: GoogleFonts.jetBrainsMono(fontSize: 11, fontWeight: FontWeight.bold, color: valueColor), overflow: TextOverflow.ellipsis),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildProjectInfoCard(bool isDark) {
-    final borderColor = isDark ? AppColors.darkCardBorder : AppColors.lightCardBorder;
-    return GlassCard(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SectionHeader("PROJECT INFO", dotColor: AppColors.darkTextMuted),
-          GridView.count(
-            crossAxisCount: MediaQuery.of(context).size.width < 600 ? 2 : 4,
-            shrinkWrap: true,
-            padding: EdgeInsets.zero,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            childAspectRatio: 2.5,
-            children: [
-              _buildInfoBox(icon: Icons.person_outline_rounded, title: "Creator", value: "Kagenou?", iconColor: AppColors.darkTextSecondary, bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary, borderColor: borderColor),
-              _buildInfoBox(icon: Icons.code_rounded, title: "Github", value: "kagenouReal", iconColor: AppColors.accentBlue, bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: AppColors.accentBlue, borderColor: borderColor, url: "https://github.com/kagenouReal"),
-              _buildInfoBox(icon: Icons.chat_bubble_outline_rounded, title: "WhatsApp", value: "+60 111...", iconColor: const Color(0xFF10B981), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFF10B981), borderColor: borderColor, url: "https://wa.me/601112260297"),
-              _buildInfoBox(icon: Icons.send_rounded, title: "Telegram", value: "@Kagenouonly", iconColor: const Color(0xFF06B6D4), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFF06B6D4), borderColor: borderColor, url: "https://t.me/Kagenouonly"),
-            ].animate(interval: 100.ms).fade(duration: 400.ms).scaleXY(begin: 0.9, end: 1.0, curve: Curves.easeOutBack),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildInfoBox({required IconData icon, required String title, required String value, required Color iconColor, required Color bgColor, required Color valueColor, required Color borderColor, String? url}) {
-    return InkWell(
-      onTap: url != null ? () => _openUrl(url) : null,
-      borderRadius: BorderRadius.circular(12),
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(12), border: Border.all(color: borderColor)),
-        child: Row(
+  Widget _buildWelcomeSection(bool isDark) {
+    return Column(
+      children: [
+        Text(
+          "Welcome to Zqwis Ecosystem",
+          style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w800, color: isDark ? Colors.white : Colors.black87),
+        ).animate().fade().slideY(begin: 0.2, end: 0),
+        const SizedBox(height: 12),
+        Text(
+          "Explore various high-performance APIs for your projects. Stable, secure, and fast.",
+          style: GoogleFonts.inter(fontSize: 13, color: Colors.grey, height: 1.5),
+          textAlign: TextAlign.center,
+        ).animate(delay: 200.ms).fade(),
+        const SizedBox(height: 32),
+        Wrap(
+          spacing: 12,
+          runSpacing: 12,
+          alignment: WrapAlignment.center,
           children: [
-            Container(
-              width: 32, height: 32,
-              decoration: BoxDecoration(color: iconColor.withOpacity(0.1), borderRadius: BorderRadius.circular(8), border: Border.all(color: iconColor.withOpacity(0.2))),
-              child: Center(child: Icon(icon, color: iconColor, size: 16)),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(title.toUpperCase(), style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.darkTextSecondary, letterSpacing: 1.5), overflow: TextOverflow.ellipsis),
-                  const SizedBox(height: 2),
-                  Row(
-                    children: [
-                      Expanded(child: Text(value, style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: valueColor), overflow: TextOverflow.ellipsis)),
-                      if (url != null) Icon(Icons.arrow_outward_rounded, size: 10, color: valueColor),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
+            _buildQuickStat(Icons.bolt_rounded, "Fast", AppColors.accentBlue),
+            _buildQuickStat(Icons.security_rounded, "Secure", const Color(0xFF10B981)),
+            _buildQuickStat(Icons.Auto_awesome_rounded, "Modern", AppColors.accentPurple),
+          ].animate(interval: 100.ms).fade().scale(),
         ),
+      ],
+    );
+  }
+
+  Widget _buildQuickStat(IconData icon, String label, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withOpacity(0.1)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: color, size: 16),
+          const SizedBox(width: 8),
+          Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.bold, color: color)),
+        ],
       ),
     );
   }

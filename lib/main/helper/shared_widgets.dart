@@ -182,7 +182,7 @@ class SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final color = dotColor ?? (isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary);
+    final color = dotColor ?? AppColors.accentBlue; // Default ke biru global
     
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),

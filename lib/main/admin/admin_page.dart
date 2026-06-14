@@ -327,7 +327,7 @@ class _UserCardInteractiveState extends State<_UserCardInteractive> {
               SizedBox(width: (MediaQuery.of(context).size.width - 64) / 3, child: ActionButton(icon: Icons.edit_rounded, label: "LIMIT", onTap: widget.onEditLimit, isDark: isDark)),
               SizedBox(width: (MediaQuery.of(context).size.width - 64) / 3, child: ActionButton(icon: Icons.security_rounded, label: "IP", onTap: widget.onEditIpQuota, isDark: isDark)),
               SizedBox(width: (MediaQuery.of(context).size.width - 64) / 3, child: ActionButton(icon: Icons.monetization_on_outlined, label: "COINS", onTap: widget.onManageCoins, isDark: isDark)),
-              SizedBox(width: (MediaQuery.of(context).size.width - 64) / 3, child: ActionButton(icon: Icons.delete_outline_rounded, label: "DELETE", onTap: widget.onDelete, isDark: isDark, color: Colors.redAccent)),
+              SizedBox(width: (MediaQuery.of(context).size.width - 64) / 3, child: ActionButton(icon: Icons.delete_outline_rounded, label: "DELETE", onTap: widget.onDelete, isDark: isDark)),
             ]),
           ])),
           crossFadeState: _isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
