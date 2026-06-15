@@ -40,6 +40,13 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  Future<void> _openUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -66,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 24),
-                  child: _buildWelcomeSection(isDark),
+                  child: _buildProjectInfoCard(isDark),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 60),
@@ -163,49 +170,68 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildWelcomeSection(bool isDark) {
-    return Column(
-      children: [
-        Text(
-          "Welcome to Zqwis Ecosystem",
-          style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w800, color: isDark ? Colors.white : Colors.black87),
-        ).animate().fade().slideY(begin: 0.2, end: 0),
-        const SizedBox(height: 12),
-        Text(
-          "Explore various high-performance APIs for your projects. Stable, secure, and fast.",
-          style: GoogleFonts.inter(fontSize: 13, color: Colors.grey, height: 1.5),
-          textAlign: TextAlign.center,
-        ).animate(delay: 200.ms).fade(),
-        const SizedBox(height: 32),
-        Wrap(
-          spacing: 12,
-          runSpacing: 12,
-          alignment: WrapAlignment.center,
-          children: [
-            _buildQuickStat(Icons.bolt_rounded, "Fast", AppColors.accentBlue),
-            _buildQuickStat(Icons.security_rounded, "Secure", const Color(0xFF10B981)),
-            _buildQuickStat(Icons.auto_awesome_rounded, "Modern", AppColors.accentPurple),
-          ].animate(interval: 100.ms).fade().scale(),
-        ),
-      ],
+  Widget _buildProjectInfoCard(bool isDark) {
+    final borderColor = isDark ? AppColors.darkCardBorder : AppColors.lightCardBorder;
+    return GlassCard(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SectionHeader("PROJECT INFO"),
+          GridView.count(
+            crossAxisCount: MediaQuery.of(context).size.width < 600 ? 2 : 4,
+            shrinkWrap: true,
+            padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 2.5,
+            children: [
+              _buildInfoBox(icon: Icons.person_outline_rounded, title: "Creator", value: "Kagenou?", iconColor: AppColors.darkTextSecondary, bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary, borderColor: borderColor),
+              _buildInfoBox(icon: Icons.code_rounded, title: "Github", value: "kagenouReal", iconColor: AppColors.accentBlue, bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: AppColors.accentBlue, borderColor: borderColor, url: "https://github.com/kagenouReal"),
+              _buildInfoBox(icon: Icons.chat_bubble_outline_rounded, title: "WhatsApp", value: "+60 111...", iconColor: const Color(0xFF10B981), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFF10B981), borderColor: borderColor, url: "https://wa.me/601112260297"),
+              _buildInfoBox(icon: Icons.send_rounded, title: "Telegram", value: "@Kagenouonly", iconColor: const Color(0xFF06B6D4), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFF06B6D4), borderColor: borderColor, url: "https://t.me/Kagenouonly"),
+            ].animate(interval: 100.ms).fade(duration: 400.ms).scaleXY(begin: 0.9, end: 1.0, curve: Curves.easeOutBack),
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _buildQuickStat(IconData icon, String label, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.1)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: color, size: 16),
-          const SizedBox(width: 8),
-          Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.bold, color: color)),
-        ],
+  Widget _buildInfoBox({required IconData icon, required String title, required String value, required Color iconColor, required Color bgColor, required Color valueColor, required Color borderColor, String? url}) {
+    return InkWell(
+      onTap: url != null ? () => _openUrl(url) : null,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(12), border: Border.all(color: borderColor)),
+        child: Row(
+          children: [
+            Container(
+              width: 32, height: 32,
+              decoration: BoxDecoration(color: iconColor.withOpacity(0.1), borderRadius: BorderRadius.circular(8), border: Border.all(color: iconColor.withOpacity(0.2))),
+              child: Center(child: Icon(icon, color: iconColor, size: 16)),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(title.toUpperCase(), style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.darkTextSecondary, letterSpacing: 1.5), overflow: TextOverflow.ellipsis),
+                  const SizedBox(height: 2),
+                  Row(
+                    children: [
+                      Expanded(child: Text(value, style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: valueColor), overflow: TextOverflow.ellipsis)),
+                      if (url != null) Icon(Icons.arrow_outward_rounded, size: 10, color: valueColor),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

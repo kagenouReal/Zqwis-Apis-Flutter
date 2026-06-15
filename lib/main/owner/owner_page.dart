@@ -114,6 +114,11 @@ class _OwnerPageState extends State<OwnerPage> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     if (_isLoading) return const Center(child: CircularProgressIndicator());
+
+    final total = _stats?.total ?? 0;
+    final success = _stats?.success ?? 0;
+    final ratio = total == 0 ? 100.0 : (success / total * 100);
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: RefreshIndicator(
@@ -123,12 +128,12 @@ class _OwnerPageState extends State<OwnerPage> {
           physics: const BouncingScrollPhysics(),
           slivers: [
             SliverPadding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
                   ModuleHeader(title: "OWNER", accentTitle: "COMMAND", subtitle: "Full control over system and resources.", isDark: isDark).animate().fade().slideY(begin: 0.1, end: 0),
                   const SizedBox(height: 24),
-                  _buildGlobalMetrics(isDark),
+                  _buildMetricsCard(isDark, ratio),
                   const SizedBox(height: 24),
                   _buildSystemHealth(isDark),
                   const SizedBox(height: 24),
@@ -146,51 +151,60 @@ class _OwnerPageState extends State<OwnerPage> {
     );
   }
 
-  Widget _buildGlobalMetrics(bool isDark) {
-    final total = _stats?.total ?? 0;
-    final success = _stats?.success ?? 0;
-    final ratio = total == 0 ? 100.0 : (success / total * 100);
+  Widget _buildMetricsCard(bool isDark, double ratio) {
     final borderColor = isDark ? AppColors.darkCardBorder : AppColors.lightCardBorder;
     final valueColor = isDark ? AppColors.darkTextPrimary : AppColors.lightTextPrimary;
 
     return GlassCard(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SectionHeader("GLOBAL LIVE METRICS"),
-          const SizedBox(height: 16),
+          const SectionHeader("LIVE METRICS"),
           GridView.count(
-            crossAxisCount: 2,
+            crossAxisCount: MediaQuery.of(context).size.width < 600 ? 2 : 4,
             shrinkWrap: true,
+            padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
             childAspectRatio: 2.5,
             children: [
-              _buildMetricBox(icon: "⊞", title: "Total", value: "$total", iconColor: AppColors.accentBlue, bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: valueColor, borderColor: borderColor),
-              _buildMetricBox(icon: "✓", title: "Success", value: "$success", iconColor: const Color(0xFF10B981), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFF10B981), borderColor: borderColor),
+              _buildMetricBox(icon: "⊞", title: "Total", value: "${_stats?.total ?? 0}", iconColor: AppColors.accentBlue, bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: valueColor, borderColor: borderColor),
+              _buildMetricBox(icon: "✓", title: "Success", value: "${_stats?.success ?? 0}", iconColor: const Color(0xFF10B981), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFF10B981), borderColor: borderColor),
               _buildMetricBox(icon: "✕", title: "Failed", value: "${_stats?.failed ?? 0}", iconColor: const Color(0xFFF43F5E), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFFF43F5E), borderColor: borderColor),
               _buildMetricBox(icon: "◷", title: "Crash", value: _formatTime(_stats?.lastCrash), iconColor: const Color(0xFF06B6D4), bgColor: isDark ? AppColors.darkSurface : AppColors.lightSurface, valueColor: const Color(0xFF06B6D4), borderColor: borderColor),
-            ],
+            ].animate(interval: 100.ms).fade(duration: 400.ms).scaleXY(begin: 0.9, end: 1.0, curve: Curves.easeOutBack),
           ),
           const SizedBox(height: 20),
+          Divider(color: borderColor, height: 1),
+          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("API SUCCESS RATE", style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w900, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary, letterSpacing: 1.5)),
-              Text("${ratio.toStringAsFixed(1)}%", style: GoogleFonts.jetBrainsMono(fontSize: 10, fontWeight: FontWeight.bold, color: AppColors.accentBlue)),
+              Text("SYSTEM HEALTH", style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w900, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary, letterSpacing: 1.5)),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(color: isDark ? AppColors.accentGlow : const Color(0xCCEFF6FF), borderRadius: BorderRadius.circular(6), border: Border.all(color: isDark ? const Color(0x333B82F6) : const Color(0x80BFDBFE))),
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween<double>(begin: 0, end: ratio),
+                  duration: 1.seconds,
+                  curve: Curves.easeOutQuart,
+                  builder: (context, value, child) => Text("${value.toStringAsFixed(1)}%", style: GoogleFonts.jetBrainsMono(fontSize: 9, fontWeight: FontWeight.bold, color: isDark ? const Color(0xFF60A5FA) : const Color(0xFF2563EB))),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 8),
           Container(
-            height: 6, width: double.infinity,
-            decoration: BoxDecoration(color: isDark ? AppColors.darkSurface : AppColors.lightSurface, borderRadius: BorderRadius.circular(999)),
+            height: 4, width: double.infinity,
+            decoration: BoxDecoration(color: isDark ? AppColors.darkSurface : AppColors.lightSurface, borderRadius: BorderRadius.circular(999), border: Border.all(color: borderColor)),
             child: FractionallySizedBox(
               alignment: Alignment.centerLeft,
               widthFactor: (ratio / 100).clamp(0.0, 1.0),
-              child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(999), gradient: const LinearGradient(colors: [Color(0xFF3B82F6), Color(0xFF22D3EE)]))),
-            ),
+              child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(999), gradient: const LinearGradient(colors: [Color(0xFF3B82F6), Color(0xFF22D3EE)]), boxShadow: const [BoxShadow(color: Color(0x803B82F6), blurRadius: 8)])),
+            ).animate().scaleX(begin: 0, end: 1, duration: 1200.ms, curve: Curves.easeOutCirc, alignment: Alignment.centerLeft),
           ),
         ],
       ),
@@ -206,7 +220,7 @@ class _OwnerPageState extends State<OwnerPage> {
         children: [
           Container(
             width: 32, height: 32,
-            decoration: BoxDecoration(color: iconColor.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(color: iconColor.withOpacity(0.1), borderRadius: BorderRadius.circular(8), border: Border.all(color: iconColor.withOpacity(0.2))),
             child: Center(child: Text(icon, style: TextStyle(color: iconColor, fontSize: 16, fontWeight: FontWeight.bold))),
           ),
           const SizedBox(width: 10),
@@ -217,7 +231,14 @@ class _OwnerPageState extends State<OwnerPage> {
               children: [
                 Text(title.toUpperCase(), style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w900, color: AppColors.darkTextSecondary, letterSpacing: 1.5), overflow: TextOverflow.ellipsis),
                 const SizedBox(height: 2),
-                Text(value, style: GoogleFonts.jetBrainsMono(fontSize: 11, fontWeight: FontWeight.bold, color: valueColor), overflow: TextOverflow.ellipsis),
+                if (isNumber)
+                  TweenAnimationBuilder<int>(
+                    tween: IntTween(begin: 0, end: int.parse(value)),
+                    duration: 1200.ms, curve: Curves.easeOutQuart,
+                    builder: (context, val, child) => Text('$val', style: GoogleFonts.jetBrainsMono(fontSize: 11, fontWeight: FontWeight.bold, color: valueColor), overflow: TextOverflow.ellipsis),
+                  )
+                else
+                  Text(value, style: GoogleFonts.jetBrainsMono(fontSize: 11, fontWeight: FontWeight.bold, color: valueColor), overflow: TextOverflow.ellipsis),
               ],
             ),
           ),

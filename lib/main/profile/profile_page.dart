@@ -169,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SectionHeader("YOUR API ACTIVITY", dotColor: Color(0xFF10B981)),
+          const SectionHeader("YOUR API ACTIVITY"),
           const SizedBox(height: 16),
           Row(
             children: [
@@ -409,12 +409,37 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SectionHeader("IP WHITELIST", dotColor: AppColors.accentBlue),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SectionHeader("IP WHITELIST"),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: AppColors.accentBlue.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: AppColors.accentBlue.withOpacity(0.3)),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.router_rounded, size: 10, color: AppColors.accentBlue),
+                    const SizedBox(width: 4),
+                    Text(
+                      "MAX ${user.ipQuotaDisplay} IP",
+                      style: GoogleFonts.inter(fontSize: 8, fontWeight: FontWeight.w900, color: AppColors.accentBlue, letterSpacing: 0.5),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
           Text(
-            "Authorize specific IP addresses. (Max: ${user.ipQuotaDisplay})",
+            "Authorize specific IP addresses to access your API Key.",
             style: GoogleFonts.inter(fontSize: 12, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary),
           ),
           const SizedBox(height: 20),
+
           if (user.whitelistIp.isEmpty)
             _buildEmptyState("No IP whitelisted", isDark)
           else
