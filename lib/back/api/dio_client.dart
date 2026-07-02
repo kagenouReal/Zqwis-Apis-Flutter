@@ -68,7 +68,7 @@ class DioClient {
   Future<Response> deleteIp(String ip) => dio.post('/api/profile/ip/delete', data: {'ip': ip});
 
   Future<Response> getApiList() => dio.get('/api/v1/list');
-  Future<Response> getStats() => dio.get('/api/stats');
+  Future<Response> getStats() => dio.get('/api/owner/statsv1');
   
   Future<Response> listUsers() => dio.get('/api/admin/user/list');
   Future<Response> createUser(String username, String password, String role) => dio.post('/api/admin/user/create', data: {'username': username, 'password': password, 'role': role});

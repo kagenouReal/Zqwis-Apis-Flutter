@@ -160,8 +160,8 @@ class _ProfilePageState extends State<ProfilePage> {
   //==================
   Widget _buildActivityCard(dynamic user, bool isDark) {
     final activity = user.activity ?? {};
-    final totalCalls = activity['apiCalls'] ?? 0;
-    final dailyCalls = activity['dailyApiCalls'] ?? 0;
+    final totalSuccess = activity['totalSuccess'] ?? 0;
+    final totalFailed = activity['totalFailed'] ?? 0;
     final borderColor = isDark ? AppColors.darkCardBorder : AppColors.lightCardBorder;
 
     return GlassCard(
@@ -174,25 +174,25 @@ class _ProfilePageState extends State<ProfilePage> {
           Row(
             children: [
               _buildActivityItem(
-                icon: Icons.analytics_outlined,
-                label: "TOTAL REQUESTS",
-                value: "$totalCalls",
-                color: AppColors.accentBlue,
+                icon: Icons.check_circle_outline_rounded,
+                label: "SUCCESS REQUESTS",
+                value: "$totalSuccess",
+                color: const Color(0xFF10B981),
                 isDark: isDark,
               ),
               Container(width: 1, height: 40, color: isDark ? Colors.white10 : Colors.black12, margin: const EdgeInsets.symmetric(horizontal: 16)),
               _buildActivityItem(
-                icon: Icons.today_rounded,
-                label: "V1 CALLS TODAY",
-                value: "$dailyCalls",
-                color: const Color(0xFF10B981),
+                icon: Icons.error_outline_rounded,
+                label: "FAILED REQUESTS",
+                value: "$totalFailed",
+                color: AppColors.error,
                 isDark: isDark,
               ),
             ],
           ),
           const SizedBox(height: 12),
           Text(
-            "V1 calls track your daily usage for specific automated endpoints.",
+            "Track your successful and failed requests to API V1.",
             style: GoogleFonts.inter(fontSize: 10, color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary, fontStyle: FontStyle.italic),
           ),
         ],
