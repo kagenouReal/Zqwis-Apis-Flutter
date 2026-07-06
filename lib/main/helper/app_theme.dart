@@ -198,8 +198,8 @@ class AppTheme {
   }
 
   //===============
-  static CardThemeData _buildCardTheme(Color card, Color border) {
-    return CardThemeData(
+  static CardTheme _buildCardTheme(Color card, Color border) {
+    return CardTheme(
       color: card,
       elevation: 0,
       shape: RoundedRectangleBorder(

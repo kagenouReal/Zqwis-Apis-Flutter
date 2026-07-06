@@ -99,45 +99,31 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       );
                     case 1:
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 24),
-                        child: VisibilityAnimator(
-                          idKey: 'balance_card',
-                          child: _buildBalanceCard(user, isDark),
-                        ),
+                      return CardWrapper(
+                        uniqueId: 'balance_card',
+                        child: _buildBalanceCard(user, isDark),
                       );
                     case 2:
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 24),
-                        child: VisibilityAnimator(
-                          idKey: 'api_activity_card',
-                          child: _buildActivityCard(user, isDark),
-                        ),
+                      if (user.role == 'owner') return const SizedBox.shrink();
+                      return CardWrapper(
+                        uniqueId: 'api_activity_card',
+                        child: _buildActivityCard(user, isDark),
                       );
                     case 3:
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 24),
-                        child: VisibilityAnimator(
-                          idKey: 'api_security_card',
-                          child: _buildSecurityCard(user, isDark),
-                        ),
+                      return CardWrapper(
+                        uniqueId: 'api_security_card',
+                        child: _buildSecurityCard(user, isDark),
                       );
                     case 4:
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 24),
-                        child: VisibilityAnimator(
-                          idKey: 'ip_whitelist_card',
-                          child: _buildIpWhitelistCard(user, isDark),
-                        ),
+                      return CardWrapper(
+                        uniqueId: 'ip_whitelist_card',
+                        child: _buildIpWhitelistCard(user, isDark),
                       );
                     case 5:
                       if (user.role == 'owner') return const SizedBox.shrink();
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 24),
-                        child: VisibilityAnimator(
-                          idKey: 'password_card',
-                          child: _buildPasswordCard(isDark),
-                        ),
+                      return CardWrapper(
+                        uniqueId: 'password_card',
+                        child: _buildPasswordCard(isDark),
                       );
                     case 6:
                       return const Padding(

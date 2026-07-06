@@ -80,7 +80,7 @@ class DioClient {
   Future<Response> addCoins(String username, int amount, String reason) => dio.post('/api/admin/coins/add', data: {'username': username, 'amount': amount, 'reason': reason});
   Future<Response> adminSetCoins(String username, int amount, String action, String reason) => dio.post('/api/admin/coins/set', data: {'username': username, 'amount': amount, 'action': action, 'reason': reason});
 
-  Future<Response> getSettings() => dio.get('/api/owner/manage/settings');
+  Future<Response> getBroadcast() => dio.get('/api/broadcast');
   Future<Response> getSystemInfo() => dio.get('/api/owner/manage/system-info');
   Future<Response> updateOwnerSetting(String key, dynamic value) => dio.post('/api/owner/manage/settings', data: {'key': key, 'value': value});
   Future<Response> backupDatabase() => dio.post('/api/owner/manage/db/backup');
@@ -94,7 +94,7 @@ class DioClient {
     String path = '/api/missions/claim';
     if (missionId == 'daily_limit') path += '/daily-limit';
     else if (missionId == 'daily_login') path += '/daily-login';
-    else if (missionId == 'api_call_10') path += '/api-v1-10x';
+    else if (missionId == 'daily_api_call_10') path += '/api-v1-10x';
     else if (missionId == 'weekly_login_7') path += '/weekly-login-7';
     else if (missionId == 'game_play_1') path += '/game-play-1';
     else if (missionId == 'game_win_3') path += '/game-win-3';

@@ -370,5 +370,27 @@ class _VisibilityAnimatorState extends State<VisibilityAnimator> {
     );
   }
 }
+
+class CardWrapper extends StatelessWidget {
+  final Widget child;
+  final String uniqueId;
+
+  const CardWrapper({
+    super.key,
+    required this.child,
+    required this.uniqueId,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 24),
+      child: VisibilityAnimator(
+        idKey: uniqueId,
+        child: child,
+      ),
+    );
+  }
+}
 // Tambahin di shared_widgets.dart
 // Note: Notification logic moved to notification_helper.dart for better accessibility.

@@ -33,7 +33,7 @@ class _OwnerPageState extends State<OwnerPage> {
   Future<void> _fetchData() async {
     setState(() => _isLoading = true);
     try {
-      final resSet = await DioClient.instance.getSettings();
+      final resSet = await DioClient.instance.getBroadcast();
       final resSys = await DioClient.instance.getSystemInfo();
       final resStats = await DioClient.instance.getStats();
       
@@ -69,8 +69,10 @@ class _OwnerPageState extends State<OwnerPage> {
     try {
       final res = await DioClient.instance.updateOwnerSetting(key, value);
       if (res.statusCode == 200 && res.data['status'] == true) {
-        if (mounted) Notif.success(context, "Setting updated");
-        _fetchData();
+        if (mounted) {
+            Notif.success(context, "Setting updated");
+            _fetchData();
+        }
       }
     } catch (_) {
       if (mounted) Notif.error(context, "Update failed");
@@ -131,18 +133,14 @@ class _OwnerPageState extends State<OwnerPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
-                  ModuleHeader(title: "OWNER", accentTitle: "COMMAND", subtitle: "Full control over system and resources.", isDark: isDark).animate().fade().slideY(begin: 0.1, end: 0),
-                  const SizedBox(height: 24),
-                  _buildMetricsCard(isDark, ratio),
-                  const SizedBox(height: 24),
-                  _buildSystemHealth(isDark),
-                  const SizedBox(height: 24),
-                  _buildGlobalControls(isDark),
-                  const SizedBox(height: 24),
-                  _buildBroadcastSection(isDark),
-                  const SizedBox(height: 40),
-                  const CopyrightFooter(),
+                  CardWrapper(uniqueId: 'owner_header', child: ModuleHeader(title: "OWNER", accentTitle: "COMMAND", subtitle: "Full control over system and resources.", isDark: isDark)),
+                  CardWrapper(uniqueId: 'metrics_card', child: _buildMetricsCard(isDark, ratio)),
+                  CardWrapper(uniqueId: 'system_health_card', child: _buildSystemHealth(isDark)),
+                  CardWrapper(uniqueId: 'global_controls_card', child: _buildGlobalControls(isDark)),
+                  CardWrapper(uniqueId: 'broadcast_section_card', child: _buildBroadcastSection(isDark)),
+                  const Padding(padding: EdgeInsets.only(top: 40), child: CopyrightFooter()),
                 ]),
+
               ),
             ),
           ],

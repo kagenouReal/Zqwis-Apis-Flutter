@@ -1,4 +1,4 @@
-package com.example.zqwis_apis
+package com.zqis.my
 
 import io.flutter.embedding.android.FlutterActivity
 

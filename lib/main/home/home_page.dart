@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _fetchBroadcast() async {
     try {
-      final res = await DioClient.instance.getSettings();
+      final res = await DioClient.instance.getBroadcast();
       if (res.statusCode == 200 && mounted) {
         setState(() {
           _broadcast = res.data['data']['broadcast'];
@@ -51,38 +51,43 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return RefreshIndicator(
-      color: AppColors.accentBlue,
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      onRefresh: _fetchBroadcast,
-      child: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate([
-                if (_broadcast != null && _broadcast!.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: VisibilityAnimator(idKey: 'broadcast_card', child: _buildBroadcastCard(isDark)),
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: RefreshIndicator(
+        color: AppColors.accentBlue,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        onRefresh: _fetchBroadcast,
+        child: _isLoading 
+          ? const Center(child: CircularProgressIndicator())
+          : CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate([
+                  if (_broadcast != null && _broadcast!.isNotEmpty)
+                    CardWrapper(
+                      uniqueId: 'broadcast_card',
+                      child: _buildBroadcastCard(isDark),
+                    ),
+                  CardWrapper(
+                    uniqueId: 'banner_card',
+                    child: _buildBannerCard(isDark),
                   ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: VisibilityAnimator(idKey: 'banner_card', child: _buildBannerCard(isDark)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 24),
-                  child: _buildProjectInfoCard(isDark),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 60),
-                  child: CopyrightFooter(),
-                ),
-              ]),
+                  CardWrapper(
+                    uniqueId: 'project_info_card',
+                    child: _buildProjectInfoCard(isDark),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 60),
+                    child: CopyrightFooter(),
+                  ),
+                ]),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

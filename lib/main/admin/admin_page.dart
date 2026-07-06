@@ -91,7 +91,12 @@ class _AdminPageState extends State<AdminPage> {
   Future<void> _adminSetCoins(String username, int amount, String action, String reason) async {
     try {
       final res = await DioClient.instance.adminSetCoins(username, amount, action, reason);
-      if (res.statusCode == 200 && mounted) { final actionText = action == 'add' ? 'Added' : 'Set'; Notif.success(context, '$actionText coins for $username success'); _fetchUsers(); } else { if (mounted) Notif.error(context, res.data['message'] ?? 'Action failed'); }
+      if (res.statusCode == 200 && mounted) { 
+        final actionText = action == 'add' ? 'Added' : 'Set'; 
+        Notif.success(context, '$actionText coins for $username success'); 
+        _fetchUsers(); 
+        context.read<AuthProvider>().refreshProfile(); 
+      } else { if (mounted) Notif.error(context, res.data['message'] ?? 'Action failed'); }
     } catch (_) { if (mounted) Notif.error(context, 'Connection error'); }
   }
 
@@ -109,16 +114,17 @@ class _AdminPageState extends State<AdminPage> {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
-                switch (index) {
-                  case 0: return Padding(padding: const EdgeInsets.only(top: 16), child: VisibilityAnimator(idKey: 'admin_header', child: ModuleHeader(title: "ADMIN", accentTitle: "PANEL", subtitle: "Manage system users and infrastructure.", isDark: isDark)));
-                  case 1: return Padding(padding: const EdgeInsets.only(top: 24), child: VisibilityAnimator(idKey: 'create_account_section', child: _buildCreateAccountSection(isDark)));
-                  case 2: return const Padding(padding: EdgeInsets.only(top: 32), child: SectionHeader("USER MANAGEMENT"));
-                  case 3: if (_loading) return const Padding(padding: EdgeInsets.symmetric(vertical: 40), child: Center(child: CircularProgressIndicator())); if (_users.isEmpty) return _buildEmptyState(isDark); return const SizedBox.shrink();
-                  case 4: if (_loading || _users.isEmpty) return const SizedBox.shrink(); return Column(children: _users.map((user) => Padding(padding: const EdgeInsets.only(bottom: 12), child: VisibilityAnimator(idKey: 'user_card_${user.username}', child: _UserCardInteractive(user: user, isDark: isDark, onEditLimit: () => _showEditLimitDialog(user), onEditIpQuota: () => _showEditIpQuotaDialog(user), onManageCoins: () => _showManageCoinsDialog(user), onDelete: () => _showDeleteConfirmDialog(user))))).toList());
-                  case 5: return const Padding(padding: EdgeInsets.only(top: 40, bottom: 40), child: CopyrightFooter());
-                  default: return const SizedBox.shrink();
-                }
+              switch (index) {
+              case 0: return CardWrapper(uniqueId: 'admin_header', child: ModuleHeader(title: "ADMIN", accentTitle: "PANEL", subtitle: "Manage system users and infrastructure.", isDark: isDark));
+              case 1: return CardWrapper(uniqueId: 'create_account_section', child: _buildCreateAccountSection(isDark));
+              case 2: return const Padding(padding: EdgeInsets.only(top: 32), child: SectionHeader("USER MANAGEMENT"));
+              case 3: if (_loading) return const Padding(padding: EdgeInsets.symmetric(vertical: 40), child: Center(child: CircularProgressIndicator())); if (_users.isEmpty) return _buildEmptyState(isDark); return const SizedBox.shrink();
+              case 4: if (_loading || _users.isEmpty) return const SizedBox.shrink(); return Column(children: _users.map((user) => CardWrapper(uniqueId: 'user_card_${user.username}', child: _UserCardInteractive(user: user, isDark: isDark, onEditLimit: () => _showEditLimitDialog(user), onEditIpQuota: () => _showEditIpQuotaDialog(user), onManageCoins: () => _showManageCoinsDialog(user), onDelete: () => _showDeleteConfirmDialog(user)))).toList());
+              case 5: return const Padding(padding: EdgeInsets.only(top: 40, bottom: 40), child: CopyrightFooter());
+              default: return const SizedBox.shrink();
+              }
               }, childCount: 6),
+
             ),
           ),
         ],

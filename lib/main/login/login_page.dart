@@ -570,8 +570,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                                         foregroundColor: textColor,
                                       ).copyWith(
-                                        overlayColor: WidgetStateProperty.resolveWith((s) {
-                                          if (s.contains(WidgetState.hovered) || s.contains(WidgetState.pressed)) {
+                                        overlayColor: MaterialStateProperty.resolveWith((s) {
+                                          if (s.contains(MaterialState.hovered) || s.contains(MaterialState.pressed)) {
                                             return isDark ? zinc800 : const Color(0xFFF4F4F5);
                                           }
                                           return null;

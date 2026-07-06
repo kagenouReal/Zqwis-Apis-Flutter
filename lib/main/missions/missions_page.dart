@@ -119,7 +119,7 @@ class _MissionsPageState extends State<MissionsPage> {
                   if (user.role == 'owner') _buildOwnerState(isDark) 
                   else if (_fetchingMissions) const Center(child: Padding(padding: EdgeInsets.all(40), child: CircularProgressIndicator())) 
                   else if (_availableMissions.isEmpty) _buildEmptyState(isDark) 
-                  else ... _availableMissions.entries.map((entry) => _buildMissionsSection(entry.key.toUpperCase(), entry.value as List, user.missions?['completed'] as List? ?? [], isDark)).toList(),
+                  else ... _availableMissions.entries.map((entry) => _buildMissionsSection(entry.key.toUpperCase(), entry.value as List, user.missions?['completed'] as List? ?? [], isDark, user)).toList(),
                   const SizedBox(height: 40),
                   const CopyrightFooter(),
                 ]),
@@ -131,7 +131,7 @@ class _MissionsPageState extends State<MissionsPage> {
     );
   }
 
-  Widget _buildMissionsSection(String title, List missions, List completed, bool isDark) {
+  Widget _buildMissionsSection(String title, List missions, List completed, bool isDark, dynamic user) {
     final labelColor = isDark ? const Color(0xFF71717A) : const Color(0xFFA1A1AA);
     final textColor = isDark ? Colors.white : Colors.black;
     final borderColor = isDark ? Colors.white.withOpacity(0.1) : Colors.black.withOpacity(0.1); 
@@ -140,19 +140,27 @@ class _MissionsPageState extends State<MissionsPage> {
       SectionHeader(title),
       const SizedBox(height: 16),
       ...missions.map((m) {
-        final isCompleted = m['isCompleted'] ?? completed.contains(m['id']);
-        final canClaim = m['canClaim'] ?? false;
+        final missionId = m['id'];
+        final isCompleted = completed.contains(missionId);
         final hasUrl = m['url'] != null && (m['url'] as String).isNotEmpty;
 
-        final bool isActive = !isCompleted && (canClaim || hasUrl);
+        // Validasi Frontend: Apakah misi ini bisa diklik/aktif?
+        bool isConditionMet = true;
+        if (missionId == 'first_premium') isConditionMet = user.isPremium;
+        if (missionId == 'daily_api_call_10') isConditionMet = (user.activity?['dailyApiCalls'] ?? 0) >= 10;
+        if (missionId == 'weekly_login_7') isConditionMet = (user.activity?['loginStreak'] ?? 0) >= 7;
+
+        // Misi sosial (GitHub/TikTok) harus selalu bisa diklik URL-nya
+        final bool isSocial = hasUrl;
+
+        // Misi aktif jika belum selesai DAN (syarat terpenuhi ATAU ini misi sosial)
+        final bool isActive = !isCompleted && (isConditionMet || isSocial);
         final bool isBtnLoading = _loading && isActive;
 
-        String btnLabel = isCompleted ? "CLAIMED" : (hasUrl ? "GO" : "CLAIM");
+        String btnLabel = isCompleted ? "CLAIMED" : (isSocial ? "GO" : (isConditionMet ? "CLAIM" : "LOCKED"));
         IconData btnIcon = isCompleted 
             ? Icons.check_circle_outline_rounded 
-            : (!isActive && !hasUrl) 
-                ? Icons.lock_outline_rounded     
-                : (hasUrl ? Icons.launch_rounded : Icons.redeem_rounded);
+            : (!isConditionMet && !isSocial ? Icons.lock_outline_rounded : (isSocial ? Icons.launch_rounded : Icons.redeem_rounded));
 
         final rewardType = m['rewardType'] ?? 'coins';
         final isLimit = rewardType == 'limit';
