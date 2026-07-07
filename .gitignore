@@ -14,7 +14,6 @@ android/app/release/
 ios/Pods/
 
 # Mac/Linux/Windows
-*.lock
 .DS_Store
 
 # IDE
