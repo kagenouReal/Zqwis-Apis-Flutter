@@ -28,12 +28,14 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          cache: true
+          cache: false
 
       - name: Kill Java Processes
-        run: pkill -9 java || true
+        run: |
+          pkill -9 java || true
+          sleep 2
 
-      - name: Clean Flutter & Gradle
+      - name: Clean Everything
         run: |
           flutter clean
           rm -rf build/
@@ -41,6 +43,7 @@ jobs:
           rm -rf pubspec.lock
           rm -rf android/.gradle/
           rm -rf android/build/
+          rm -rf ~/.gradle/
 
       - name: Copy gradle.properties untuk GitHub Actions
         run: cp android/gradle.properties.github android/gradle.properties
@@ -48,10 +51,23 @@ jobs:
       - name: Get Dependencies
         run: flutter pub get
 
-      - name: Build APK
-        run: flutter build apk --release --target-platform android-arm64
+      - name: Build APK with Verbose
+        run: flutter build apk --release --target-platform android-arm64 --verbose 2>&1 | tee build.log
+
+      - name: Show Build Log
+        if: failure()
+        run: |
+          echo "=== BUILD LOG ===" 
+          tail -200 build.log
+
+      - name: Check APK Output
+        if: success()
+        run: |
+          ls -la build/app/outputs/flutter-apk/
+          du -sh build/app/outputs/flutter-apk/*
 
       - name: Upload APK
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: zqwis-release
