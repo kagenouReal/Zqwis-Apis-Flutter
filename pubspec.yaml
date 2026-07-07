@@ -16,11 +16,11 @@ dependencies:
   go_router: ^13.2.1
   provider: ^6.1.2
   google_fonts: ^6.1.0
-  shared_preferences: 2.2.0
-  url_launcher: 6.1.14
+  shared_preferences: ^2.2.3
+  url_launcher: ^6.3.2
   flutter_animate: ^4.5.0
   shimmer: ^3.0.0
-  fluttertoast: ^8.2.5
+  fluttertoast: ^9.1.0
   visibility_detector: ^0.4.0+2  
   file_picker: ^8.0.3  
   
