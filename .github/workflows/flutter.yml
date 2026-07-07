@@ -30,19 +30,23 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Flutter Clean & Fix Watcher
+      - name: Kill Java Processes
+        run: pkill -9 java || true
+
+      - name: Clean Flutter & Gradle
         run: |
           flutter clean
           rm -rf build/
-          rm -rf pubspec.lock
           rm -rf .dart_tool/
-          rm -rf ~/.gradle
-          flutter pub get
+          rm -rf pubspec.lock
+          rm -rf android/.gradle/
+          rm -rf android/build/
 
-      - name: Configure Gradle Memory
-        run: |
-          mkdir -p ~/.gradle
-          echo "org.gradle.jvmargs=-Xmx2048m -XX:MaxMetaspaceSize=512m" > ~/.gradle/gradle.properties
+      - name: Copy gradle.properties untuk GitHub Actions
+        run: cp android/gradle.properties.github android/gradle.properties
+
+      - name: Get Dependencies
+        run: flutter pub get
 
       - name: Build APK
         run: flutter build apk --release --target-platform android-arm64
@@ -51,4 +55,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: zqwis-release
-          path: build/app/outputs/flutter-apk/*.apk
+          path: build/app/outputs/flutter-apk/app-release.apk

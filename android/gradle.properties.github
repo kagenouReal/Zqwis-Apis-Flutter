@@ -1,0 +1,10 @@
+android.useAndroidX=true
+android.enableJetifier=false
+org.gradle.jvmargs=-Xmx2048m -XX:MaxMetaspaceSize=512m -XX:+UseParallelGC -Dfile.encoding=UTF-8
+org.gradle.daemon=true
+org.gradle.parallel=false
+org.gradle.caching=true
+org.gradle.workers.max=1
+org.gradle.configuration-cache=false
+org.gradle.configureondemand=false
+org.gradle.vfs.watch=false
