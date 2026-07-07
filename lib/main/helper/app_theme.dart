@@ -198,17 +198,17 @@ class AppTheme {
   }
 
   //===============
-  static CardTheme _buildCardTheme(Color card, Color border) {
-    return CardTheme(
-      color: card,
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: BorderSide(color: border, width: 1),
-      ),
-      margin: EdgeInsets.zero,
-    );
-  }
+static CardThemeData _buildCardTheme(Color card, Color border) {
+  return CardThemeData(
+    color: card,
+    elevation: 0,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12),
+      side: BorderSide(color: border, width: 1),
+    ),
+    margin: EdgeInsets.zero,
+  );
+}
 
   //===============
   static InputDecorationTheme _buildInputTheme({
