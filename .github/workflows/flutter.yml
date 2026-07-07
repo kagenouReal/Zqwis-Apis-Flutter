@@ -45,7 +45,7 @@ jobs:
           rm -rf android/build/
           rm -rf ~/.gradle/
 
-      - name: Copy gradle.properties
+      - name: Copy gradle.properties untuk GitHub Actions
         run: cp android/gradle.properties.github android/gradle.properties
 
       - name: Get Dependencies
@@ -54,26 +54,8 @@ jobs:
       - name: Build APK
         run: flutter build apk --release --target-platform android-arm64
 
-      - name: Find APK Files
-        if: always()
-        run: |
-          echo "=== Searching for APK files ==="
-          find /home/runner/work/Zqwis-Apis-Flutter -name "*.apk" -type f 2>/dev/null
-          
-          echo ""
-          echo "=== Build folder structure ==="
-          ls -la build/app/outputs/ 2>/dev/null || echo "No build/app/outputs/"
-          
-          echo ""
-          echo "=== Full build tree ==="
-          tree -L 4 build/app/ 2>/dev/null || find build/app -type f -name "*.apk"
-
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: zqwis-release
-          path: build/app/outputs/flutter-apk/
-
-      - name: List Uploaded Files
-        if: always()
-        run: ls -lah build/app/outputs/flutter-apk/ || echo "No files found"
+          path: build/app/outputs/flutter-apk/app-release.apk

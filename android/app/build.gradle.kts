@@ -28,15 +28,6 @@ android {
         versionName = "1.0.0"
     }
 
-    flavorDimensions += "default"
-
-    productFlavors {
-        create("dev") {
-            dimension = "default"
-            applicationIdSuffix = ".dev"
-        }
-    }
-
     buildTypes {
         getByName("debug") {
             ndk {
