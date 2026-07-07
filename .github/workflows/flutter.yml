@@ -30,11 +30,16 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install Dependencies
-        run: flutter pub get
+      - name: Flutter Clean & Fix Watcher
+        run: |
+          flutter clean
+          rm -rf build/
+          rm -rf pubspec.lock
+          rm -rf .dart_tool/
+          flutter pub get
 
       - name: Build APK
-        run: flutter build apk --release --target-platform android-arm64
+        run: flutter build apk --release --target-platform android-arm64 --no-tree-shake-icons
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
