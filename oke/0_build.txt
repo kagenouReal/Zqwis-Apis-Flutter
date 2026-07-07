@@ -1,648 +1,466 @@
-﻿2026-07-06T15:19:27.6783827Z Current runner version: '2.335.1'
-2026-07-06T15:19:27.6808091Z ##[group]Runner Image Provisioner
-2026-07-06T15:19:27.6809059Z Hosted Compute Agent
-2026-07-06T15:19:27.6809641Z Version: 20260624.560
-2026-07-06T15:19:27.6810245Z Commit: 925d229a51159bc391ae97e54a2dd1fe20af789d
-2026-07-06T15:19:27.6811034Z Build Date: 2026-06-24T18:26:47Z
-2026-07-06T15:19:27.6811736Z Worker ID: {cd1e371a-076a-4485-ba44-1b8c2148f9f9}
-2026-07-06T15:19:27.6812514Z Azure Region: northcentralus
-2026-07-06T15:19:27.6813145Z ##[endgroup]
-2026-07-06T15:19:27.6814649Z ##[group]Operating System
-2026-07-06T15:19:27.6815364Z Ubuntu
-2026-07-06T15:19:27.6815871Z 24.04.4
-2026-07-06T15:19:27.6816383Z LTS
-2026-07-06T15:19:27.6816940Z ##[endgroup]
-2026-07-06T15:19:27.6817742Z ##[group]Runner Image
-2026-07-06T15:19:27.6818418Z Image: ubuntu-24.04
-2026-07-06T15:19:27.6818968Z Version: 20260628.225.1
-2026-07-06T15:19:27.6820290Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260628.225/images/ubuntu/Ubuntu2404-Readme.md
-2026-07-06T15:19:27.6821805Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260628.225
-2026-07-06T15:19:27.6822796Z ##[endgroup]
-2026-07-06T15:19:27.6823952Z ##[group]GITHUB_TOKEN Permissions
-2026-07-06T15:19:27.6826366Z Contents: read
-2026-07-06T15:19:27.6826968Z Metadata: read
-2026-07-06T15:19:27.6828155Z Packages: read
-2026-07-06T15:19:27.6828713Z ##[endgroup]
-2026-07-06T15:19:27.6830815Z Secret source: Actions
-2026-07-06T15:19:27.6831885Z Prepare workflow directory
-2026-07-06T15:19:27.7189936Z Prepare all required actions
-2026-07-06T15:19:27.7228716Z Getting action download info
-2026-07-06T15:19:28.0465204Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
-2026-07-06T15:19:28.1590362Z Download action repository 'actions/setup-java@v4' (SHA:c1e323688fd81a25caa38c78aa6df2d33d3e20d9)
-2026-07-06T15:19:28.6543719Z Download action repository 'subosito/flutter-action@v2' (SHA:1a449444c387b1966244ae4d4f8c696479add0b2)
-2026-07-06T15:19:28.8327781Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
-2026-07-06T15:19:29.0548862Z Getting action download info
-2026-07-06T15:19:29.1681064Z Download action repository 'actions/cache@v5' (SHA:caa296126883cff596d87d8935842f9db880ef25)
-2026-07-06T15:19:29.7733306Z Complete job name: build
-2026-07-06T15:19:29.8608455Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
-2026-07-06T15:19:29.8619733Z ##[group]Run actions/checkout@v4
-2026-07-06T15:19:29.8620968Z with:
-2026-07-06T15:19:29.8621876Z   repository: kagenouReal/Zqwis-Apis-Flutter
-2026-07-06T15:19:29.8630660Z   token: ***
-2026-07-06T15:19:29.8631501Z   ssh-strict: true
-2026-07-06T15:19:29.8632364Z   ssh-user: git
-2026-07-06T15:19:29.8633267Z   persist-credentials: true
-2026-07-06T15:19:29.8634243Z   clean: true
-2026-07-06T15:19:29.8635126Z   sparse-checkout-cone-mode: true
-2026-07-06T15:19:29.8636181Z   fetch-depth: 1
-2026-07-06T15:19:29.8637026Z   fetch-tags: false
-2026-07-06T15:19:29.8638049Z   show-progress: true
-2026-07-06T15:19:29.8638938Z   lfs: false
-2026-07-06T15:19:29.8639804Z   submodules: false
-2026-07-06T15:19:29.8640690Z   set-safe-directory: true
-2026-07-06T15:19:29.8641927Z ##[endgroup]
-2026-07-06T15:19:29.9721363Z Syncing repository: kagenouReal/Zqwis-Apis-Flutter
-2026-07-06T15:19:29.9724294Z ##[group]Getting Git version info
-2026-07-06T15:19:29.9725883Z Working directory is '/home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter'
-2026-07-06T15:19:29.9728989Z [command]/usr/bin/git version
-2026-07-06T15:19:29.9730042Z git version 2.54.0
-2026-07-06T15:19:29.9776680Z ##[endgroup]
-2026-07-06T15:19:29.9791302Z Temporarily overriding HOME='/home/runner/work/_temp/a997f28c-fb6a-45a4-9acf-eee09fb113d4' before making global git config changes
-2026-07-06T15:19:29.9795953Z Adding repository directory to the temporary git global config as a safe directory
-2026-07-06T15:19:29.9798898Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter
-2026-07-06T15:19:29.9848739Z Deleting the contents of '/home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter'
-2026-07-06T15:19:29.9851452Z ##[group]Initializing the repository
-2026-07-06T15:19:29.9856535Z [command]/usr/bin/git init /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter
-2026-07-06T15:19:29.9959495Z hint: Using 'master' as the name for the initial branch. This default branch name
-2026-07-06T15:19:29.9962492Z hint: will change to "main" in Git 3.0. To configure the initial branch name
-2026-07-06T15:19:29.9964518Z hint: to use in all of your new repositories, which will suppress this warning,
-2026-07-06T15:19:29.9966850Z hint: call:
-2026-07-06T15:19:29.9968490Z hint:
-2026-07-06T15:19:29.9970262Z hint: 	git config --global init.defaultBranch <name>
-2026-07-06T15:19:29.9972488Z hint:
-2026-07-06T15:19:29.9974563Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
-2026-07-06T15:19:29.9978192Z hint: 'development'. The just-created branch can be renamed via this command:
-2026-07-06T15:19:29.9980890Z hint:
-2026-07-06T15:19:29.9982319Z hint: 	git branch -m <name>
-2026-07-06T15:19:29.9983922Z hint:
-2026-07-06T15:19:29.9986313Z hint: Disable this message with "git config set advice.defaultBranchName false"
-2026-07-06T15:19:29.9988995Z Initialized empty Git repository in /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter/.git/
-2026-07-06T15:19:29.9993769Z [command]/usr/bin/git remote add origin https://github.com/kagenouReal/Zqwis-Apis-Flutter
-2026-07-06T15:19:30.0023473Z ##[endgroup]
-2026-07-06T15:19:30.0026062Z ##[group]Disabling automatic garbage collection
-2026-07-06T15:19:30.0027760Z [command]/usr/bin/git config --local gc.auto 0
-2026-07-06T15:19:30.0059508Z ##[endgroup]
-2026-07-06T15:19:30.0062052Z ##[group]Setting up auth
-2026-07-06T15:19:30.0066357Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2026-07-06T15:19:30.0099772Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2026-07-06T15:19:30.0495704Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2026-07-06T15:19:30.0525455Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2026-07-06T15:19:30.0743125Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
-2026-07-06T15:19:30.0773340Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
-2026-07-06T15:19:30.0989426Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
-2026-07-06T15:19:30.1022713Z ##[endgroup]
-2026-07-06T15:19:30.1025003Z ##[group]Fetching the repository
-2026-07-06T15:19:30.1032149Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2befcd8ca369e892b149012c856458fdc3c84165:refs/remotes/origin/main
-2026-07-06T15:19:30.4633495Z From https://github.com/kagenouReal/Zqwis-Apis-Flutter
-2026-07-06T15:19:30.4636392Z  * [new ref]         2befcd8ca369e892b149012c856458fdc3c84165 -> origin/main
-2026-07-06T15:19:30.4672396Z ##[endgroup]
-2026-07-06T15:19:30.4674792Z ##[group]Determining the checkout info
-2026-07-06T15:19:30.4677672Z ##[endgroup]
-2026-07-06T15:19:30.4682031Z [command]/usr/bin/git sparse-checkout disable
-2026-07-06T15:19:30.4728654Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
-2026-07-06T15:19:30.4758060Z ##[group]Checking out the ref
-2026-07-06T15:19:30.4761352Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
-2026-07-06T15:19:30.4863427Z Switched to a new branch 'main'
-2026-07-06T15:19:30.4865954Z branch 'main' set up to track 'origin/main'.
-2026-07-06T15:19:30.4875029Z ##[endgroup]
-2026-07-06T15:19:30.4919537Z [command]/usr/bin/git log -1 --format=%H
-2026-07-06T15:19:30.4945094Z 2befcd8ca369e892b149012c856458fdc3c84165
-2026-07-06T15:19:30.5332001Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
-2026-07-06T15:19:30.5336850Z ##[group]Run actions/setup-java@v4
-2026-07-06T15:19:30.5338046Z with:
-2026-07-06T15:19:30.5338834Z   distribution: temurin
-2026-07-06T15:19:30.5339730Z   java-version: 17
-2026-07-06T15:19:30.5340560Z   java-package: jdk
-2026-07-06T15:19:30.5341393Z   check-latest: false
-2026-07-06T15:19:30.5342249Z   server-id: github
-2026-07-06T15:19:30.5343091Z   server-username: GITHUB_ACTOR
-2026-07-06T15:19:30.5344082Z   server-password: GITHUB_TOKEN
-2026-07-06T15:19:30.5345060Z   overwrite-settings: true
-2026-07-06T15:19:30.5345970Z   job-status: success
-2026-07-06T15:19:30.5354016Z   token: ***
-2026-07-06T15:19:30.5354809Z ##[endgroup]
-2026-07-06T15:19:30.6958669Z ##[group]Installed distributions
-2026-07-06T15:19:30.7210690Z Resolved Java 17.0.19+10 from tool-cache
-2026-07-06T15:19:30.7213177Z Setting Java 17.0.19+10 as the default
-2026-07-06T15:19:30.7223964Z (node:2310) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-07-06T15:19:30.7228390Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-07-06T15:19:30.7231259Z Creating toolchains.xml for JDK version 17 from temurin
-2026-07-06T15:19:30.7310587Z Writing to /home/runner/.m2/toolchains.xml
-2026-07-06T15:19:30.7312170Z 
-2026-07-06T15:19:30.7313120Z Java configuration:
-2026-07-06T15:19:30.7314673Z   Distribution: temurin
-2026-07-06T15:19:30.7316170Z   Version: 17.0.19+10
-2026-07-06T15:19:30.7318670Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:19:30.7320742Z 
-2026-07-06T15:19:30.7322582Z ##[endgroup]
-2026-07-06T15:19:30.7339738Z Creating settings.xml with server-id: github
-2026-07-06T15:19:30.7341880Z Writing to /home/runner/.m2/settings.xml
-2026-07-06T15:19:30.7883541Z ##[group]Run subosito/flutter-action@v2
-2026-07-06T15:19:30.7885318Z with:
-2026-07-06T15:19:30.7886531Z   channel: stable
-2026-07-06T15:19:30.7887899Z   architecture: X64
-2026-07-06T15:19:30.7888730Z   cache: false
-2026-07-06T15:19:30.7889532Z   pub-cache-path: default
-2026-07-06T15:19:30.7890420Z   dry-run: false
-2026-07-06T15:19:30.7891371Z   git-source: https://github.com/flutter/flutter.git
-2026-07-06T15:19:30.7892507Z env:
-2026-07-06T15:19:30.7893589Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:19:30.7895388Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:19:30.7896800Z ##[endgroup]
-2026-07-06T15:19:30.8031745Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
-2026-07-06T15:19:30.8033066Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
-2026-07-06T15:19:30.8221783Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
-2026-07-06T15:19:30.8222990Z env:
-2026-07-06T15:19:30.8224128Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:19:30.8225917Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:19:30.8227630Z ##[endgroup]
-2026-07-06T15:19:30.8403067Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
-2026-07-06T15:19:30.8404307Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
-2026-07-06T15:19:30.8405367Z [36;1m  -n '' \[0m
-2026-07-06T15:19:30.8406184Z [36;1m  -f '' \[0m
-2026-07-06T15:19:30.8406996Z [36;1m  -a 'X64' \[0m
-2026-07-06T15:19:30.8408152Z [36;1m  -k '' \[0m
-2026-07-06T15:19:30.8409197Z [36;1m  -c '' \[0m
-2026-07-06T15:19:30.8409983Z [36;1m  -l '' \[0m
-2026-07-06T15:19:30.8410790Z [36;1m  -d 'default' \[0m
-2026-07-06T15:19:30.8411875Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
-2026-07-06T15:19:30.8413033Z [36;1m  stable[0m
-2026-07-06T15:19:30.8445595Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
-2026-07-06T15:19:30.8446797Z env:
-2026-07-06T15:19:30.8448202Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:19:30.8449976Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:19:30.8451770Z ##[endgroup]
-2026-07-06T15:19:31.0167513Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
-2026-07-06T15:19:31.0168685Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
-2026-07-06T15:19:31.0169700Z [36;1m  -n '3.44.4' \[0m
-2026-07-06T15:19:31.0170559Z [36;1m  -a 'x64' \[0m
-2026-07-06T15:19:31.0171633Z [36;1m  -c '/opt/hostedtoolcache/flutter/stable-3.44.4-x64' \[0m
-2026-07-06T15:19:31.0172927Z [36;1m  -d '/home/runner/.pub-cache' \[0m
-2026-07-06T15:19:31.0173941Z [36;1m  stable[0m
-2026-07-06T15:19:31.0209666Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
-2026-07-06T15:19:31.0210912Z env:
-2026-07-06T15:19:31.0212031Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:19:31.0213843Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:19:31.0215273Z ##[endgroup]
-2026-07-06T15:19:31.1737898Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-2026-07-06T15:19:31.1739701Z                                  Dload  Upload   Total   Spent    Left  Speed
-2026-07-06T15:19:31.1740944Z 
-2026-07-06T15:19:32.0366516Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-2026-07-06T15:19:33.0333102Z   7 1472M    7  109M    0     0   126M      0  0:00:11 --:--:--  0:00:11  126M
-2026-07-06T15:19:34.0334602Z  17 1472M   17  259M    0     0   139M      0  0:00:10  0:00:01  0:00:09  139M
-2026-07-06T15:19:35.0329115Z  29 1472M   29  434M    0     0   152M      0  0:00:09  0:00:02  0:00:07  152M
-2026-07-06T15:19:36.0334053Z  41 1472M   41  606M    0     0   157M      0  0:00:09  0:00:03  0:00:06  157M
-2026-07-06T15:19:37.0329968Z  51 1472M   51  764M    0     0   157M      0  0:00:09  0:00:04  0:00:05  157M
-2026-07-06T15:19:38.0365872Z  59 1472M   59  877M    0     0   149M      0  0:00:09  0:00:05  0:00:04  153M
-2026-07-06T15:19:39.0333889Z  70 1472M   70 1037M    0     0   151M      0  0:00:09  0:00:06  0:00:03  155M
-2026-07-06T15:19:40.0330953Z  80 1472M   80 1183M    0     0   150M      0  0:00:09  0:00:07  0:00:02  149M
-2026-07-06T15:19:40.7730537Z  91 1472M   91 1349M    0     0   152M      0  0:00:09  0:00:08  0:00:01  148M
-2026-07-06T15:19:40.7731866Z 100 1472M  100 1472M    0     0   153M      0  0:00:09  0:00:09 --:--:--  149M
-2026-07-06T15:20:32.6339496Z ##[group]Run flutter pub get
-2026-07-06T15:20:32.6339818Z [36;1mflutter pub get[0m
-2026-07-06T15:20:32.6372148Z shell: /usr/bin/bash -e {0}
-2026-07-06T15:20:32.6372434Z env:
-2026-07-06T15:20:32.6372781Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:20:32.6373287Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:20:32.6373781Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.44.4-x64/flutter
-2026-07-06T15:20:32.6374167Z   PUB_CACHE: /home/runner/.pub-cache
-2026-07-06T15:20:32.6374423Z ##[endgroup]
-2026-07-06T15:20:37.9304696Z Resolving dependencies...
-2026-07-06T15:20:38.3282454Z Downloading packages...
-2026-07-06T15:20:42.8641024Z + archive 4.0.9
-2026-07-06T15:20:42.8641569Z + args 2.7.0
-2026-07-06T15:20:42.8641994Z + async 2.13.1
-2026-07-06T15:20:42.8642433Z + boolean_selector 2.1.2
-2026-07-06T15:20:42.8642955Z + characters 1.4.1
-2026-07-06T15:20:42.8643347Z + checked_yaml 2.0.4
-2026-07-06T15:20:42.8643866Z + cli_util 0.4.2 (0.5.1 available)
-2026-07-06T15:20:42.8644351Z + clock 1.1.2
-2026-07-06T15:20:42.8645068Z + code_assets 1.2.1
-2026-07-06T15:20:42.8645419Z + collection 1.19.1
-2026-07-06T15:20:42.8645752Z + cookie_jar 4.0.9
-2026-07-06T15:20:42.8646086Z + cross_file 0.3.5+4
-2026-07-06T15:20:42.8646434Z + crypto 3.0.7
-2026-07-06T15:20:42.8646752Z + dio 5.10.0
-2026-07-06T15:20:42.8647085Z + dio_cookie_manager 3.4.0
-2026-07-06T15:20:42.8647781Z + dio_web_adapter 2.2.0
-2026-07-06T15:20:42.8648244Z + fake_async 1.3.3
-2026-07-06T15:20:42.8648577Z + ffi 2.2.0
-2026-07-06T15:20:42.8648870Z + file 7.0.1
-2026-07-06T15:20:42.8649212Z + file_picker 8.3.7 (11.0.2 available)
-2026-07-06T15:20:42.8649680Z + flutter 0.0.0 from sdk flutter
-2026-07-06T15:20:42.8650093Z + flutter_animate 4.5.2
-2026-07-06T15:20:42.8650484Z + flutter_launcher_icons 0.14.4
-2026-07-06T15:20:42.8650929Z + flutter_lints 3.0.2 (6.0.0 available)
-2026-07-06T15:20:42.8651428Z + flutter_plugin_android_lifecycle 2.0.35
-2026-07-06T15:20:42.8651928Z + flutter_shaders 0.1.3
-2026-07-06T15:20:42.8652331Z + flutter_test 0.0.0 from sdk flutter
-2026-07-06T15:20:42.8652834Z + flutter_web_plugins 0.0.0 from sdk flutter
-2026-07-06T15:20:42.8653343Z + fluttertoast 8.2.14 (9.1.0 available)
-2026-07-06T15:20:42.8653807Z + go_router 13.2.5 (17.3.0 available)
-2026-07-06T15:20:42.8654316Z ! google_fonts 6.1.0 (overridden) (8.1.0 available)
-2026-07-06T15:20:42.8654834Z + hooks 2.0.2
-2026-07-06T15:20:42.8655161Z + http 1.6.0
-2026-07-06T15:20:42.8655488Z + http_parser 4.1.2
-2026-07-06T15:20:42.8655832Z + image 4.9.1
-2026-07-06T15:20:42.8656145Z + jni 1.0.0
-2026-07-06T15:20:42.8656455Z + jni_flutter 1.0.1
-2026-07-06T15:20:42.8656817Z + json_annotation 4.12.0
-2026-07-06T15:20:42.8657207Z + leak_tracker 11.0.2
-2026-07-06T15:20:42.8657853Z + leak_tracker_flutter_testing 3.0.10
-2026-07-06T15:20:42.8658337Z + leak_tracker_testing 3.0.2
-2026-07-06T15:20:42.8658754Z + lints 3.0.0 (6.1.0 available)
-2026-07-06T15:20:42.8659156Z + logging 1.3.0
-2026-07-06T15:20:42.8659514Z + matcher 0.12.19 (0.12.20 available)
-2026-07-06T15:20:42.8659976Z + material_color_utilities 0.13.0
-2026-07-06T15:20:42.8660429Z + meta 1.18.0 (1.18.3 available)
-2026-07-06T15:20:42.8660833Z + mime 2.0.0
-2026-07-06T15:20:42.8661165Z + nested 1.0.0
-2026-07-06T15:20:42.8661506Z + objective_c 9.4.1
-2026-07-06T15:20:42.8661858Z + package_config 2.2.0 (3.0.0 available)
-2026-07-06T15:20:42.8662300Z + path 1.9.1
-2026-07-06T15:20:42.8662618Z + path_provider 2.1.6
-2026-07-06T15:20:42.8662988Z + path_provider_android 2.3.1
-2026-07-06T15:20:42.8663413Z + path_provider_foundation 2.6.0
-2026-07-06T15:20:42.8663833Z + path_provider_linux 2.2.2
-2026-07-06T15:20:42.8664250Z + path_provider_platform_interface 2.1.3
-2026-07-06T15:20:42.8664742Z + path_provider_windows 2.3.0
-2026-07-06T15:20:42.8665187Z + petitparser 7.0.2
-2026-07-06T15:20:42.8665556Z + platform 3.1.6
-2026-07-06T15:20:42.8665943Z + plugin_platform_interface 2.1.8
-2026-07-06T15:20:42.8666386Z + posix 6.5.0
-2026-07-06T15:20:42.8666722Z + provider 6.1.5+1
-2026-07-06T15:20:42.8667617Z + pub_semver 2.2.0
-2026-07-06T15:20:42.8668035Z + record_use 0.6.0
-2026-07-06T15:20:42.8668451Z + shared_preferences 2.2.0 (2.5.5 available)
-2026-07-06T15:20:42.8669047Z + shared_preferences_android 2.4.26
-2026-07-06T15:20:42.8669573Z + shared_preferences_foundation 2.5.6
-2026-07-06T15:20:42.8670074Z + shared_preferences_linux 2.4.1
-2026-07-06T15:20:42.8670567Z + shared_preferences_platform_interface 2.4.2
-2026-07-06T15:20:42.8671087Z + shared_preferences_web 2.4.3
-2026-07-06T15:20:42.8671539Z + shared_preferences_windows 2.4.1
-2026-07-06T15:20:42.8671992Z + shimmer 3.0.0
-2026-07-06T15:20:42.8672364Z + sky_engine 0.0.0 from sdk flutter
-2026-07-06T15:20:42.8672823Z + source_span 1.10.2
-2026-07-06T15:20:42.8673194Z + stack_trace 1.12.1
-2026-07-06T15:20:42.8673574Z + stream_channel 2.1.4
-2026-07-06T15:20:42.8673954Z + string_scanner 1.4.1
-2026-07-06T15:20:42.8674331Z + term_glyph 1.2.2
-2026-07-06T15:20:42.8674752Z + test_api 0.7.11 (0.7.13 available)
-2026-07-06T15:20:42.8675230Z + typed_data 1.4.0
-2026-07-06T15:20:42.8675603Z + universal_io 2.3.1
-2026-07-06T15:20:42.8675993Z + url_launcher 6.1.14 (6.3.2 available)
-2026-07-06T15:20:42.8676720Z + url_launcher_android 6.3.32
-2026-07-06T15:20:42.8677160Z + url_launcher_ios 6.4.1
-2026-07-06T15:20:42.8677906Z + url_launcher_linux 3.2.2
-2026-07-06T15:20:42.8678327Z + url_launcher_macos 3.2.5
-2026-07-06T15:20:42.8678763Z + url_launcher_platform_interface 2.3.2
-2026-07-06T15:20:42.8679244Z + url_launcher_web 2.4.3
-2026-07-06T15:20:42.8679645Z + url_launcher_windows 3.1.5
-2026-07-06T15:20:42.8680088Z + vector_math 2.2.0 (2.4.0 available)
-2026-07-06T15:20:42.8680556Z + visibility_detector 0.4.0+2
-2026-07-06T15:20:42.8680979Z + vm_service 15.2.0
-2026-07-06T15:20:42.8681326Z + web 1.1.1
-2026-07-06T15:20:42.8681662Z + win32 5.15.0 (6.3.0 available)
-2026-07-06T15:20:42.8682099Z + xdg_directories 1.1.0
-2026-07-06T15:20:42.8682469Z + xml 7.0.1
-2026-07-06T15:20:42.8682781Z + yaml 3.1.3
-2026-07-06T15:20:42.8683145Z Changed 96 dependencies!
-2026-07-06T15:20:42.8683783Z 15 packages have newer versions incompatible with dependency constraints.
-2026-07-06T15:20:42.8684569Z Try `flutter pub outdated` for more information.
-2026-07-06T15:20:43.1994533Z ##[group]Run flutter build apk --release --target-platform android-arm64
-2026-07-06T15:20:43.1995556Z [36;1mflutter build apk --release --target-platform android-arm64[0m
-2026-07-06T15:20:43.2027890Z shell: /usr/bin/bash -e {0}
-2026-07-06T15:20:43.2028136Z env:
-2026-07-06T15:20:43.2028443Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:20:43.2028953Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
-2026-07-06T15:20:43.2029442Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.44.4-x64/flutter
-2026-07-06T15:20:43.2029825Z   PUB_CACHE: /home/runner/.pub-cache
-2026-07-06T15:20:43.2030076Z ##[endgroup]
-2026-07-06T15:20:43.6844068Z Upgrading build.gradle.kts
-2026-07-06T15:20:43.6861723Z Upgrading gradle.properties
-2026-07-06T15:20:43.6872813Z Upgrading gradle.properties
-2026-07-06T15:22:16.9098380Z Running Gradle task 'assembleRelease'...                        
-2026-07-06T15:22:16.9100058Z Checking the license for package NDK (Side by side) 27.0.12077973 in /usr/local/lib/android/sdk/licenses
-2026-07-06T15:22:17.0033234Z License for package NDK (Side by side) 27.0.12077973 accepted.
-2026-07-06T15:22:17.0034625Z Preparing "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973".
-2026-07-06T15:22:36.6019581Z "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" ready.
-2026-07-06T15:22:36.6022134Z Installing NDK (Side by side) 27.0.12077973 in /usr/local/lib/android/sdk/ndk/27.0.12077973
-2026-07-06T15:22:36.6023096Z "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" complete.
-2026-07-06T15:22:37.3023187Z "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" finished.
-2026-07-06T15:22:54.0029208Z Warning: The plugin flutter_plugin_android_lifecycle requires Android SDK version 36 or higher.
-2026-07-06T15:22:54.0088933Z For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
-2026-07-06T15:23:09.5018283Z Warning: The plugin jni requires Android SDK version 35 or higher.
-2026-07-06T15:23:09.5048479Z For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
-2026-07-06T15:23:09.8048872Z Warning: The plugin jni_flutter requires Android SDK version 35 or higher.
-2026-07-06T15:23:09.8050902Z For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
-2026-07-06T15:23:15.0015358Z Warning: The plugin shared_preferences_android requires Android SDK version 36 or higher.
-2026-07-06T15:23:15.0038475Z For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
-2026-07-06T15:23:15.9053058Z Warning: The plugin url_launcher_android requires Android SDK version 36 or higher.
-2026-07-06T15:23:15.9109902Z For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
-2026-07-06T15:23:15.9150522Z Your project is configured to compile against Android SDK 34, but the following plugin(s) require to be compiled against a higher Android SDK version:
-2026-07-06T15:23:15.9158040Z - flutter_plugin_android_lifecycle compiles against Android SDK 36
-2026-07-06T15:23:15.9188654Z - jni compiles against Android SDK 35
-2026-07-06T15:23:15.9212238Z - jni_flutter compiles against Android SDK 35
-2026-07-06T15:23:15.9238335Z - shared_preferences_android compiles against Android SDK 36
-2026-07-06T15:23:15.9277935Z - url_launcher_android compiles against Android SDK 36
-2026-07-06T15:23:15.9308318Z Fix this issue by compiling against the highest Android SDK version (they are backward compatible).
-2026-07-06T15:23:15.9330163Z Add the following to /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter/android/app/build.gradle.kts:
-2026-07-06T15:23:15.9338460Z 
-2026-07-06T15:23:15.9356718Z     android {
-2026-07-06T15:23:15.9380002Z         compileSdk = 36
-2026-07-06T15:23:15.9380651Z         ...
-2026-07-06T15:23:15.9381145Z     }
-2026-07-06T15:23:15.9382828Z Your project is configured with Android NDK 27.0.12077973, but the following plugin(s) depend on a different Android NDK version:
-2026-07-06T15:23:15.9396930Z - jni requires Android NDK 28.2.13676358
-2026-07-06T15:23:15.9398288Z Fix this issue by using the highest Android NDK version (they are backward compatible).
-2026-07-06T15:23:15.9399575Z Add the following to /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter/android/app/build.gradle.kts:
-2026-07-06T15:23:15.9400531Z 
-2026-07-06T15:23:15.9400861Z     android {
-2026-07-06T15:23:15.9401419Z         ndkVersion = "28.2.13676358"
-2026-07-06T15:23:15.9402047Z         ...
-2026-07-06T15:23:15.9402549Z     }
-2026-07-06T15:23:15.9403762Z WARNING: Your Android app project: app located at: /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter/android/app/build.gradle.kts
-2026-07-06T15:23:15.9405393Z applies the Kotlin Gradle Plugin, which will cause build failures in future versions of Flutter. 
-2026-07-06T15:23:15.9406998Z Please migrate your app to Built-in Kotlin using this guide: https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-app-developers
-2026-07-06T15:23:15.9408532Z 
-2026-07-06T15:23:15.9422830Z WARNING: Your app uses the following plugins that apply Kotlin Gradle Plugin (KGP): fluttertoast
-2026-07-06T15:23:15.9424158Z Future versions of Flutter will fail to build if your app uses plugins that apply KGP.
-2026-07-06T15:23:15.9424974Z 
-2026-07-06T15:23:15.9425673Z Please check the changelogs of these plugins and upgrade to a version that supports Built-in Kotlin.
-2026-07-06T15:23:15.9426996Z If no such version exists, report the issue to the plugin. If necessary, here is a guide on filing 
-2026-07-06T15:23:15.9429289Z an issue against a plugin: https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-app-developers#report-incompatible-kotlin-gradle-plugin-usage-to-plugin-authors
-2026-07-06T15:23:15.9432571Z 
-2026-07-06T15:23:15.9433838Z If you are a plugin author, please migrate your plugin to Built-in Kotlin using this guide: https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-plugin-authors
-2026-07-06T15:23:17.9015898Z Checking the license for package Android SDK Platform 33 in /usr/local/lib/android/sdk/licenses
-2026-07-06T15:23:17.9016936Z License for package Android SDK Platform 33 accepted.
-2026-07-06T15:23:17.9017891Z Preparing "Install Android SDK Platform 33 (revision 3)".
-2026-07-06T15:23:21.4022921Z "Install Android SDK Platform 33 (revision 3)" ready.
-2026-07-06T15:23:21.4024150Z Installing Android SDK Platform 33 in /usr/local/lib/android/sdk/platforms/android-33
-2026-07-06T15:23:21.4025421Z "Install Android SDK Platform 33 (revision 3)" complete.
-2026-07-06T15:23:21.4026326Z "Install Android SDK Platform 33 (revision 3)" finished.
-2026-07-06T15:23:21.5018696Z [=========                              ] 25%                                   
-2026-07-06T15:23:21.5022807Z [=========                              ] 25% Fetch remote repository...        
-2026-07-06T15:23:21.5025990Z [=======================================] 100% Fetch remote repository...       
-2026-07-06T15:23:24.2015668Z Checking the license for package CMake 3.22.1 in /usr/local/lib/android/sdk/licenses
-2026-07-06T15:23:24.2016649Z License for package CMake 3.22.1 accepted.
-2026-07-06T15:23:24.2017490Z Preparing "Install CMake 3.22.1 v.3.22.1".
-2026-07-06T15:23:25.5048393Z "Install CMake 3.22.1 v.3.22.1" ready.
-2026-07-06T15:23:25.5093349Z Installing CMake 3.22.1 in /usr/local/lib/android/sdk/cmake/3.22.1
-2026-07-06T15:23:25.5148250Z "Install CMake 3.22.1 v.3.22.1" complete.
-2026-07-06T15:23:25.5180199Z "Install CMake 3.22.1 v.3.22.1" finished.
-2026-07-06T15:23:36.7129123Z lib/main/helper/app_theme.dart:110:18: Error: The argument type 'CardTheme' can't be assigned to the parameter type 'CardThemeData?'.
-2026-07-06T15:23:36.7148798Z  - 'CardTheme' is from 'package:flutter/src/material/card_theme.dart' ('/opt/hostedtoolcache/flutter/stable-3.44.4-x64/flutter/packages/flutter/lib/src/material/card_theme.dart').
-2026-07-06T15:23:36.7230706Z  - 'CardThemeData' is from 'package:flutter/src/material/card_theme.dart' ('/opt/hostedtoolcache/flutter/stable-3.44.4-x64/flutter/packages/flutter/lib/src/material/card_theme.dart').
-2026-07-06T15:23:36.7291731Z       cardTheme: _buildCardTheme(AppColors.darkCard, AppColors.darkCardBorder),
-2026-07-06T15:23:36.7318068Z                  ^
-2026-07-06T15:23:36.7358547Z lib/main/helper/app_theme.dart:148:18: Error: The argument type 'CardTheme' can't be assigned to the parameter type 'CardThemeData?'.
-2026-07-06T15:23:36.7398879Z  - 'CardTheme' is from 'package:flutter/src/material/card_theme.dart' ('/opt/hostedtoolcache/flutter/stable-3.44.4-x64/flutter/packages/flutter/lib/src/material/card_theme.dart').
-2026-07-06T15:23:36.7468833Z  - 'CardThemeData' is from 'package:flutter/src/material/card_theme.dart' ('/opt/hostedtoolcache/flutter/stable-3.44.4-x64/flutter/packages/flutter/lib/src/material/card_theme.dart').
-2026-07-06T15:23:36.7478076Z       cardTheme: _buildCardTheme(AppColors.lightCard, AppColors.lightCardBorder),
-2026-07-06T15:23:36.7527935Z                  ^
-2026-07-06T15:23:55.3018466Z ../../../.pub-cache/hosted/pub.dev/google_fonts-6.1.0/lib/src/google_fonts_variant.dart:150:42: Error: Constant evaluation error:
-2026-07-06T15:23:55.3042593Z const _fontWeightToFilenameWeightParts = {
-2026-07-06T15:23:55.3043464Z                                          ^
-2026-07-06T15:23:55.3045012Z ../../../.pub-cache/hosted/pub.dev/google_fonts-6.1.0/lib/src/google_fonts_variant.dart:151:14: Context: The key 'FontWeight {value: 100}' does not have a primitive operator '=='.
-2026-07-06T15:23:55.3046588Z  - 'FontWeight' is from 'dart:ui'.
-2026-07-06T15:23:55.3047422Z   FontWeight.w100: 'Thin',
-2026-07-06T15:23:55.3048009Z              ^
-2026-07-06T15:23:55.3049011Z ../../../.pub-cache/hosted/pub.dev/google_fonts-6.1.0/lib/src/google_fonts_variant.dart:150:7: Context: While analyzing:
-2026-07-06T15:23:55.3050205Z const _fontWeightToFilenameWeightParts = {
-2026-07-06T15:23:55.3050862Z       ^
-2026-07-06T15:24:00.8016636Z Target kernel_snapshot_program failed: Exception
-2026-07-06T15:24:00.8037598Z 
-2026-07-06T15:24:07.3014675Z 
-2026-07-06T15:24:07.3039721Z FAILURE: Build completed with 3 failures.
-2026-07-06T15:24:07.3086096Z 
-2026-07-06T15:24:07.3128198Z 1: Task failed with an exception.
-2026-07-06T15:24:07.3228123Z -----------
-2026-07-06T15:24:07.3267874Z * What went wrong:
-2026-07-06T15:24:07.3327476Z Execution failed for task ':app:compileFlutterBuildDevRelease'.
-2026-07-06T15:24:07.3378460Z > Process 'command '/opt/hostedtoolcache/flutter/stable-3.44.4-x64/flutter/bin/flutter'' finished with non-zero exit value 1
-2026-07-06T15:24:07.3379759Z 
-2026-07-06T15:24:07.3396022Z * Try:
-2026-07-06T15:24:07.3396800Z > Run with --stacktrace option to get the stack trace.
-2026-07-06T15:24:07.3398000Z > Run with --info or --debug option to get more log output.
-2026-07-06T15:24:07.3398977Z > Run with --scan to get full insights.
-2026-07-06T15:24:07.3399735Z > Get more help at https://help.gradle.org.
-2026-07-06T15:24:07.3400583Z ==============================================================================
-2026-07-06T15:24:07.3403790Z 
-2026-07-06T15:24:07.3403975Z 2: Task failed with an exception.
-2026-07-06T15:24:07.3404418Z -----------
-2026-07-06T15:24:07.3404736Z * What went wrong:
-2026-07-06T15:24:07.3405249Z Execution failed for task ':file_picker:verifyReleaseResources'.
-2026-07-06T15:24:07.3406166Z > Could not resolve all files for configuration ':file_picker:releaseRuntimeClasspath'.
-2026-07-06T15:24:07.3409025Z    > Failed to transform window-1.2.0.aar (androidx.window:window:1.2.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3412172Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/881ea24aa7a927138a9ee97cb0a575a5/transformed/window-1.2.0.
-2026-07-06T15:24:07.3414389Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3417701Z    > Failed to transform window-java-1.2.0.aar (androidx.window:window-java:1.2.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3421044Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/369722326505418b4f4ba64b2c9bc2dc/transformed/window-java-1.2.0.
-2026-07-06T15:24:07.3423082Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3426191Z    > Failed to transform fragment-1.7.1.aar (androidx.fragment:fragment:1.7.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3430780Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/2fe15869618166bec7a4ebb0858e4b32/transformed/fragment-1.7.1.
-2026-07-06T15:24:07.3432800Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3435875Z    > Failed to transform activity-1.8.1.aar (androidx.activity:activity:1.8.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3439400Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/e33a08b8cfce4c46a366935ddd7c607f/transformed/activity-1.8.1.
-2026-07-06T15:24:07.3441432Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3444137Z    > Failed to transform loader-1.0.0.aar (androidx.loader:loader:1.0.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.libraryelements=jar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3447011Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/3fa46e9e80756e66253ac75a89fd164f/transformed/loader-1.0.0.
-2026-07-06T15:24:07.3449175Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3453286Z    > Failed to transform viewpager-1.0.0.aar (androidx.viewpager:viewpager:1.0.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.libraryelements=jar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3457086Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/1fd114032d2770385df00ee7e12a85e0/transformed/viewpager-1.0.0.
-2026-07-06T15:24:07.3459321Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3462663Z    > Failed to transform lifecycle-livedata-core-ktx-2.7.0.aar (androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3466522Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/b02e0b663d8a5dad033ee37eb3ce4784/transformed/lifecycle-livedata-core-ktx-2.7.0.
-2026-07-06T15:24:07.3469524Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3471771Z    > Failed to transform lifecycle-livedata-2.7.0.aar (androidx.lifecycle:lifecycle-livedata:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.status=release}.
-2026-07-06T15:24:07.3474275Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/e7be435f8bc361df7b7904846969f1a0/transformed/lifecycle-livedata-2.7.0.
-2026-07-06T15:24:07.3476304Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3480295Z    > Failed to transform lifecycle-viewmodel-2.7.0.aar (androidx.lifecycle:lifecycle-viewmodel:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3483789Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/7216c92066b9fd9cb789ef795de99a55/transformed/lifecycle-viewmodel-2.7.0.
-2026-07-06T15:24:07.3485888Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3489700Z    > Failed to transform lifecycle-livedata-core-2.7.0.aar (androidx.lifecycle:lifecycle-livedata-core:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3493397Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/d54ad035c1f629569e067ed1894debd8/transformed/lifecycle-livedata-core-2.7.0.
-2026-07-06T15:24:07.3495518Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3499213Z    > Failed to transform lifecycle-process-2.7.0.aar (androidx.lifecycle:lifecycle-process:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3502694Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/d4be926f78485688fddbce6926bcc437/transformed/lifecycle-process-2.7.0.
-2026-07-06T15:24:07.3505043Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3508873Z    > Failed to transform lifecycle-viewmodel-savedstate-2.7.0.aar (androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3512709Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/ab0fe86dedc966284746ef622548a264/transformed/lifecycle-viewmodel-savedstate-2.7.0.
-2026-07-06T15:24:07.3514888Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3518448Z    > Failed to transform core-ktx-1.13.1.aar (androidx.core:core-ktx:1.13.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3521899Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/fb7acbce666a8bb7142445493a2f6e36/transformed/core-ktx-1.13.1.
-2026-07-06T15:24:07.3523971Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3526117Z    > Failed to transform customview-1.0.0.aar (androidx.customview:customview:1.0.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.status=release}.
-2026-07-06T15:24:07.3529059Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/364816755b9fad0a1c528d1954ba2664/transformed/customview-1.0.0.
-2026-07-06T15:24:07.3531085Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3533978Z    > Failed to transform core-1.13.1.aar (androidx.core:core:1.13.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3537026Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/bcbc599dc9c7e881908d355610b79ba5/transformed/core-1.13.1.
-2026-07-06T15:24:07.3539306Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3542451Z    > Failed to transform lifecycle-runtime-2.7.0.aar (androidx.lifecycle:lifecycle-runtime:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3545872Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/756c4c197422ce054e37d79232ddfce6/transformed/lifecycle-runtime-2.7.0.
-2026-07-06T15:24:07.3548152Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3551713Z    > Failed to transform savedstate-1.2.1.aar (androidx.savedstate:savedstate:1.2.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3555043Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/88647196459bff19e1193266ba5f15b4/transformed/savedstate-1.2.1.
-2026-07-06T15:24:07.3557532Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3560831Z    > Failed to transform profileinstaller-1.3.1.aar (androidx.profileinstaller:profileinstaller:1.3.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3564355Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/80e2b593a18cc962ee406c54c75f341e/transformed/profileinstaller-1.3.1.
-2026-07-06T15:24:07.3566644Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3570188Z    > Failed to transform startup-runtime-1.1.1.aar (androidx.startup:startup-runtime:1.1.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3573557Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/ad9c241a934d1092595d007998358bdd/transformed/startup-runtime-1.1.1.
-2026-07-06T15:24:07.3575591Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3578775Z    > Failed to transform tracing-1.2.0.aar (androidx.tracing:tracing:1.2.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3581996Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/cece08bff07c35b6f70227ba6bc4396f/transformed/tracing-1.2.0.
-2026-07-06T15:24:07.3584016Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3587159Z    > Failed to transform exifinterface-1.4.1.aar (androidx.exifinterface:exifinterface:1.4.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3590784Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/c57e9db491a1087986ef156c3bb2009e/transformed/exifinterface-1.4.1.
-2026-07-06T15:24:07.3593134Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3596274Z    > Failed to transform core-runtime-2.2.0.aar (androidx.arch.core:core-runtime:2.2.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3599896Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/bc0a09b67d60222cc0858eff81b9e0e4/transformed/core-runtime-2.2.0.
-2026-07-06T15:24:07.3601938Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3604805Z    > Failed to transform interpolator-1.0.0.aar (androidx.interpolator:interpolator:1.0.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.libraryelements=jar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3608421Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/b4160516cbaa16a2a7b1e49915741559/transformed/interpolator-1.0.0.
-2026-07-06T15:24:07.3610467Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3613525Z    > Failed to transform versionedparcelable-1.1.1.aar (androidx.versionedparcelable:versionedparcelable:1.1.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.libraryelements=jar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3617131Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/f6ffa93e276b072bb7f168b96152c77c/transformed/versionedparcelable-1.1.1.
-2026-07-06T15:24:07.3619641Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3622731Z    > Failed to transform core-1.0.0.aar (androidx.window.extensions.core:core:1.0.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3625945Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/59b4fbf708338da6bb07a53ed096e96e/transformed/core-1.0.0.
-2026-07-06T15:24:07.3628114Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3631802Z    > Failed to transform annotation-experimental-1.4.0.aar (androidx.annotation:annotation-experimental:1.4.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3635421Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/2566373a27e82c7cbc831b3078e37318/transformed/annotation-experimental-1.4.0.
-2026-07-06T15:24:07.3637773Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3640888Z    > Failed to transform relinker-1.4.5.aar (com.getkeepsafe.relinker:relinker:1.4.5) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3644163Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/f7e682816e13c470ac8c0663f0de1c08/transformed/relinker-1.4.5.
-2026-07-06T15:24:07.3646162Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3647668Z > There are 4 more failures with identical causes.
-2026-07-06T15:24:07.3648070Z 
-2026-07-06T15:24:07.3648198Z * Try:
-2026-07-06T15:24:07.3648621Z > Run with --stacktrace option to get the stack trace.
-2026-07-06T15:24:07.3649292Z > Run with --info or --debug option to get more log output.
-2026-07-06T15:24:07.3649896Z > Run with --scan to get full insights.
-2026-07-06T15:24:07.3650431Z > Get more help at https://help.gradle.org.
-2026-07-06T15:24:07.3651351Z ==============================================================================
-2026-07-06T15:24:07.3652036Z 
-2026-07-06T15:24:07.3652212Z 3: Task failed with an exception.
-2026-07-06T15:24:07.3652650Z -----------
-2026-07-06T15:24:07.3652973Z * What went wrong:
-2026-07-06T15:24:07.3653658Z Execution failed for task ':flutter_plugin_android_lifecycle:verifyReleaseResources'.
-2026-07-06T15:24:07.3654888Z > Could not resolve all files for configuration ':flutter_plugin_android_lifecycle:releaseRuntimeClasspath'.
-2026-07-06T15:24:07.3657957Z    > Failed to transform fragment-1.7.1.aar (androidx.fragment:fragment:1.7.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3661319Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/2fe15869618166bec7a4ebb0858e4b32/transformed/fragment-1.7.1.
-2026-07-06T15:24:07.3663544Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3666569Z    > Failed to transform window-1.2.0.aar (androidx.window:window:1.2.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3669934Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/881ea24aa7a927138a9ee97cb0a575a5/transformed/window-1.2.0.
-2026-07-06T15:24:07.3671704Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3674690Z    > Failed to transform window-java-1.2.0.aar (androidx.window:window-java:1.2.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3678252Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/369722326505418b4f4ba64b2c9bc2dc/transformed/window-java-1.2.0.
-2026-07-06T15:24:07.3680235Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3683270Z    > Failed to transform activity-1.8.1.aar (androidx.activity:activity:1.8.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3686506Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/e33a08b8cfce4c46a366935ddd7c607f/transformed/activity-1.8.1.
-2026-07-06T15:24:07.3688713Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3691410Z    > Failed to transform loader-1.0.0.aar (androidx.loader:loader:1.0.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.libraryelements=jar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3694242Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/3fa46e9e80756e66253ac75a89fd164f/transformed/loader-1.0.0.
-2026-07-06T15:24:07.3696215Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3699278Z    > Failed to transform viewpager-1.0.0.aar (androidx.viewpager:viewpager:1.0.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.libraryelements=jar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3702528Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/1fd114032d2770385df00ee7e12a85e0/transformed/viewpager-1.0.0.
-2026-07-06T15:24:07.3704516Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3708244Z    > Failed to transform lifecycle-livedata-core-ktx-2.7.0.aar (androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3712233Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/b02e0b663d8a5dad033ee37eb3ce4784/transformed/lifecycle-livedata-core-ktx-2.7.0.
-2026-07-06T15:24:07.3714400Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3716679Z    > Failed to transform lifecycle-livedata-2.7.0.aar (androidx.lifecycle:lifecycle-livedata:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.status=release}.
-2026-07-06T15:24:07.3719425Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/e7be435f8bc361df7b7904846969f1a0/transformed/lifecycle-livedata-2.7.0.
-2026-07-06T15:24:07.3721539Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3724864Z    > Failed to transform lifecycle-viewmodel-2.7.0.aar (androidx.lifecycle:lifecycle-viewmodel:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3728853Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/7216c92066b9fd9cb789ef795de99a55/transformed/lifecycle-viewmodel-2.7.0.
-2026-07-06T15:24:07.3731961Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3735408Z    > Failed to transform lifecycle-livedata-core-2.7.0.aar (androidx.lifecycle:lifecycle-livedata-core:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3739715Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/d54ad035c1f629569e067ed1894debd8/transformed/lifecycle-livedata-core-2.7.0.
-2026-07-06T15:24:07.3742143Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3745773Z    > Failed to transform lifecycle-viewmodel-savedstate-2.7.0.aar (androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3750006Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/ab0fe86dedc966284746ef622548a264/transformed/lifecycle-viewmodel-savedstate-2.7.0.
-2026-07-06T15:24:07.3753303Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3756563Z    > Failed to transform core-ktx-1.13.1.aar (androidx.core:core-ktx:1.13.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3760556Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/fb7acbce666a8bb7142445493a2f6e36/transformed/core-ktx-1.13.1.
-2026-07-06T15:24:07.3762724Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3765240Z    > Failed to transform customview-1.0.0.aar (androidx.customview:customview:1.0.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.status=release}.
-2026-07-06T15:24:07.3768408Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/364816755b9fad0a1c528d1954ba2664/transformed/customview-1.0.0.
-2026-07-06T15:24:07.3770650Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3790841Z    > Failed to transform core-1.13.1.aar (androidx.core:core:1.13.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3794102Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/bcbc599dc9c7e881908d355610b79ba5/transformed/core-1.13.1.
-2026-07-06T15:24:07.3796100Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3799647Z    > Failed to transform lifecycle-runtime-2.7.0.aar (androidx.lifecycle:lifecycle-runtime:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3803125Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/756c4c197422ce054e37d79232ddfce6/transformed/lifecycle-runtime-2.7.0.
-2026-07-06T15:24:07.3805225Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3808779Z    > Failed to transform lifecycle-process-2.7.0.aar (androidx.lifecycle:lifecycle-process:2.7.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3812273Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/d4be926f78485688fddbce6926bcc437/transformed/lifecycle-process-2.7.0.
-2026-07-06T15:24:07.3814348Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3817637Z    > Failed to transform savedstate-1.2.1.aar (androidx.savedstate:savedstate:1.2.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3821263Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/88647196459bff19e1193266ba5f15b4/transformed/savedstate-1.2.1.
-2026-07-06T15:24:07.3823263Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3826517Z    > Failed to transform profileinstaller-1.3.1.aar (androidx.profileinstaller:profileinstaller:1.3.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3830987Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/80e2b593a18cc962ee406c54c75f341e/transformed/profileinstaller-1.3.1.
-2026-07-06T15:24:07.3833335Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3836515Z    > Failed to transform startup-runtime-1.1.1.aar (androidx.startup:startup-runtime:1.1.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3840104Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/ad9c241a934d1092595d007998358bdd/transformed/startup-runtime-1.1.1.
-2026-07-06T15:24:07.3842145Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3845159Z    > Failed to transform tracing-1.2.0.aar (androidx.tracing:tracing:1.2.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3848522Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/cece08bff07c35b6f70227ba6bc4396f/transformed/tracing-1.2.0.
-2026-07-06T15:24:07.3850507Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3854059Z    > Failed to transform exifinterface-1.4.1.aar (androidx.exifinterface:exifinterface:1.4.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3857643Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/c57e9db491a1087986ef156c3bb2009e/transformed/exifinterface-1.4.1.
-2026-07-06T15:24:07.3859657Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3862747Z    > Failed to transform core-runtime-2.2.0.aar (androidx.arch.core:core-runtime:2.2.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3866023Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/bc0a09b67d60222cc0858eff81b9e0e4/transformed/core-runtime-2.2.0.
-2026-07-06T15:24:07.3868234Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3871254Z    > Failed to transform versionedparcelable-1.1.1.aar (androidx.versionedparcelable:versionedparcelable:1.1.1) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.libraryelements=jar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3874797Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/f6ffa93e276b072bb7f168b96152c77c/transformed/versionedparcelable-1.1.1.
-2026-07-06T15:24:07.3876863Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3880022Z    > Failed to transform interpolator-1.0.0.aar (androidx.interpolator:interpolator:1.0.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.libraryelements=jar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3883234Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/b4160516cbaa16a2a7b1e49915741559/transformed/interpolator-1.0.0.
-2026-07-06T15:24:07.3885266Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3888526Z    > Failed to transform core-1.0.0.aar (androidx.window.extensions.core:core:1.0.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3891737Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/59b4fbf708338da6bb07a53ed096e96e/transformed/core-1.0.0.
-2026-07-06T15:24:07.3893673Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3896965Z    > Failed to transform annotation-experimental-1.4.0.aar (androidx.annotation:annotation-experimental:1.4.0) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3900817Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/2566373a27e82c7cbc831b3078e37318/transformed/annotation-experimental-1.4.0.
-2026-07-06T15:24:07.3902914Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3905989Z    > Failed to transform relinker-1.4.5.aar (com.getkeepsafe.relinker:relinker:1.4.5) to match attributes {artifactType=android-compiled-dependencies-resources, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
-2026-07-06T15:24:07.3909549Z       > Execution failed for AarResourcesCompilerTransform: /home/runner/.gradle/caches/8.14/transforms/f7e682816e13c470ac8c0663f0de1c08/transformed/relinker-1.4.5.
-2026-07-06T15:24:07.3911528Z          > Specified AAPT2 executable does not exist: /opt/android-sdk/build-tools/35.0.1/aapt2. Must supply one of aapt2 from maven or custom location.
-2026-07-06T15:24:07.3912735Z > There are 4 more failures with identical causes.
-2026-07-06T15:24:07.3913132Z 
-2026-07-06T15:24:07.3913259Z * Try:
-2026-07-06T15:24:07.3913666Z > Run with --stacktrace option to get the stack trace.
-2026-07-06T15:24:07.3914328Z > Run with --info or --debug option to get more log output.
-2026-07-06T15:24:07.3914924Z > Run with --scan to get full insights.
-2026-07-06T15:24:07.3915455Z > Get more help at https://help.gradle.org.
-2026-07-06T15:24:07.3916028Z ==============================================================================
-2026-07-06T15:24:07.3916676Z 
-2026-07-06T15:24:07.3916821Z BUILD FAILED in 3m 22s
-2026-07-06T15:24:07.8662920Z Running Gradle task 'assembleRelease'...                          204.2s
-2026-07-06T15:24:07.8757574Z Gradle task assembleRelease failed with exit code 1
-2026-07-06T15:24:07.8819713Z ##[error]Process completed with exit code 1.
-2026-07-06T15:24:07.9028199Z Post job cleanup.
-2026-07-06T15:24:07.9110263Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
-2026-07-06T15:24:07.9111522Z Post job cleanup.
-2026-07-06T15:24:08.0427621Z (node:3646) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
-2026-07-06T15:24:08.0428589Z (Use `node --trace-deprecation ...` to show where the warning was created)
-2026-07-06T15:24:08.0599629Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
-2026-07-06T15:24:08.0600884Z Post job cleanup.
-2026-07-06T15:24:08.1498609Z [command]/usr/bin/git version
-2026-07-06T15:24:08.1535835Z git version 2.54.0
-2026-07-06T15:24:08.1606203Z Temporarily overriding HOME='/home/runner/work/_temp/94d4f6f3-d727-48a6-8269-aa5905d1b305' before making global git config changes
-2026-07-06T15:24:08.1608196Z Adding repository directory to the temporary git global config as a safe directory
-2026-07-06T15:24:08.1612686Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter
-2026-07-06T15:24:08.1650378Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2026-07-06T15:24:08.1683056Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2026-07-06T15:24:08.1907156Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2026-07-06T15:24:08.1935380Z http.https://github.com/.extraheader
-2026-07-06T15:24:08.1946920Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
-2026-07-06T15:24:08.1978150Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2026-07-06T15:24:08.2197985Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
-2026-07-06T15:24:08.2226971Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
-2026-07-06T15:24:08.2600698Z Cleaning up orphan processes
-2026-07-06T15:24:08.2926865Z Terminate orphan process: pid (2766) (java)
-2026-07-06T15:24:08.2965799Z Terminate orphan process: pid (2899) (java)
-2026-07-06T15:24:08.2991321Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+﻿2026-07-07T04:25:47.4868271Z Current runner version: '2.335.1'
+2026-07-07T04:25:47.4894894Z ##[group]Runner Image Provisioner
+2026-07-07T04:25:47.4895787Z Hosted Compute Agent
+2026-07-07T04:25:47.4896770Z Version: 20260624.560
+2026-07-07T04:25:47.4897780Z Commit: 925d229a51159bc391ae97e54a2dd1fe20af789d
+2026-07-07T04:25:47.4898828Z Build Date: 2026-06-24T18:26:47Z
+2026-07-07T04:25:47.4899841Z Worker ID: {f1130477-28d9-468d-a56a-0911caaecf13}
+2026-07-07T04:25:47.4900896Z Azure Region: eastus2
+2026-07-07T04:25:47.4901490Z ##[endgroup]
+2026-07-07T04:25:47.4903052Z ##[group]Operating System
+2026-07-07T04:25:47.4903681Z Ubuntu
+2026-07-07T04:25:47.4904195Z 24.04.4
+2026-07-07T04:25:47.4904838Z LTS
+2026-07-07T04:25:47.4905373Z ##[endgroup]
+2026-07-07T04:25:47.4906122Z ##[group]Runner Image
+2026-07-07T04:25:47.4906766Z Image: ubuntu-24.04
+2026-07-07T04:25:47.4907350Z Version: 20260628.225.1
+2026-07-07T04:25:47.4908753Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260628.225/images/ubuntu/Ubuntu2404-Readme.md
+2026-07-07T04:25:47.4910344Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260628.225
+2026-07-07T04:25:47.4911323Z ##[endgroup]
+2026-07-07T04:25:47.4912476Z ##[group]GITHUB_TOKEN Permissions
+2026-07-07T04:25:47.4914504Z Contents: read
+2026-07-07T04:25:47.4915112Z Metadata: read
+2026-07-07T04:25:47.4915781Z Packages: read
+2026-07-07T04:25:47.4916647Z ##[endgroup]
+2026-07-07T04:25:47.4918722Z Secret source: Actions
+2026-07-07T04:25:47.4920375Z Prepare workflow directory
+2026-07-07T04:25:47.5250612Z Prepare all required actions
+2026-07-07T04:25:47.5288456Z Getting action download info
+2026-07-07T04:25:47.7899894Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-07-07T04:25:47.8603026Z Download action repository 'actions/setup-java@v4' (SHA:c1e323688fd81a25caa38c78aa6df2d33d3e20d9)
+2026-07-07T04:25:48.1682715Z Download action repository 'subosito/flutter-action@v2' (SHA:1a449444c387b1966244ae4d4f8c696479add0b2)
+2026-07-07T04:25:48.2640354Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-07-07T04:25:48.4921662Z Getting action download info
+2026-07-07T04:25:48.5712079Z Download action repository 'actions/cache@v5' (SHA:caa296126883cff596d87d8935842f9db880ef25)
+2026-07-07T04:25:48.8712799Z Complete job name: build
+2026-07-07T04:25:48.9440441Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-07T04:25:48.9449629Z ##[group]Run actions/checkout@v4
+2026-07-07T04:25:48.9450316Z with:
+2026-07-07T04:25:48.9450793Z   repository: kagenouReal/Zqwis-Apis-Flutter
+2026-07-07T04:25:48.9454683Z   token: ***
+2026-07-07T04:25:48.9455110Z   ssh-strict: true
+2026-07-07T04:25:48.9455548Z   ssh-user: git
+2026-07-07T04:25:48.9456212Z   persist-credentials: true
+2026-07-07T04:25:48.9456709Z   clean: true
+2026-07-07T04:25:48.9457152Z   sparse-checkout-cone-mode: true
+2026-07-07T04:25:48.9457685Z   fetch-depth: 1
+2026-07-07T04:25:48.9458115Z   fetch-tags: false
+2026-07-07T04:25:48.9458547Z   show-progress: true
+2026-07-07T04:25:48.9458981Z   lfs: false
+2026-07-07T04:25:48.9459531Z   submodules: false
+2026-07-07T04:25:48.9459976Z   set-safe-directory: true
+2026-07-07T04:25:48.9460650Z ##[endgroup]
+2026-07-07T04:25:49.0613061Z Syncing repository: kagenouReal/Zqwis-Apis-Flutter
+2026-07-07T04:25:49.0615613Z ##[group]Getting Git version info
+2026-07-07T04:25:49.0617082Z Working directory is '/home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter'
+2026-07-07T04:25:49.0618774Z [command]/usr/bin/git version
+2026-07-07T04:25:49.0619564Z git version 2.54.0
+2026-07-07T04:25:49.0621995Z ##[endgroup]
+2026-07-07T04:25:49.0628588Z Temporarily overriding HOME='/home/runner/work/_temp/7917064b-33ee-4746-be7e-9c5d2a9a9ea3' before making global git config changes
+2026-07-07T04:25:49.0631174Z Adding repository directory to the temporary git global config as a safe directory
+2026-07-07T04:25:49.0633223Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter
+2026-07-07T04:25:49.0669050Z Deleting the contents of '/home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter'
+2026-07-07T04:25:49.0671504Z ##[group]Initializing the repository
+2026-07-07T04:25:49.0673597Z [command]/usr/bin/git init /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter
+2026-07-07T04:25:49.0764694Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-07-07T04:25:49.0766596Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-07-07T04:25:49.0768351Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-07-07T04:25:49.0769678Z hint: call:
+2026-07-07T04:25:49.0770458Z hint:
+2026-07-07T04:25:49.0771412Z hint: 	git config --global init.defaultBranch <name>
+2026-07-07T04:25:49.0772637Z hint:
+2026-07-07T04:25:49.0773762Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-07-07T04:25:49.0775440Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-07-07T04:25:49.0776947Z hint:
+2026-07-07T04:25:49.0777787Z hint: 	git branch -m <name>
+2026-07-07T04:25:49.0778690Z hint:
+2026-07-07T04:25:49.0779822Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-07-07T04:25:49.0781936Z Initialized empty Git repository in /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter/.git/
+2026-07-07T04:25:49.0785331Z [command]/usr/bin/git remote add origin https://github.com/kagenouReal/Zqwis-Apis-Flutter
+2026-07-07T04:25:49.0828298Z ##[endgroup]
+2026-07-07T04:25:49.0829539Z ##[group]Disabling automatic garbage collection
+2026-07-07T04:25:49.0832725Z [command]/usr/bin/git config --local gc.auto 0
+2026-07-07T04:25:49.0867311Z ##[endgroup]
+2026-07-07T04:25:49.0868417Z ##[group]Setting up auth
+2026-07-07T04:25:49.0874626Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-07-07T04:25:49.0912282Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-07-07T04:25:49.1282754Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-07-07T04:25:49.1322717Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-07-07T04:25:49.1579334Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-07-07T04:25:49.1617876Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-07-07T04:25:49.1860734Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-07-07T04:25:49.1901572Z ##[endgroup]
+2026-07-07T04:25:49.1902499Z ##[group]Fetching the repository
+2026-07-07T04:25:49.1911721Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +3fb49b05626f1c9aaa2494a1dd1635737b28d473:refs/remotes/origin/main
+2026-07-07T04:25:49.4424743Z From https://github.com/kagenouReal/Zqwis-Apis-Flutter
+2026-07-07T04:25:49.4427269Z  * [new ref]         3fb49b05626f1c9aaa2494a1dd1635737b28d473 -> origin/main
+2026-07-07T04:25:49.4458443Z ##[endgroup]
+2026-07-07T04:25:49.4459587Z ##[group]Determining the checkout info
+2026-07-07T04:25:49.4461051Z ##[endgroup]
+2026-07-07T04:25:49.4467082Z [command]/usr/bin/git sparse-checkout disable
+2026-07-07T04:25:49.4518201Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-07-07T04:25:49.4563201Z ##[group]Checking out the ref
+2026-07-07T04:25:49.4564832Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-07-07T04:25:49.4678378Z Switched to a new branch 'main'
+2026-07-07T04:25:49.4680517Z branch 'main' set up to track 'origin/main'.
+2026-07-07T04:25:49.4689393Z ##[endgroup]
+2026-07-07T04:25:49.4737524Z [command]/usr/bin/git log -1 --format=%H
+2026-07-07T04:25:49.4766600Z 3fb49b05626f1c9aaa2494a1dd1635737b28d473
+2026-07-07T04:25:49.5192463Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-07T04:25:49.5198613Z ##[group]Run actions/setup-java@v4
+2026-07-07T04:25:49.5199747Z with:
+2026-07-07T04:25:49.5200597Z   distribution: temurin
+2026-07-07T04:25:49.5201585Z   java-version: 17
+2026-07-07T04:25:49.5202521Z   java-package: jdk
+2026-07-07T04:25:49.5203448Z   check-latest: false
+2026-07-07T04:25:49.5204421Z   server-id: github
+2026-07-07T04:25:49.5205378Z   server-username: GITHUB_ACTOR
+2026-07-07T04:25:49.5206620Z   server-password: GITHUB_TOKEN
+2026-07-07T04:25:49.5207737Z   overwrite-settings: true
+2026-07-07T04:25:49.5208771Z   job-status: success
+2026-07-07T04:25:49.5218260Z   token: ***
+2026-07-07T04:25:49.5219147Z ##[endgroup]
+2026-07-07T04:25:49.6894984Z ##[group]Installed distributions
+2026-07-07T04:25:49.6952913Z Resolved Java 17.0.19+10 from tool-cache
+2026-07-07T04:25:49.6954799Z Setting Java 17.0.19+10 as the default
+2026-07-07T04:25:49.6965485Z (node:2340) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-07-07T04:25:49.6969834Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-07-07T04:25:49.6972558Z Creating toolchains.xml for JDK version 17 from temurin
+2026-07-07T04:25:49.7039435Z Writing to /home/runner/.m2/toolchains.xml
+2026-07-07T04:25:49.7040799Z 
+2026-07-07T04:25:49.7041466Z Java configuration:
+2026-07-07T04:25:49.7042926Z   Distribution: temurin
+2026-07-07T04:25:49.7044437Z   Version: 17.0.19+10
+2026-07-07T04:25:49.7046522Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:49.7048202Z 
+2026-07-07T04:25:49.7049762Z ##[endgroup]
+2026-07-07T04:25:49.7072111Z Creating settings.xml with server-id: github
+2026-07-07T04:25:49.7077655Z Writing to /home/runner/.m2/settings.xml
+2026-07-07T04:25:49.7715917Z ##[group]Run subosito/flutter-action@v2
+2026-07-07T04:25:49.7717358Z with:
+2026-07-07T04:25:49.7718191Z   channel: stable
+2026-07-07T04:25:49.7719077Z   cache: true
+2026-07-07T04:25:49.7719952Z   architecture: X64
+2026-07-07T04:25:49.7720881Z   pub-cache-path: default
+2026-07-07T04:25:49.7721871Z   dry-run: false
+2026-07-07T04:25:49.7722931Z   git-source: https://github.com/flutter/flutter.git
+2026-07-07T04:25:49.7724194Z env:
+2026-07-07T04:25:49.7725384Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:49.7727700Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:49.7729255Z ##[endgroup]
+2026-07-07T04:25:49.7878980Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+2026-07-07T04:25:49.7880448Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+2026-07-07T04:25:49.8041840Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-07-07T04:25:49.8043195Z env:
+2026-07-07T04:25:49.8044497Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:49.8046768Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:49.8048335Z ##[endgroup]
+2026-07-07T04:25:49.8239244Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+2026-07-07T04:25:49.8240652Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+2026-07-07T04:25:49.8241833Z [36;1m  -n '' \[0m
+2026-07-07T04:25:49.8242726Z [36;1m  -f '' \[0m
+2026-07-07T04:25:49.8243624Z [36;1m  -a 'X64' \[0m
+2026-07-07T04:25:49.8244526Z [36;1m  -k '' \[0m
+2026-07-07T04:25:49.8245589Z [36;1m  -c '' \[0m
+2026-07-07T04:25:49.8246750Z [36;1m  -l '' \[0m
+2026-07-07T04:25:49.8247646Z [36;1m  -d 'default' \[0m
+2026-07-07T04:25:49.8248815Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+2026-07-07T04:25:49.8250085Z [36;1m  stable[0m
+2026-07-07T04:25:49.8286806Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-07-07T04:25:49.8288115Z env:
+2026-07-07T04:25:49.8289297Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:49.8291219Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:49.8292730Z ##[endgroup]
+2026-07-07T04:25:50.0563819Z ##[group]Run actions/cache@v5
+2026-07-07T04:25:50.0564805Z with:
+2026-07-07T04:25:50.0565735Z   path: /opt/hostedtoolcache/flutter/stable-3.44.5-x64
+2026-07-07T04:25:50.0567653Z   key: flutter-linux-stable-3.44.5-x64-f94f4fc76b4d74543ed9b085bbd75341ef65de22
+2026-07-07T04:25:50.0569257Z   enableCrossOsArchive: false
+2026-07-07T04:25:50.0570274Z   fail-on-cache-miss: false
+2026-07-07T04:25:50.0571211Z   lookup-only: false
+2026-07-07T04:25:50.0572069Z   save-always: false
+2026-07-07T04:25:50.0572893Z env:
+2026-07-07T04:25:50.0574008Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:50.0575821Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:50.0577530Z ##[endgroup]
+2026-07-07T04:25:50.2606808Z Cache not found for input keys: flutter-linux-stable-3.44.5-x64-f94f4fc76b4d74543ed9b085bbd75341ef65de22
+2026-07-07T04:25:50.3511804Z ##[group]Run actions/cache@v5
+2026-07-07T04:25:50.3512779Z with:
+2026-07-07T04:25:50.3513602Z   path: /home/runner/.pub-cache
+2026-07-07T04:25:50.3515148Z   key: flutter-pub-linux-stable-3.44.5-x64-f94f4fc76b4d74543ed9b085bbd75341ef65de22-
+2026-07-07T04:25:50.3517040Z   enableCrossOsArchive: false
+2026-07-07T04:25:50.3518045Z   fail-on-cache-miss: false
+2026-07-07T04:25:50.3518991Z   lookup-only: false
+2026-07-07T04:25:50.3519863Z   save-always: false
+2026-07-07T04:25:50.3520703Z env:
+2026-07-07T04:25:50.3521815Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:50.3523624Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:50.3525064Z ##[endgroup]
+2026-07-07T04:25:50.5646378Z Cache not found for input keys: flutter-pub-linux-stable-3.44.5-x64-f94f4fc76b4d74543ed9b085bbd75341ef65de22-
+2026-07-07T04:25:50.5835775Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+2026-07-07T04:25:50.5837314Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+2026-07-07T04:25:50.5838394Z [36;1m  -n '3.44.5' \[0m
+2026-07-07T04:25:50.5839290Z [36;1m  -a 'x64' \[0m
+2026-07-07T04:25:50.5840421Z [36;1m  -c '/opt/hostedtoolcache/flutter/stable-3.44.5-x64' \[0m
+2026-07-07T04:25:50.5841765Z [36;1m  -d '/home/runner/.pub-cache' \[0m
+2026-07-07T04:25:50.5842823Z [36;1m  stable[0m
+2026-07-07T04:25:50.5882648Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-07-07T04:25:50.5883892Z env:
+2026-07-07T04:25:50.5885010Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:50.5886925Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:25:50.5888364Z ##[endgroup]
+2026-07-07T04:25:50.7691345Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2026-07-07T04:25:50.7693741Z                                  Dload  Upload   Total   Spent    Left  Speed
+2026-07-07T04:25:50.7695291Z 
+2026-07-07T04:25:51.4359768Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-07-07T04:25:52.4259363Z   9 1472M    9  137M    0     0   205M      0  0:00:07 --:--:--  0:00:07  205M
+2026-07-07T04:25:53.4258047Z  25 1472M   25  374M    0     0   225M      0  0:00:06  0:00:01  0:00:05  225M
+2026-07-07T04:25:54.4263182Z  42 1472M   42  628M    0     0   236M      0  0:00:06  0:00:02  0:00:04  236M
+2026-07-07T04:25:55.4259251Z  61 1472M   61  898M    0     0   245M      0  0:00:05  0:00:03  0:00:02  245M
+2026-07-07T04:25:56.4319438Z  80 1472M   80 1181M    0     0   253M      0  0:00:05  0:00:04  0:00:01  253M
+2026-07-07T04:25:56.4385113Z  99 1472M   99 1467M    0     0   259M      0  0:00:05  0:00:05 --:--:--  266M
+2026-07-07T04:25:56.4386338Z 100 1472M  100 1472M    0     0   259M      0  0:00:05  0:00:05 --:--:--  273M
+2026-07-07T04:26:49.7965307Z ##[group]Run flutter pub get
+2026-07-07T04:26:49.7965632Z [36;1mflutter pub get[0m
+2026-07-07T04:26:49.8002439Z shell: /usr/bin/bash -e {0}
+2026-07-07T04:26:49.8002717Z env:
+2026-07-07T04:26:49.8003051Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:26:49.8003567Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:26:49.8004065Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.44.5-x64/flutter
+2026-07-07T04:26:49.8004489Z   PUB_CACHE: /home/runner/.pub-cache
+2026-07-07T04:26:49.8004751Z ##[endgroup]
+2026-07-07T04:26:53.5935487Z Resolving dependencies...
+2026-07-07T04:26:53.9583871Z Downloading packages...
+2026-07-07T04:26:58.0104581Z + archive 4.0.9
+2026-07-07T04:26:58.0104967Z + args 2.7.0
+2026-07-07T04:26:58.0105241Z + async 2.13.1
+2026-07-07T04:26:58.0105561Z + boolean_selector 2.1.2
+2026-07-07T04:26:58.0107629Z + characters 1.4.1
+2026-07-07T04:26:58.0115296Z + checked_yaml 2.0.4
+2026-07-07T04:26:58.0115748Z + cli_util 0.4.2 (0.5.1 available)
+2026-07-07T04:26:58.0116288Z + clock 1.1.2
+2026-07-07T04:26:58.0116580Z + code_assets 1.2.1
+2026-07-07T04:26:58.0116887Z + collection 1.19.1
+2026-07-07T04:26:58.0117220Z + cookie_jar 4.0.9
+2026-07-07T04:26:58.0117561Z + cross_file 0.3.5+4
+2026-07-07T04:26:58.0117880Z + crypto 3.0.7
+2026-07-07T04:26:58.0118169Z + dio 5.10.0
+2026-07-07T04:26:58.0118471Z + dio_cookie_manager 3.4.0
+2026-07-07T04:26:58.0118985Z + dio_web_adapter 2.2.0
+2026-07-07T04:26:58.0119312Z + fake_async 1.3.3
+2026-07-07T04:26:58.0119603Z + ffi 2.2.0
+2026-07-07T04:26:58.0119874Z + file 7.0.1
+2026-07-07T04:26:58.0120260Z + file_picker 8.3.7 (11.0.2 available)
+2026-07-07T04:26:58.0120680Z + flutter 0.0.0 from sdk flutter
+2026-07-07T04:26:58.0121063Z + flutter_animate 4.5.2
+2026-07-07T04:26:58.0121405Z + flutter_launcher_icons 0.14.4
+2026-07-07T04:26:58.0121789Z + flutter_lints 3.0.2 (6.0.0 available)
+2026-07-07T04:26:58.0122217Z + flutter_plugin_android_lifecycle 2.0.35
+2026-07-07T04:26:58.0122501Z + flutter_shaders 0.1.3
+2026-07-07T04:26:58.0122727Z + flutter_test 0.0.0 from sdk flutter
+2026-07-07T04:26:58.0122999Z + flutter_web_plugins 0.0.0 from sdk flutter
+2026-07-07T04:26:58.0123280Z + fluttertoast 8.2.14 (9.1.0 available)
+2026-07-07T04:26:58.0123551Z + go_router 13.2.5 (17.3.0 available)
+2026-07-07T04:26:58.0123836Z ! google_fonts 6.1.0 (overridden) (8.1.0 available)
+2026-07-07T04:26:58.0124122Z + hooks 2.0.2
+2026-07-07T04:26:58.0124314Z + http 1.6.0
+2026-07-07T04:26:58.0124519Z + http_parser 4.1.2
+2026-07-07T04:26:58.0124734Z + image 4.9.1
+2026-07-07T04:26:58.0124921Z + jni 1.0.0
+2026-07-07T04:26:58.0125108Z + jni_flutter 1.0.1
+2026-07-07T04:26:58.0125324Z + json_annotation 4.12.0
+2026-07-07T04:26:58.0125556Z + leak_tracker 11.0.2
+2026-07-07T04:26:58.0125794Z + leak_tracker_flutter_testing 3.0.10
+2026-07-07T04:26:58.0126295Z + leak_tracker_testing 3.0.2
+2026-07-07T04:26:58.0126538Z + lints 3.0.0 (6.1.0 available)
+2026-07-07T04:26:58.0126769Z + logging 1.3.0
+2026-07-07T04:26:58.0126982Z + matcher 0.12.19 (0.12.20 available)
+2026-07-07T04:26:58.0127235Z + material_color_utilities 0.13.0
+2026-07-07T04:26:58.0127483Z + meta 1.18.0 (1.18.3 available)
+2026-07-07T04:26:58.0127707Z + mime 2.0.0
+2026-07-07T04:26:58.0127893Z + nested 1.0.0
+2026-07-07T04:26:58.0128087Z + objective_c 9.4.1
+2026-07-07T04:26:58.0128309Z + package_config 2.2.0 (3.0.0 available)
+2026-07-07T04:26:58.0128575Z + path 1.9.1
+2026-07-07T04:26:58.0128771Z + path_provider 2.1.6
+2026-07-07T04:26:58.0128997Z + path_provider_android 2.3.1
+2026-07-07T04:26:58.0129257Z + path_provider_foundation 2.6.0
+2026-07-07T04:26:58.0129510Z + path_provider_linux 2.2.2
+2026-07-07T04:26:58.0130043Z + path_provider_platform_interface 2.1.3
+2026-07-07T04:26:58.0130329Z + path_provider_windows 2.3.0
+2026-07-07T04:26:58.0130569Z + petitparser 7.0.2
+2026-07-07T04:26:58.0130780Z + platform 3.1.6
+2026-07-07T04:26:58.0130999Z + plugin_platform_interface 2.1.8
+2026-07-07T04:26:58.0131244Z + posix 6.5.0
+2026-07-07T04:26:58.0131443Z + provider 6.1.5+1
+2026-07-07T04:26:58.0131847Z + pub_semver 2.2.0
+2026-07-07T04:26:58.0132047Z + record_use 0.6.0
+2026-07-07T04:26:58.0132268Z + shared_preferences 2.2.0 (2.5.5 available)
+2026-07-07T04:26:58.0132615Z + shared_preferences_android 2.4.26
+2026-07-07T04:26:58.0132925Z + shared_preferences_foundation 2.5.6
+2026-07-07T04:26:58.0133195Z + shared_preferences_linux 2.4.1
+2026-07-07T04:26:58.0133463Z + shared_preferences_platform_interface 2.4.2
+2026-07-07T04:26:58.0133757Z + shared_preferences_web 2.4.3
+2026-07-07T04:26:58.0134008Z + shared_preferences_windows 2.4.1
+2026-07-07T04:26:58.0134257Z + shimmer 3.0.0
+2026-07-07T04:26:58.0134471Z + sky_engine 0.0.0 from sdk flutter
+2026-07-07T04:26:58.0134738Z + source_span 1.10.2
+2026-07-07T04:26:58.0134953Z + stack_trace 1.12.1
+2026-07-07T04:26:58.0135157Z + stream_channel 2.1.4
+2026-07-07T04:26:58.0135371Z + string_scanner 1.4.1
+2026-07-07T04:26:58.0135581Z + term_glyph 1.2.2
+2026-07-07T04:26:58.0135795Z + test_api 0.7.11 (0.7.13 available)
+2026-07-07T04:26:58.0136346Z + typed_data 1.4.0
+2026-07-07T04:26:58.0138148Z + universal_io 2.3.1
+2026-07-07T04:26:58.0138476Z + url_launcher 6.1.14 (6.3.2 available)
+2026-07-07T04:26:58.0138871Z + url_launcher_android 6.3.32
+2026-07-07T04:26:58.0139234Z + url_launcher_ios 6.4.1
+2026-07-07T04:26:58.0139574Z + url_launcher_linux 3.2.2
+2026-07-07T04:26:58.0139929Z + url_launcher_macos 3.2.5
+2026-07-07T04:26:58.0140299Z + url_launcher_platform_interface 2.3.2
+2026-07-07T04:26:58.0140714Z + url_launcher_web 2.4.3
+2026-07-07T04:26:58.0141063Z + url_launcher_windows 3.1.5
+2026-07-07T04:26:58.0141437Z + vector_math 2.2.0 (2.4.0 available)
+2026-07-07T04:26:58.0141854Z + visibility_detector 0.4.0+2
+2026-07-07T04:26:58.0142259Z + vm_service 15.2.0
+2026-07-07T04:26:58.0142560Z + web 1.1.1
+2026-07-07T04:26:58.0142855Z + win32 5.15.0 (6.3.0 available)
+2026-07-07T04:26:58.0143224Z + xdg_directories 1.1.0
+2026-07-07T04:26:58.0143544Z + xml 7.0.1
+2026-07-07T04:26:58.0143825Z + yaml 3.1.3
+2026-07-07T04:26:58.0144160Z Changed 96 dependencies!
+2026-07-07T04:26:58.0144701Z 15 packages have newer versions incompatible with dependency constraints.
+2026-07-07T04:26:58.0145363Z Try `flutter pub outdated` for more information.
+2026-07-07T04:26:58.3089388Z ##[group]Run flutter build apk --release --target-platform android-arm64
+2026-07-07T04:26:58.3089927Z [36;1mflutter build apk --release --target-platform android-arm64[0m
+2026-07-07T04:26:58.3125157Z shell: /usr/bin/bash -e {0}
+2026-07-07T04:26:58.3125407Z env:
+2026-07-07T04:26:58.3125720Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:26:58.3126462Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-07T04:26:58.3126955Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.44.5-x64/flutter
+2026-07-07T04:26:58.3127317Z   PUB_CACHE: /home/runner/.pub-cache
+2026-07-07T04:26:58.3127568Z ##[endgroup]
+2026-07-07T04:26:58.7497178Z Upgrading build.gradle.kts
+2026-07-07T04:26:58.7513653Z Upgrading gradle.properties
+2026-07-07T04:26:58.7525084Z Upgrading gradle.properties
+2026-07-07T04:28:29.4558615Z Running Gradle task 'assembleRelease'...                        
+2026-07-07T04:28:29.4559949Z Checking the license for package NDK (Side by side) 27.0.12077973 in /usr/local/lib/android/sdk/licenses
+2026-07-07T04:28:29.4564929Z License for package NDK (Side by side) 27.0.12077973 accepted.
+2026-07-07T04:28:29.4565628Z Preparing "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973".
+2026-07-07T04:28:42.2514177Z "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" ready.
+2026-07-07T04:28:42.2519718Z Installing NDK (Side by side) 27.0.12077973 in /usr/local/lib/android/sdk/ndk/27.0.12077973
+2026-07-07T04:28:42.2520947Z "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" complete.
+2026-07-07T04:28:42.6523146Z "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" finished.
+2026-07-07T04:28:58.8516367Z Warning: The plugin flutter_plugin_android_lifecycle requires Android SDK version 36 or higher.
+2026-07-07T04:28:58.8539873Z For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
+2026-07-07T04:29:14.9516294Z Warning: The plugin jni requires Android SDK version 35 or higher.
+2026-07-07T04:29:14.9537758Z For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
+2026-07-07T04:29:15.2515848Z Warning: The plugin jni_flutter requires Android SDK version 35 or higher.
+2026-07-07T04:29:15.2539208Z For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
+2026-07-07T04:29:20.7538059Z Warning: The plugin shared_preferences_android requires Android SDK version 36 or higher.
+2026-07-07T04:29:20.7539179Z For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
+2026-07-07T04:29:21.5516417Z Warning: The plugin url_launcher_android requires Android SDK version 36 or higher.
+2026-07-07T04:29:21.5517909Z For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
+2026-07-07T04:29:21.5583321Z Your project is configured to compile against Android SDK 34, but the following plugin(s) require to be compiled against a higher Android SDK version:
+2026-07-07T04:29:21.5584899Z - flutter_plugin_android_lifecycle compiles against Android SDK 36
+2026-07-07T04:29:21.5590850Z - jni compiles against Android SDK 35
+2026-07-07T04:29:21.5591757Z - jni_flutter compiles against Android SDK 35
+2026-07-07T04:29:21.5593327Z - shared_preferences_android compiles against Android SDK 36
+2026-07-07T04:29:21.5594094Z - url_launcher_android compiles against Android SDK 36
+2026-07-07T04:29:21.5595005Z Fix this issue by compiling against the highest Android SDK version (they are backward compatible).
+2026-07-07T04:29:21.5596465Z Add the following to /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter/android/app/build.gradle.kts:
+2026-07-07T04:29:21.5597260Z 
+2026-07-07T04:29:21.5597569Z     android {
+2026-07-07T04:29:21.5598035Z         compileSdk = 36
+2026-07-07T04:29:21.5598531Z         ...
+2026-07-07T04:29:21.5598979Z     }
+2026-07-07T04:29:21.5600689Z Your project is configured with Android NDK 27.0.12077973, but the following plugin(s) depend on a different Android NDK version:
+2026-07-07T04:29:21.5601710Z - jni requires Android NDK 28.2.13676358
+2026-07-07T04:29:21.5602569Z Fix this issue by using the highest Android NDK version (they are backward compatible).
+2026-07-07T04:29:21.5604233Z Add the following to /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter/android/app/build.gradle.kts:
+2026-07-07T04:29:21.5605198Z 
+2026-07-07T04:29:21.5605526Z     android {
+2026-07-07T04:29:21.5606308Z         ndkVersion = "28.2.13676358"
+2026-07-07T04:29:21.5606982Z         ...
+2026-07-07T04:29:21.5607520Z     }
+2026-07-07T04:29:22.9513068Z Checking the license for package Android SDK Platform 33 in /usr/local/lib/android/sdk/licenses
+2026-07-07T04:29:22.9513944Z License for package Android SDK Platform 33 accepted.
+2026-07-07T04:29:22.9514532Z Preparing "Install Android SDK Platform 33 (revision 3)".
+2026-07-07T04:29:25.1520577Z "Install Android SDK Platform 33 (revision 3)" ready.
+2026-07-07T04:29:25.1521803Z Installing Android SDK Platform 33 in /usr/local/lib/android/sdk/platforms/android-33
+2026-07-07T04:29:25.1522878Z "Install Android SDK Platform 33 (revision 3)" complete.
+2026-07-07T04:29:25.1523607Z "Install Android SDK Platform 33 (revision 3)" finished.
+2026-07-07T04:29:25.2543730Z [=========                              ] 25%                                   
+2026-07-07T04:29:25.2566746Z [=========                              ] 25% Fetch remote repository...        
+2026-07-07T04:29:25.2597135Z [=======================================] 100% Fetch remote repository...       
+2026-07-07T04:29:26.3512528Z Checking the license for package CMake 3.22.1 in /usr/local/lib/android/sdk/licenses
+2026-07-07T04:29:26.3513585Z License for package CMake 3.22.1 accepted.
+2026-07-07T04:29:26.3514024Z Preparing "Install CMake 3.22.1 v.3.22.1".
+2026-07-07T04:29:27.1516966Z "Install CMake 3.22.1 v.3.22.1" ready.
+2026-07-07T04:29:27.1518302Z Installing CMake 3.22.1 in /usr/local/lib/android/sdk/cmake/3.22.1
+2026-07-07T04:29:27.1519313Z "Install CMake 3.22.1 v.3.22.1" complete.
+2026-07-07T04:29:27.1520257Z "Install CMake 3.22.1 v.3.22.1" finished.
+2026-07-07T04:29:38.2568119Z lib/main/helper/app_theme.dart:110:18: Error: The argument type 'CardTheme' can't be assigned to the parameter type 'CardThemeData?'.
+2026-07-07T04:29:38.2637751Z  - 'CardTheme' is from 'package:flutter/src/material/card_theme.dart' ('/opt/hostedtoolcache/flutter/stable-3.44.5-x64/flutter/packages/flutter/lib/src/material/card_theme.dart').
+2026-07-07T04:29:38.2662462Z  - 'CardThemeData' is from 'package:flutter/src/material/card_theme.dart' ('/opt/hostedtoolcache/flutter/stable-3.44.5-x64/flutter/packages/flutter/lib/src/material/card_theme.dart').
+2026-07-07T04:29:38.2690131Z       cardTheme: _buildCardTheme(AppColors.darkCard, AppColors.darkCardBorder),
+2026-07-07T04:29:38.2691131Z                  ^
+2026-07-07T04:29:38.2692213Z lib/main/helper/app_theme.dart:148:18: Error: The argument type 'CardTheme' can't be assigned to the parameter type 'CardThemeData?'.
+2026-07-07T04:29:38.2694114Z  - 'CardTheme' is from 'package:flutter/src/material/card_theme.dart' ('/opt/hostedtoolcache/flutter/stable-3.44.5-x64/flutter/packages/flutter/lib/src/material/card_theme.dart').
+2026-07-07T04:29:38.2696555Z  - 'CardThemeData' is from 'package:flutter/src/material/card_theme.dart' ('/opt/hostedtoolcache/flutter/stable-3.44.5-x64/flutter/packages/flutter/lib/src/material/card_theme.dart').
+2026-07-07T04:29:38.2698300Z       cardTheme: _buildCardTheme(AppColors.lightCard, AppColors.lightCardBorder),
+2026-07-07T04:29:38.2699200Z                  ^
+2026-07-07T04:29:57.7524626Z ../../../.pub-cache/hosted/pub.dev/google_fonts-6.1.0/lib/src/google_fonts_variant.dart:150:42: Error: Constant evaluation error:
+2026-07-07T04:29:57.7540665Z const _fontWeightToFilenameWeightParts = {
+2026-07-07T04:29:57.7541188Z                                          ^
+2026-07-07T04:29:57.7542773Z ../../../.pub-cache/hosted/pub.dev/google_fonts-6.1.0/lib/src/google_fonts_variant.dart:151:14: Context: The key 'FontWeight {value: 100}' does not have a primitive operator '=='.
+2026-07-07T04:29:57.7544018Z  - 'FontWeight' is from 'dart:ui'.
+2026-07-07T04:29:57.7544435Z   FontWeight.w100: 'Thin',
+2026-07-07T04:29:57.7544791Z              ^
+2026-07-07T04:29:57.7545539Z ../../../.pub-cache/hosted/pub.dev/google_fonts-6.1.0/lib/src/google_fonts_variant.dart:150:7: Context: While analyzing:
+2026-07-07T04:29:57.7546634Z const _fontWeightToFilenameWeightParts = {
+2026-07-07T04:29:57.7547089Z       ^
+2026-07-07T04:30:02.7547536Z Target kernel_snapshot_program failed: Exception
+2026-07-07T04:30:02.7566618Z 
+2026-07-07T04:30:05.6513790Z 
+2026-07-07T04:30:05.6522297Z FAILURE: Build failed with an exception.
+2026-07-07T04:30:05.6531221Z 
+2026-07-07T04:30:05.6533778Z * What went wrong:
+2026-07-07T04:30:05.6606355Z Execution failed for task ':app:compileFlutterBuildDevRelease'.
+2026-07-07T04:30:05.6637101Z > Process 'command '/opt/hostedtoolcache/flutter/stable-3.44.5-x64/flutter/bin/flutter'' finished with non-zero exit value 1
+2026-07-07T04:30:05.6638294Z 
+2026-07-07T04:30:05.6666959Z * Try:
+2026-07-07T04:30:05.6686193Z > Run with --stacktrace option to get the stack trace.
+2026-07-07T04:30:05.6736757Z > Run with --info or --debug option to get more log output.
+2026-07-07T04:30:05.6737376Z > Run with --scan to get full insights.
+2026-07-07T04:30:05.6737886Z > Get more help at https://help.gradle.org.
+2026-07-07T04:30:05.6738222Z 
+2026-07-07T04:30:05.6738352Z BUILD FAILED in 3m 6s
+2026-07-07T04:30:06.1460141Z Running Gradle task 'assembleRelease'...                          187.4s
+2026-07-07T04:30:06.1548557Z Gradle task assembleRelease failed with exit code 1
+2026-07-07T04:30:06.1615541Z ##[error]Process completed with exit code 1.
+2026-07-07T04:30:06.1822755Z Post job cleanup.
+2026-07-07T04:30:06.1910413Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-07T04:30:06.1911617Z Post job cleanup.
+2026-07-07T04:30:06.3234191Z (node:3651) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-07-07T04:30:06.3234894Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-07-07T04:30:06.3447794Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-07T04:30:06.3448966Z Post job cleanup.
+2026-07-07T04:30:06.4483195Z [command]/usr/bin/git version
+2026-07-07T04:30:06.4540755Z git version 2.54.0
+2026-07-07T04:30:06.4620894Z Temporarily overriding HOME='/home/runner/work/_temp/c6b19ebd-ac8c-40ef-94db-5690010c75a5' before making global git config changes
+2026-07-07T04:30:06.4622550Z Adding repository directory to the temporary git global config as a safe directory
+2026-07-07T04:30:06.4623875Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Zqwis-Apis-Flutter/Zqwis-Apis-Flutter
+2026-07-07T04:30:06.4702402Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-07-07T04:30:06.4752837Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-07-07T04:30:06.5038334Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-07-07T04:30:06.5069268Z http.https://github.com/.extraheader
+2026-07-07T04:30:06.5081247Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-07-07T04:30:06.5125625Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-07-07T04:30:06.5433244Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-07-07T04:30:06.5475721Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-07-07T04:30:06.5874828Z Cleaning up orphan processes
+2026-07-07T04:30:06.6226980Z Terminate orphan process: pid (2827) (java)
+2026-07-07T04:30:06.6262583Z Terminate orphan process: pid (2966) (java)
+2026-07-07T04:30:06.6309820Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
