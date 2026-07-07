@@ -14,7 +14,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    // MEMBAIKI RALAT DEPRECATION: Guna blok baharu mengikut saranan dokumentasi Kotlin
     kotlin {
         compilerOptions {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
@@ -39,8 +38,16 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            ndk {
+                debugSymbolLevel = "NONE"
+            }
+        }
         getByName("release") {
             signingConfig = signingConfigs.getByName("debug")
+            ndk {
+                debugSymbolLevel = "NONE"
+            }
         }
     }
 }

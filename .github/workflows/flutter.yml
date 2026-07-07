@@ -21,6 +21,8 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          build-tools-version: 35.0.1
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
