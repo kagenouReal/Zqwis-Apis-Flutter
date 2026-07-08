@@ -28,24 +28,20 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          cache: false
+          cache: true
 
       - name: Kill Java Processes
         run: |
           pkill -9 java || true
-          sleep 2
+          sleep 1
 
-      - name: Clean Everything
+      - name: Clean
         run: |
           flutter clean
-          rm -rf build/
-          rm -rf .dart_tool/
-          rm -rf pubspec.lock
-          rm -rf android/.gradle/
-          rm -rf android/build/
-          rm -rf ~/.gradle/
+          rm -rf build/ .dart_tool/ pubspec.lock
+          rm -rf android/.gradle/ android/build/
 
-      - name: Copy gradle.properties untuk GitHub Actions
+      - name: Copy gradle.properties
         run: cp android/gradle.properties.github android/gradle.properties
 
       - name: Get Dependencies
